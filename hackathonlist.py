@@ -1,15 +1,14 @@
 import requests
 import simplejson
 
-def hackathon_list():
+def get_hackathons():
     hackathons = requests.get("http://hackerleague.org/api/v1/hackathons.json")
     hackathons = simplejson.loads(hackathons.text)
 
-    hackathon_list = []
+    hackathon_dict = {}
     for hackathon in hackathons:
-       # print hackathon["name"]
-      hackathon_list.append(hackathon["name"])
+      hackathon_dict[hackathon["name"]] = hackathon["url"]
 
-    return hackathon_list
+    return hackathon_dict
 
-print hackathon_list()
+print get_hackathons().keys()
