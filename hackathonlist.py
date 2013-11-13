@@ -11,4 +11,5 @@ def get_hackathons():
 
     return hackathon_dict
 
-print get_hackathons().keys()
+for hackathon in get_hackathons().keys():
+    print hackathon
