@@ -6,5 +6,3 @@ hackathons = simplejson.loads(hackathons.text)
 
 for hackathon in hackathons:
     print hackathon["name"]
-
-
