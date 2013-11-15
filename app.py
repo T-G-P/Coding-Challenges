@@ -11,7 +11,7 @@ def index():
     hackathon_list = ""
 
     for hackathon in get_hackathons():
-        hackathon_list+=hackathon+'\n'
+        hackathon_list+=hackathon+'\n'+'<br>'
     return hackathon_list
 
 app.run(host="0.0.0.0", port=5000)
