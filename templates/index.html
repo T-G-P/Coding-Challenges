@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <head>
+        <title>
+            Upcoming Hackathons
+        </title>
+    </head>
+    <body>
+        <div id="hackathons">
+            {% block content %}
+            <!--jinja template-->
+                {% for hackathon in hackathon_list.keys() %}
+                <a href="{{ hackathon_list[hackathon] }}">{{hackathon}}</a>
+                <br>
+                {% endfor %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
