@@ -6,14 +6,22 @@
         </title>
     </head>
     <body>
-        <div id="hackathons">
-            {% block content %}
-            <!--jinja template-->
-                {% for hackathon in hackathon_list.keys() %}
-                <a href="{{ hackathon_list[hackathon] }}">{{hackathon}}</a>
-                <br>
-                {% endfor %}
-            {% endblock %}
+        {% block content %}
+        <div id="input">
+            <form method="POST" action="/search">
+                <input type="text" name="query"
+                placeholder="Enter the date here!"/>
+                <button type="submit" class="btn">Search</button>
+            </form>
         </div>
+
+        <div id="hackathons">
+            <!--jinja template-->
+            {% for hackathon in hackathon_list.keys() %}
+            <a href="{{ hackathon_list[hackathon] }}">{{hackathon}}</a>
+            <br>
+            {% endfor %}
+        </div>
+        {% endblock %}
     </body>
 </html>
