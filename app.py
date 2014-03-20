@@ -26,5 +26,3 @@ def send_emails():
     return 
 
 send_emails()
-
-
