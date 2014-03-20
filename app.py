@@ -20,7 +20,8 @@ def sendgrid_email(user_email):
     return
 
 def send_emails():
-    with open('test.txt', 'r') as f:
+    text_file = raw_input("Enter the name of the text file with emails in it: ")
+    with open(text_file, 'r') as f:
         for user_email in f:
             sendgrid_email(user_email)
     return 
