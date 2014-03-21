@@ -8,6 +8,7 @@ from emails import email_text, subject, from_email
 from constants import gmail_password
 import sys
 import DNS
+import re
 
 #Global varialbes
 GMAIL_SMTP = "smtp.gmail.com"
@@ -46,16 +47,16 @@ def send_email(recipient):
     except SMTPException as error:
       print "Error: unable to send email :  {err}".format(err=error)
 
+#This function takes a tab or comma delimited file and parses the file for all valid emails. 
 def send_emails():
     text_file = raw_input("Enter the name of the text file\n")
     with open(text_file, 'r') as f:
         for line in f:
-            string_array = line.split('\t')
+            string_array = re.split('\t|,',line)
             for user_email in string_array:
                 user_email = user_email.strip(' ')
                 is_valid = validate_email(user_email)
                 if is_valid:
                     send_email(user_email)
-
 
 send_emails()
