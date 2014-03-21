@@ -10,6 +10,8 @@ def sendgrid_email(user_email):
     sg = sendgrid.SendGridClient(username, password, secure=True)
     #Make Empty Message
     message = sendgrid.Mail()
+    #attach a file
+    message.add_attachment_stream('Resume_Tobias_Perelstein.pdf','Resume')
     #Add recipient
     message.add_to(user_email)
     #set the subject of the email
@@ -20,10 +22,9 @@ def sendgrid_email(user_email):
     message.set_from(from_email)
     #send the message
     status, msg = sg.send(message)
-    return
-
+ 
 def send_emails():
-    text_file = raw_input("Enter the name of the text file")
+    text_file = raw_input("Enter the name of the text file\n")
     with open(text_file, 'r') as f:
         for line in f:
             string_array = line.split('\t')
@@ -31,7 +32,7 @@ def send_emails():
                 user_email = user_email.strip(' ')
                 is_valid = validate_email(user_email)
                 if is_valid:
-                    send_email(user_email)
+                    sendgrid_email(user_email)
 
 
 send_emails()

@@ -1,7 +1,9 @@
 from validate_email import validate_email
 from smtplib import SMTP
 from smtplib import SMTPException
+from email.MIMEMultipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
 from emails import email_text, subject, from_email
 from constants import gmail_password
 import sys
@@ -16,10 +18,17 @@ TEXT_SUBTYPE = "plain"
 def send_email(recipient):
      
     #Create the message
-    msg = MIMEText(email_text, TEXT_SUBTYPE)
+    msg = MIMEMultipart()
+    #msg = MIMEText(email_text, TEXT_SUBTYPE)
     msg["Subject"] = subject 
     msg["From"] = from_email 
     msg["To"] = recipient 
+
+    part = MIMEText(email_text, TEXT_SUBTYPE)
+    msg.attach(part)
+    part = MIMEApplication(open("Resume_Tobias_Perelstein.pdf","rb").read())
+    part.add_header('Content-Disposition', 'attachment', filename="Resume_Tobias_Perelstein.pdf")
+    msg.attach(part)
      
     try:
       smtpObj = SMTP(GMAIL_SMTP, GMAIL_SMTP_PORT)
@@ -38,7 +47,7 @@ def send_email(recipient):
       print "Error: unable to send email :  {err}".format(err=error)
 
 def send_emails():
-    text_file = raw_input("Enter the name of the text file")
+    text_file = raw_input("Enter the name of the text file\n")
     with open(text_file, 'r') as f:
         for line in f:
             string_array = line.split('\t')
