@@ -2,7 +2,7 @@
 from smtplib import SMTP
 from smtplib import SMTPException
 from email.mime.text import MIMEText
-from emails import email_text,subject,from_email
+from emails import email_text, subject, from_email
 from constants import gmail_password
 import sys
  
@@ -11,6 +11,7 @@ GMAIL_SMTP = "smtp.gmail.com"
 GMAIL_SMTP_PORT = 587
 TEXT_SUBTYPE = "plain"
  
+#This function takes in a recipient and sends them an email
 def send_email(recipient):
      
     #Create the message
@@ -27,7 +28,7 @@ def send_email(recipient):
       smtpObj.starttls()
       smtpObj.ehlo()
       #Login to service
-      smtpObj.login(user=from_email, gmail_password)
+      smtpObj.login(user=from_email, password=gmail_password)
       #Send email
       smtpObj.sendmail(from_email, recipient.split(), msg.as_string())
       #close connection and session.
