@@ -1,11 +1,12 @@
-
+from validate_email import validate_email
 from smtplib import SMTP
 from smtplib import SMTPException
 from email.mime.text import MIMEText
 from emails import email_text, subject, from_email
 from constants import gmail_password
 import sys
- 
+import DNS
+
 #Global varialbes
 GMAIL_SMTP = "smtp.gmail.com"
 GMAIL_SMTP_PORT = 587
@@ -39,7 +40,13 @@ def send_email(recipient):
 def send_emails():
     text_file = raw_input("Enter the name of the text file")
     with open(text_file, 'r') as f:
-        for user_email in f:
-            send_email(user_email)
+        for line in f:
+            string_array = line.split('\t')
+            for user_email in string_array:
+                user_email = user_email.strip(' ')
+                is_valid = validate_email(user_email)
+                if is_valid:
+                    send_email(user_email)
+
 
 send_emails()
