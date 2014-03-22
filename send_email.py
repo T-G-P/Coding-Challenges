@@ -1,7 +1,6 @@
 from constants import username, password
 from validate_email import validate_email
 import sendgrid
-import DNS
 
 def sendgrid_email(user_email,from_email,subject,msg):
     #Securely connect to SendGrid
