@@ -14,10 +14,10 @@ def index():
 @app.route('/submit', methods=['POST'])
 def submit():
     from_email = request.form['from_email']
-    to_email = request.form['to_email']
+    to_emails = request.form['to_email']
     subject = request.form['subject']
     msg = request.form['msg']
-    send_emails(from_email,to_email,subject,msg);
+    send_emails(to_emails,from_email,subject,msg);
     return render_template('results.html')
 
 
