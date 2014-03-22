@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
+from send_email import send_emails
 import urllib2
 import os
-import send_email
 
 app = Flask(__name__)
 
@@ -11,11 +11,11 @@ def index():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    from_email = request.form['from_email']
     to_emails = request.form['to_email']
+    from_email = request.form['from_email']
     subject = request.form['subject']
     msg = request.form['msg']
-    send_emails(to_emails, from_email, subject, msg);
+    send_email.send_emails(to_emails, from_email, subject, msg);
     return render_template('result.html')
 
 
