@@ -1,9 +1,6 @@
 from constants import username, password
 from validate_email import validate_email
 import sendgrid
-import DNS
-import re
-
 
 def sendgrid_email(user_email,from_email,subject,msg):
     #Securely connect to SendGrid
@@ -22,12 +19,12 @@ def sendgrid_email(user_email,from_email,subject,msg):
     #print "Sending the message to: "+user_email
     status, msg = sg.send(message)
 
-#This function takes a tab or comma delimited file and parses the file for all valid emails. 
+#This function takes comma delimited string and parses the file for all valid emails. 
 def send_emails(to_emails,from_email, subject, msg):
-            string_array = to_emails.split(',')
-            for user_email in string_array:
-                user_email = user_email.strip(' ')
-                is_valid = validate_email(user_email)
-                if is_valid:
-                    sendgrid_email(user_email, from_email, subject, msg)
+    string_array = to_emails.split(',')
+    for user_email in string_array:
+        user_email = user_email.strip(' ')
+        is_valid = validate_email(user_email)
+        if is_valid:
+            sendgrid_email(user_email, from_email, subject, msg)
 
