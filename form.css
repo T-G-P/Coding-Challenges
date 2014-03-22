@@ -1,11 +1,11 @@
-#main
+#logo
 {
-    margin-top: 230px;
+    margin-left:415px;
 }
 form {
     /* Just to center the form on the page */
     margin: 0 auto;
-    width: 400px;
+    width: 500px;
 
     /* To see the limits of the form */
     padding: 1em;

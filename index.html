@@ -5,25 +5,36 @@
 <link rel="stylesheet" type="text/css" href="form.css">
 </head>
 <body>
-<div id="main" >
-    <form action="result.html" method="post">
-        <div>
-            <label for="From">From:</label>
-            <input type="text" id="name" />
-        </div>
-        <div>
-            <label for="To">To:</label>
-            <input type="email" id="mail" />
-        </div>
-        <div>
-            <label for="msg">Body:</label>
-            <textarea id="msg"></textarea>
-        </div>
-
-        <div class="button">
-            <button type="submit">Send your message</button>
-        </div>
-    </form>
+<div id = "logo">
+<img src = "spam.png">
 </div>
+<form action="result.html" method="post">
+    <div>
+        <p>Instructions
+        <ol>
+            <li>Type the email you want to send from</li>
+            <li>Typethe emails you want to spam (separate each email with a comma or a new line)</li>
+            <li>Type the message body</li>
+            <li>Hit the send button</li>
+        </ol> 
+    </div>
+
+    <div>
+        <label for="From">From:</label>
+        <input type="text" id="name" />
+    </div>
+    <div>
+        <label for="To">To:</label>
+        <input type="email" id="mail" />
+    </div>
+    <div>
+        <label for="msg">Body:</label>
+        <textarea id="msg"></textarea>
+    </div>
+
+    <div class="button">
+        <button type="submit">Send your message</button>
+    </div>
+</form>
 </body>
 </html>
