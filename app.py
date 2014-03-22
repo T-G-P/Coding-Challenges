@@ -3,7 +3,7 @@ from constants import username, password
 import requests
 import urllib2
 import os
-import with_sendgrid
+import send_email
 
 app = Flask(__name__)
 
