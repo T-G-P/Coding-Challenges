@@ -5,6 +5,8 @@ These python scripts are not to be used for spamming emails from a text file
 
 I am personally using this to email recruiters for jobs/internships. 
 
+The benefit of these scripts is that you will receieve a separate thread for each response rather than all of the responses in a single thread. 
+
 
 Instructions:
 
