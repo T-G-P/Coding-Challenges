@@ -22,6 +22,7 @@ def sendgrid_email(user_email):
     #set the message from field
     message.set_from(from_email)
     #send the message
+    print "Sending the message to: "+user_email
     status, msg = sg.send(message)
 
 #This function takes a tab or comma delimited file and parses the file for all valid emails. 

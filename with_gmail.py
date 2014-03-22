@@ -41,6 +41,7 @@ def send_email(recipient):
       #Login to service
       smtpObj.login(user=from_email, password=gmail_password)
       #Send email
+      print "Sending the message to: "+recipient
       smtpObj.sendmail(from_email, recipient.split(), msg.as_string())
       #close connection and session.
       smtpObj.quit();
