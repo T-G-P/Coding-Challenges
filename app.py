@@ -15,7 +15,7 @@ def submit():
     from_email = request.form['from_email']
     subject = request.form['subject']
     msg = request.form['msg']
-    send_email.send_emails(to_emails, from_email, subject, msg);
+    send_emails(to_emails, from_email, subject, msg);
     return render_template('result.html')
 
 
