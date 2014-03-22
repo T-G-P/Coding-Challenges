@@ -15,10 +15,10 @@ def submit():
     from_email = request.form['from_email']
     subject = request.form['subject']
     msg = request.form['msg']
-    send_emails(to_emails, from_email, subject, msg);
+    send_emails(to_emails, from_email, subject, msg)
     return render_template('result.html')
 
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT",5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug='true')

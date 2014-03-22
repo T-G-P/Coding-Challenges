@@ -3,7 +3,7 @@ from validate_email import validate_email
 import sendgrid
 import DNS
 
-def sendgrid_email(user_email):
+def sendgrid_email(user_email,from_email,subject,msg):
     #Securely connect to SendGrid
     sg = sendgrid.SendGridClient(username, password, secure=True)
     #Make Empty Message
@@ -13,7 +13,7 @@ def sendgrid_email(user_email):
     #set the subject of the email
     message.set_subject(subject)
     #set the body of the message
-    message.set_text(email_text)
+    message.set_text(msg)
     #set the message from field
     message.set_from(from_email)
     #send the message
