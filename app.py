@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-from constants import username, password
 import urllib2
 import os
 import send_email
@@ -16,7 +15,7 @@ def submit():
     to_emails = request.form['to_email']
     subject = request.form['subject']
     msg = request.form['msg']
-    #send_emails(to_emails,from_email,subject,msg);
+    send_emails(to_emails, from_email, subject, msg);
     return render_template('result.html')
 
 
