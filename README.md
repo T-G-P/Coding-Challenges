@@ -1,4 +1,3 @@
-localytics
-==========
+Some Coding Challenges
+======================
 
-Coding Challenge for localytics (See code for details)
