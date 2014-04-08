@@ -3,7 +3,7 @@ import java.io.*;
 
 public class challenge{
 
-    public static HashMap<String,String> band = new HashMap<String,String>();
+    public static HashMap<String,HashMap<String,Integer>> bandPairs = new HashMap<String,HashMap<String,Integer>>();
 
     private static void parseFile(String fileName){
         BufferedReader br;
@@ -12,30 +12,38 @@ public class challenge{
             String line;
             while ((line = br.readLine()) != null) {
                 String[] result = line.split(",");
-                for (int x=0; x<result.length; x++){
-                    band.put(result[x],result[x]);
+                Arrays.sort(result);
+                for (int i = 0; i<result.length; i++){
+                    for(int j = 1; j<result.length; i++){
+                        if(!bandsPairs.containsKey(result[i]){
+                            HashMap<String,Integer> pairs = new HashMap(String,Integer>();
+                            pairs.put(result[j],1));
+                            bandPairs.put(result[i],pairs);
+                        }
+                        else{
+                            bandPairs.get(result[i]).put(result[j],pairs.get(result[j]) + 1));
+                        }
+                    }
                 }
             }
             br.close();
-        }catch(FileNotFoundException e){
-            System.out.println("please make sure the file you entered exists");
-            System.out.println("USAGE: java challenge (filename)");
-        }catch(IOException e){
-            System.out.println("please make sure the file you entered exists");
-            System.out.println("USAGE: java challenge (filename)");
-        }
+            }catch(FileNotFoundException e){
+                System.out.println("please make sure the file you entered exists");
+                System.out.println("USAGE: java challenge (filename)");
+            }catch(IOException e){
+                System.out.println("please make sure the file you entered exists");
+                System.out.println("USAGE: java challenge (filename)");
+            }
 
     }
-    private static void add(String bandName){
-        //add band names to hash tables with their values
-    }
 
-    private static void printResult(HashMap<String,String> band){
-        for (String key : band.keySet()) {
+    /*private static void printResult(HashMap<String,String> band){
+        for (String key : bandPairs.keySet()) {
             System.out.println("Key = " + key + "\nValue = "+band.get(key));
         }
 
     }
+    */
 
     public static void main(String[] args){
 
@@ -46,7 +54,7 @@ public class challenge{
         }
         else{
             parseFile(args[0]);
-            printResult(band);
+            printResult(bandPairs);
         }
     }
 
