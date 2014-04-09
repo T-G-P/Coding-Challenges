@@ -57,14 +57,14 @@ public class challenge{
 
     private static void printResult(){
         for (String key : bandPairs.keySet()) {
-            System.out.println(key+" paired with: ");
             for(String pair : bandPairs.get(key).keySet()){
-                System.out.println(pair+" "+bandPairs.get(key).get(pair)+" times");
+                if(bandPairs.get(key).get(pair) >= 50){
+                    System.out.println(key+" paired with: ");
+                    System.out.println(pair+" "+bandPairs.get(key).get(pair)+" times");
+                }
             }
         }
-
     }
-
 
     public static void main(String[] args){
 
@@ -77,5 +77,4 @@ public class challenge{
             printResult();
         }
     }
-
 }
