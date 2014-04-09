@@ -11,21 +11,35 @@ public class challenge{
             br = new BufferedReader(new FileReader(fileName));
             String line;
             while ((line = br.readLine()) != null) {
+                //tokenize each line by comma and store as string array
                 String[] result = line.split(",");
+                //sort each line alphabetically
                 Arrays.sort(result);
+                //loop through the line and set up pairs for every single band
                 for (int i = 0; i<result.length; i++){
                     for(int j = 1; j<result.length; j++){
-                        //doesn't contain the key, add key, and then add pair associated with this key
+                        //if the hash map does not contain this band
                         if(!bandPairs.containsKey(result[i])){
+                            //Create new hashmap to represent all pairs associated with this key
                             HashMap<String,Integer> pairs = new HashMap<String,Integer>();
+                            //Initialize this pair with a count of 1
                             pairs.put(result[j],1);
+                            //set the band to have this pair hash table as it's value
                             bandPairs.put(result[i],pairs);
                         }
+                        //if the hash map already contains this band
                         else{
-                            //contains the key, so pairs hash table already exists and check if pair exists
+                            //Now we know that this band pair hash map contains this band already
+                            //Go to the pair hash map associated with this band and see if it contains the pair already
+                            //if the pair already exists in the hash table, increment it's count by one
                             if(bandPairs.get(result[i]).containsKey(result[j])){
                                 bandPairs.get(result[i]).put(result[j], bandPairs.get(result[i]).get(result[j]) + 1);
                             }
+                            //the pair does not exist in the hash table, so add it and initalize it's count to 1
+                            else{
+                                bandPairs.get(result[i]).put(result[j], 1);
+                            }
+
                         }
                     }
                 }
