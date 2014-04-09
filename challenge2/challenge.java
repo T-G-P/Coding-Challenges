@@ -23,7 +23,7 @@ public class challenge{
                             //Create new hashmap to represent all pairs associated with this key
                             HashMap<String,Integer> pairs = new HashMap<String,Integer>();
                             //Initialize this pair with a count of 1
-                            if(!result[i].equals(result[j]){
+                            if(!result[i].equals(result[j])){
                                 pairs.put(result[j],1);
                             }
                             //set the band to have this pair hash table as it's value
@@ -39,7 +39,7 @@ public class challenge{
                             }
                             //the pair does not exist in the hash table, so add it and initalize it's count to 1
                             else{
-                                if(!result[i].equals(result[j]){
+                                if(!result[i].equals(result[j])){
                                     bandPairs.get(result[i]).put(result[j], 1);
                                 }
                             }
