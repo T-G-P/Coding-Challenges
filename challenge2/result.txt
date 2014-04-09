@@ -1,202 +1,103 @@
-Kasabian paired with: 
-Muse 50 times
-Muse paired with: 
-Placebo 98 times
-Muse paired with: 
-The Kooks 53 times
-Muse paired with: 
-The Cure 53 times
-Muse paired with: 
-The Strokes 63 times
-Muse paired with: 
-Queen 52 times
-Muse paired with: 
-Nirvana 85 times
-Muse paired with: 
-Paramore 75 times
-Muse paired with: 
-Oasis 64 times
-Muse paired with: 
-Red Hot Chili Peppers 72 times
-Muse paired with: 
-The Killers 100 times
-Muse paired with: 
-System of a Down 61 times
-Muse paired with: 
-Radiohead 128 times
-Muse paired with: 
-Pink Floyd 68 times
-Muse paired with: 
-The Beatles 107 times
-Muse paired with: 
-Snow Patrol 51 times
-Death Cab for Cutie paired with: 
-Muse 54 times
-Death Cab for Cutie paired with: 
-Radiohead 57 times
-Death Cab for Cutie paired with: 
-The Beatles 56 times
-The Cure paired with: 
-The Smiths 54 times
-Britney Spears paired with: 
-Lady Gaga 62 times
-Franz Ferdinand paired with: 
-Muse 65 times
-Franz Ferdinand paired with: 
-Radiohead 57 times
-Franz Ferdinand paired with: 
-The Beatles 52 times
-Arctic Monkeys paired with: 
-Muse 113 times
-Arctic Monkeys paired with: 
-Placebo 50 times
-Arctic Monkeys paired with: 
-The Kooks 53 times
-Arctic Monkeys paired with: 
-The Strokes 69 times
-Arctic Monkeys paired with: 
-Coldplay 84 times
-Arctic Monkeys paired with: 
-Nirvana 54 times
-Arctic Monkeys paired with: 
-Oasis 61 times
-Arctic Monkeys paired with: 
-Franz Ferdinand 54 times
-Arctic Monkeys paired with: 
-The Killers 76 times
-Arctic Monkeys paired with: 
-Radiohead 88 times
-Arctic Monkeys paired with: 
-The Beatles 86 times
-Arctic Monkeys paired with: 
-Kings of Leon 57 times
-Arctic Monkeys paired with: 
-MGMT 56 times
-Ke$ha paired with: 
-Lady Gaga 53 times
-Green Day paired with: 
-Muse 63 times
-Radiohead paired with: 
-Red Hot Chili Peppers 53 times
-Radiohead paired with: 
-The Killers 70 times
-Radiohead paired with: 
-The Cure 61 times
-Radiohead paired with: 
-The Strokes 59 times
-Radiohead paired with: 
-The Beatles 113 times
-Radiohead paired with: 
-The Smiths 68 times
-Pearl Jam paired with: 
-Radiohead 51 times
-Linkin Park paired with: 
-Muse 54 times
-Led Zeppelin paired with: 
-Pink Floyd 58 times
-Led Zeppelin paired with: 
-The Beatles 63 times
-Pink Floyd paired with: 
-Radiohead 70 times
-Pink Floyd paired with: 
-The Beatles 76 times
-Foo Fighters paired with: 
-Red Hot Chili Peppers 53 times
-Foo Fighters paired with: 
-Muse 57 times
-Foo Fighters paired with: 
-Radiohead 50 times
-Foo Fighters paired with: 
-Nirvana 52 times
-Incubus paired with: 
-Muse 50 times
-Kings of Leon paired with: 
-The Killers 52 times
-Kings of Leon paired with: 
-Muse 67 times
-Kings of Leon paired with: 
-Radiohead 54 times
-MGMT paired with: 
-Muse 57 times
-MGMT paired with: 
-The Beatles 51 times
-30 Seconds to Mars paired with: 
-Muse 55 times
-Coldplay paired with: 
-Muse 113 times
-Coldplay paired with: 
-Placebo 56 times
-Coldplay paired with: 
-Nirvana 59 times
-Coldplay paired with: 
-Oasis 59 times
-Coldplay paired with: 
-Red Hot Chili Peppers 64 times
-Coldplay paired with: 
-The Killers 85 times
-Coldplay paired with: 
-Radiohead 92 times
-Coldplay paired with: 
-The Beatles 86 times
-Coldplay paired with: 
-Kings of Leon 67 times
-Coldplay paired with: 
-Lady Gaga 55 times
-Nirvana paired with: 
-Red Hot Chili Peppers 62 times
-Nirvana paired with: 
-Placebo 51 times
-Nirvana paired with: 
-Radiohead 74 times
-Nirvana paired with: 
-Pearl Jam 51 times
-Nirvana paired with: 
-The Beatles 90 times
-Nirvana paired with: 
-Oasis 53 times
-Oasis paired with: 
-The Killers 57 times
-Oasis paired with: 
-Radiohead 61 times
-Oasis paired with: 
-The Beatles 65 times
-The Killers paired with: 
-The Strokes 53 times
-Iron Maiden paired with: 
-Metallica 54 times
-Metallica paired with: 
-System of a Down 53 times
-Metallica paired with: 
-Muse 60 times
-Placebo paired with: 
-The Killers 51 times
-Placebo paired with: 
-Radiohead 72 times
-Queen paired with: 
-The Beatles 61 times
-Red Hot Chili Peppers paired with: 
-The Killers 51 times
-Red Hot Chili Peppers paired with: 
-The Beatles 57 times
-The Beatles paired with: 
-The Killers 70 times
-The Beatles paired with: 
-The Rolling Stones 61 times
-The Beatles paired with: 
-The Strokes 60 times
-The Beatles paired with: 
-The Smiths 54 times
-David Bowie paired with: 
-Radiohead 58 times
-David Bowie paired with: 
-The Beatles 54 times
-Lady Gaga paired with: 
-Muse 73 times
-Lady Gaga paired with: 
-Lily Allen 51 times
-Lady Gaga paired with: 
-Paramore 66 times
-Lady Gaga paired with: 
-The Beatles 61 times
-Lady Gaga paired with: 
-Rihanna 67 times
+Kasabian-Muse: 50 times
+Muse-Placebo: 98 times
+Muse-The Kooks: 53 times
+Muse-The Cure: 53 times
+Muse-The Strokes: 63 times
+Muse-Queen: 52 times
+Muse-Nirvana: 85 times
+Muse-Paramore: 75 times
+Muse-Oasis: 64 times
+Muse-Red Hot Chili Peppers: 72 times
+Muse-The Killers: 100 times
+Muse-System of a Down: 61 times
+Muse-Radiohead: 128 times
+Muse-Pink Floyd: 68 times
+Muse-The Beatles: 107 times
+Muse-Snow Patrol: 51 times
+Death Cab for Cutie-Muse: 54 times
+Death Cab for Cutie-Radiohead: 57 times
+Death Cab for Cutie-The Beatles: 56 times
+The Cure-The Smiths: 54 times
+Britney Spears-Lady Gaga: 62 times
+Franz Ferdinand-Muse: 65 times
+Franz Ferdinand-Radiohead: 57 times
+Franz Ferdinand-The Beatles: 52 times
+Arctic Monkeys-Muse: 113 times
+Arctic Monkeys-Placebo: 50 times
+Arctic Monkeys-The Kooks: 53 times
+Arctic Monkeys-The Strokes: 69 times
+Arctic Monkeys-Coldplay: 84 times
+Arctic Monkeys-Nirvana: 54 times
+Arctic Monkeys-Oasis: 61 times
+Arctic Monkeys-Franz Ferdinand: 54 times
+Arctic Monkeys-The Killers: 76 times
+Arctic Monkeys-Radiohead: 88 times
+Arctic Monkeys-The Beatles: 86 times
+Arctic Monkeys-Kings of Leon: 57 times
+Arctic Monkeys-MGMT: 56 times
+Ke$ha-Lady Gaga: 53 times
+Green Day-Muse: 63 times
+Radiohead-Red Hot Chili Peppers: 53 times
+Radiohead-The Killers: 70 times
+Radiohead-The Cure: 61 times
+Radiohead-The Strokes: 59 times
+Radiohead-The Beatles: 113 times
+Radiohead-The Smiths: 68 times
+Pearl Jam-Radiohead: 51 times
+Linkin Park-Muse: 54 times
+Led Zeppelin-Pink Floyd: 58 times
+Led Zeppelin-The Beatles: 63 times
+Pink Floyd-Radiohead: 70 times
+Pink Floyd-The Beatles: 76 times
+Foo Fighters-Red Hot Chili Peppers: 53 times
+Foo Fighters-Muse: 57 times
+Foo Fighters-Radiohead: 50 times
+Foo Fighters-Nirvana: 52 times
+Incubus-Muse: 50 times
+Kings of Leon-The Killers: 52 times
+Kings of Leon-Muse: 67 times
+Kings of Leon-Radiohead: 54 times
+MGMT-Muse: 57 times
+MGMT-The Beatles: 51 times
+30 Seconds to Mars-Muse: 55 times
+Coldplay-Muse: 113 times
+Coldplay-Placebo: 56 times
+Coldplay-Nirvana: 59 times
+Coldplay-Oasis: 59 times
+Coldplay-Red Hot Chili Peppers: 64 times
+Coldplay-The Killers: 85 times
+Coldplay-Radiohead: 92 times
+Coldplay-The Beatles: 86 times
+Coldplay-Kings of Leon: 67 times
+Coldplay-Lady Gaga: 55 times
+Nirvana-Red Hot Chili Peppers: 62 times
+Nirvana-Placebo: 51 times
+Nirvana-Radiohead: 74 times
+Nirvana-Pearl Jam: 51 times
+Nirvana-The Beatles: 90 times
+Nirvana-Oasis: 53 times
+Oasis-The Killers: 57 times
+Oasis-Radiohead: 61 times
+Oasis-The Beatles: 65 times
+The Killers-The Strokes: 53 times
+Iron Maiden-Metallica: 54 times
+Metallica-System of a Down: 53 times
+Metallica-Muse: 60 times
+Placebo-The Killers: 51 times
+Placebo-Radiohead: 72 times
+Queen-The Beatles: 61 times
+Red Hot Chili Peppers-The Killers: 51 times
+Red Hot Chili Peppers-The Beatles: 57 times
+The Beatles-The Killers: 70 times
+The Beatles-The Rolling Stones: 61 times
+The Beatles-The Strokes: 60 times
+The Beatles-The Smiths: 54 times
+David Bowie-Radiohead: 58 times
+David Bowie-The Beatles: 54 times
+Lady Gaga-Muse: 73 times
+Lady Gaga-Lily Allen: 51 times
+Lady Gaga-Paramore: 66 times
+Lady Gaga-The Beatles: 61 times
+Lady Gaga-Rihanna: 67 times
+
+There are a total of 101 pairs that appear 50 or more times

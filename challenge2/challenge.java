@@ -67,14 +67,16 @@ public class challenge{
     }
 
     private static void printResult(){
+        int numPairs = 0;
         for (String key : bandPairs.keySet()) {
             for(String pair : bandPairs.get(key).keySet()){
                 if(bandPairs.get(key).get(pair) >= 50){
-                    System.out.println(key+" paired with: ");
-                    System.out.println(pair+" "+bandPairs.get(key).get(pair)+" times");
+                    numPairs++;
+                    System.out.println(key+"-"+pair+": "+bandPairs.get(key).get(pair)+" times");
                 }
             }
         }
+        System.out.println("\nThere are a total of "+numPairs+" pairs that appear 50 or more times");
     }
 
     public static void main(String[] args){
