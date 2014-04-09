@@ -14,9 +14,9 @@ public class challenge{
                 String[] result = line.split(",");
                 Arrays.sort(result);
                 for (int i = 0; i<result.length; i++){
-                    for(int j = 1; j<result.length; i++){
-                        //doesn't contain the key, add key, and then add all pairs associated with this key
-                        if(bandPairs.containsKey(result[i])){
+                    for(int j = 1; j<result.length; j++){
+                        //doesn't contain the key, add key, and then add pair associated with this key
+                        if(!bandPairs.containsKey(result[i])){
                             HashMap<String,Integer> pairs = new HashMap<String,Integer>();
                             pairs.put(result[j],1);
                             bandPairs.put(result[i],pairs);
@@ -24,7 +24,7 @@ public class challenge{
                         else{
                             //contains the key, so pairs hash table already exists and check if pair exists
                             if(bandPairs.get(result[i]).containsKey(result[j])){
-                                bandPairs.get(result[i]).put(result[j], pairs.get(result[j]) + 1);
+                                bandPairs.get(result[i]).put(result[j], bandPairs.get(result[i]).get(result[j]) + 1);
                             }
                         }
                     }
@@ -41,24 +41,26 @@ public class challenge{
 
     }
 
-    /*private static void printResult(HashMap<String,String> band){
-      for (String key : bandPairs.keySet()) {
-      System.out.println("Key = " + key + "\nValue = "+band.get(key));
-      }
+    private static void printResult(){
+        for (String key : bandPairs.keySet()) {
+            System.out.println(key+" paired with: ");
+            for(String pair : bandPairs.get(key).keySet()){
+                System.out.println(pair+" "+bandPairs.get(key).get(pair)+" times");
+            }
+        }
 
     }
-    */
+
 
     public static void main(String[] args){
 
-        System.out.println("Enter the file name");
         if(args.length != 1){
             System.out.println("Please enter a valid file name");
             System.out.println("USAGE: java challenge (filename)");
         }
         else{
             parseFile(args[0]);
-            printResult(bandPairs);
+            printResult();
         }
     }
 
