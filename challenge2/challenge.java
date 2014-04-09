@@ -43,8 +43,8 @@ public class challenge{
                                 //as long as the band and pair are not the same
                                 if(!result[i].equals(result[j])){
                                     //if the bandpair hash table contains the pair key, we do not want to consider the swapped pair
-                                    if(bandPairs.containsKey(result[j]){
-                                        if(bandPairs.get(result[j]).containsKey(result[i]){
+                                    if(bandPairs.containsKey(result[j])){
+                                        if(bandPairs.get(result[j]).containsKey(result[i])){
                                             continue;
                                         }
                                     }
