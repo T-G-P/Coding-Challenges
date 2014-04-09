@@ -22,6 +22,7 @@ public class challenge{
                         if(!bandPairs.containsKey(result[i])){
                             //Create new hashmap to represent all pairs associated with this key
                             HashMap<String,Integer> pairs = new HashMap<String,Integer>();
+                            //Add to the pairs only if the pair is not equal to the band
                             //Initialize this pair with a count of 1
                             if(!result[i].equals(result[j])){
                                 pairs.put(result[j],1);
@@ -39,7 +40,14 @@ public class challenge{
                             }
                             //the pair does not exist in the hash table, so add it and initalize it's count to 1
                             else{
+                                //as long as the band and pair are not the same
                                 if(!result[i].equals(result[j])){
+                                    //if the bandpair hash table contains the pair key, we do not want to consider the swapped pair
+                                    if(bandPairs.containsKey(result[j]){
+                                        if(bandPairs.get(result[j]).containsKey(result[i]){
+                                            continue;
+                                        }
+                                    }
                                     bandPairs.get(result[i]).put(result[j], 1);
                                 }
                             }
