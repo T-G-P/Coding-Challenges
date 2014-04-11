@@ -19,7 +19,7 @@ public abstract class StringAuditQuestion
      * that appears in the string, along with the number of occurances for that character.
      * This report is to be provided in order from most occuring character to least occurring
      * character
-     * 
+     *
      * @param input Any non-null string
      * @return returns the contents of the string
      */
@@ -31,22 +31,27 @@ public abstract class StringAuditQuestion
         for (int i = 0; i < pairs.length; i++)
         {
             System.out.println(pairs[i]._char + "\t" + pairs[i]._occurances);
-        }		
+        }
     }
 
-    public class WingSpan extends StringAuditQuestion{
-        public Pair[] result;
+    public static class WingSpan extends StringAuditQuestion{
 
         public Pair[] auditString(String input) {
 
-            result = new Pair[input.length()-1];
+            Pair [] result = new Pair[input.length()];
+            System.out.println(result);
             for(int i = 0; i<input.length(); i++){
+                System.out.println(result[i]._char);
                 for(int j = 0; j<input.length(); j++){
+                    System.out.println(result[i]._char);
                     if(result[j]!=null){
+                        System.out.println(result[i]._char);
                         if(result[j]._char == input.charAt(i)){   //check if the pair array contains thsi character. If it does, increment count
+                            System.out.println(result[i]._char);
                             result[j]._occurances++;
                         }
                         else{       //pair doesn't exist yet
+                            System.out.println(result[i]._char);
                             Pair myPair = new Pair(input.charAt(i));
                             myPair._occurances = 1;
                             result[j] = myPair;
@@ -55,26 +60,29 @@ public abstract class StringAuditQuestion
                 }
             }
 
-            Arrays.sort(result);
+            Arrays.sort(result,new OccurrenceComparator());
             return result;
         }
 
-        public int compareTo(Pair p1, Pair p2) {
+        public void run(String input){
+            auditString(input);
+            reportAudit(input);
+        }
+    }
+    public class OccurrenceComparator implements Comparator<Pair>{
+        @Override
+        public int compare(Pair p1, Pair p2) {
 
             if (p1._occurances < p2._occurances) {
                 return -1;
             }
-
-            if (p1._occurances > p2._occurances) {
+            else if (p1._occurances > p2._occurances) {
                 return 1;
             }
-            return 0;
+            else{
+                return 0;
+            }
         }
-    }
-
-    public void run(String input){
-        auditString(input);
-        reportAudit(input);
     }
 
     public static void main(String[] args){
