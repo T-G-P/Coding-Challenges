@@ -12,11 +12,12 @@ public class MysteryQuestion {
      * appends certain characters depending on its index. If the index is 0, 3, or 6, it adds '(','-', or ').
      * Otherwise, it checks the string for either a digit or a character. If it's a digit, it simply adds that index of
      * the string to the dynamically allocated buffer.
-     * If it's a character, some manipulation is done to the character by subtracting 'a' (97 in decimal 
-     * from the character and  storing this in a temporary variable. Afterward, a second character is initialized 
-     * and some integer is calculated by taking the integer cast of 2 which is 50 and then taking 1/3 of whatever c1 is and adding 
-     * it to 50, and then storing it as the variable c2.
-     * This is then appended to the result string which gets returned at the end.
+     * If it's a character, some manipulation is done to the character by subtracting 'a' (97 in decimal
+     * from the character and then casting this integer as a cha and  storing this in a temporary variable.
+     * Afterward, a second character is initialized and some integer is calculated by taking the integer
+     * cast of 2 which is 50 and then taking 1/3 of whatever c1 is and adding it to 50, and then  casting
+     * it as a char and storing it as the variable c2. This is then appended to the result string which gets
+     * returned at the end.
      */
 
 	public static String function(String s) {   //function that takes in a string
@@ -39,10 +40,11 @@ public class MysteryQuestion {
 				sb.append(c);
 			} else if (Character.isLetter(c)) { //if the character is a letter:
                 //subtract the ascii value of 'a' from the lowercase version of this char and store it in var c1
-				char c1 = (char) (Character.toLowerCase(c) - 'a'); 
+                //cast this intger as a char
+				char c1 = (char) (Character.toLowerCase(c) - 'a');
 
-                //take the character 2, cast it as an int, and 
-                //then add this to whatever character/3, 
+                //take the character 2, cast it as an int, and
+                //then add this to whatever character/3,
                 //and then store this as a char as var c2
 				char c2 = (char) (((int) '2') + (c1 / 3));
 
