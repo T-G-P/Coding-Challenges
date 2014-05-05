@@ -36,13 +36,13 @@ def get_cheapest_food(addr, city, zip_code):
 #takes in address of user and gets restaurant from cheapest food function
 def make_delivery(addr, city, zip_code, em, first_name, last_name, phone, state, card_number, card_cvc, card_expiry, card_bill_addr, card_bill_city, card_bill_state, card_bill_zip, card_bill_phone):
     cheapest_food, rid = get_cheapest_food(addr, city, zip_code)
-    delivery_check = ordrin.delivery_check('ASAP', rid, addr, city, zip_code)
+    delivery_check = ordrin_api.delivery_check('ASAP', rid, addr, city, zip_code)
     if delivery_check['delivery'] == 1:
         if not cheapest_food == None:
             if not delivery_check['mino'] == '0.00':
                 #order enough of the cheapest item to pass the min delivery charge
                 qty = int(float(delivery_check['mino'])/float(cheapest_food['price'])) + 1
-                ordrin.order_guest(rid, em, cheapest_food['id'] + '/' + qty, '0.00', first_name, last_name, phone, zip_code, addr, city, state, card_number, card_cvc, card_expiry, card_bill_addr, card_bill_city, card_bill_state, card_bill_zip, card_bill_phone, addr2=None, card_name=None, card_bill_addr2=None, delivery_date='ASAP', delivery_time=None)
+                ordrin_api.order_guest(rid, em, cheapest_food['id'] + '/' + qty, '0.00', first_name, last_name, phone, zip_code, addr, city, state, card_number, card_cvc, card_expiry, card_bill_addr, card_bill_city, card_bill_state, card_bill_zip, card_bill_phone, addr2=None, card_name=None, card_bill_addr2=None, delivery_date='ASAP', delivery_time=None)
 
 def run():
     addr = raw_input("Please enter your address: ")
@@ -73,7 +73,3 @@ def run():
     make_delivery(addr,city,zip_code,em,first_name,last_name,phone,state,card_number,card_cvc,card_expiry,card_bill_addr,card_bill_city,card_bill_state,card_bill_zip,card_bill_phone)
 
 run()
-
-
-
-
