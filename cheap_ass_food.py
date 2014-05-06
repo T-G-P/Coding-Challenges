@@ -14,6 +14,7 @@ def get_cheapest_food(addr, city, zip_code):
     rand_restaurant = ordrin_api.restaurant_details(str(nb_list[rand_restaurant_index]['id']))
     menu = rand_restaurant['menu']
     rid = rand_restaurant['restaurant_id']
+    print 'Restaurant name: '+rand_restaurant['name']
 
     #list that wlil contain all the food items
     food_list = []
@@ -37,32 +38,47 @@ def get_cheapest_food(addr, city, zip_code):
 def make_delivery(addr, city, zip_code, em, first_name, last_name, phone, state, card_number, card_cvc, card_expiry, card_bill_addr, card_bill_city, card_bill_state, card_bill_zip, card_bill_phone):
     cheapest_food, rid = get_cheapest_food(addr, city, zip_code)
     delivery_check = ordrin_api.delivery_check('ASAP', rid, addr, city, zip_code)
+    qty = 1
     if delivery_check['delivery'] == 1:
+        print cheapest_food == None
         if not cheapest_food == None:
+            print 'food id = '+cheapest_food['id']
             if not delivery_check['mino'] == '0.00':
                 #order enough of the cheapest item to pass the min delivery charge
                 qty = int(float(delivery_check['mino'])/float(cheapest_food['price'])) + 1
-                ordrin_api.order_guest(rid, em, cheapest_food['id'] + '/' + qty, '0.00', first_name, last_name, phone, zip_code, addr, city, state, card_number, card_cvc, card_expiry, card_bill_addr, card_bill_city, card_bill_state, card_bill_zip, card_bill_phone, addr2=None, card_name=None, card_bill_addr2=None, delivery_date='ASAP', delivery_time=None)
+            ordrin_api.order_guest(rid, em, cheapest_food['id'] + '/' + str(qty), '0.00', first_name, \
+                last_name, phone, zip_code, addr, city, state, card_number, card_cvc, card_expiry, \
+                card_bill_addr, card_bill_city, card_bill_state, card_bill_zip, card_bill_phone, \
+                addr2=None, card_name=None, card_bill_addr2=None, delivery_date='ASAP', \
+                delivery_time=None)
+        else:
+            return None
+    else:
+        print 'This restaurant cannot deliver'
+
+    print 'quantity '+str(qty)
+    print 'Restaurant id '+rid
+    return cheapest_food
 
 def run():
-    addr = raw_input("Please enter your address: ")
-    city = raw_input("Please enter your city: ")
-    zip_code = raw_input("Please enter your zipcode: ")
-    em = raw_input("Please enter your email: ")
-    first_name = raw_input("Please enter your first name: ")
-    last_name = raw_input("Please enter your last name: ")
-    phone = raw_input("Please enter your phone number: ")
-    state = raw_input("Please enter your state: ")
-    card_number = raw_input("Please enter your credit card#: ")
-    card_cvc = raw_input("Please enter your security code: ")
-    card_expiry = raw_input("Please enter your credit card expiration date: ")
-    billing = raw_input("Is your credit card billing info the same as the above? Y/N")
+    addr = str(raw_input("Please enter your address: "))
+    city = str(raw_input("Please enter your city: "))
+    zip_code = str(raw_input("Please enter your zipcode: "))
+    em = str(raw_input("Please enter your email: "))
+    first_name = str(raw_input("Please enter your first name: "))
+    last_name = str(raw_input("Please enter your last name: "))
+    phone = str(raw_input("Please enter your phone number: "))
+    state = str(raw_input("Please enter your state: "))
+    card_number = str(raw_input("Please enter your credit card#: "))
+    card_cvc = str(raw_input("Please enter your security code: "))
+    card_expiry = str(raw_input("Please enter your credit card expiration date: "))
+    billing = str(raw_input("Is your credit card billing info the same as the above? Y/N\n"))
     if not billing.lower() == 'y':
-        card_bill_city = raw_input("Please enter your billing city: ")
-        card_bill_addr = raw_input("Please enter your card billing address: ")
-        card_bill_state = raw_input("Please enter your billing state: ")
-        card_bill_zip = raw_input("Please enter your billing izp: ")
-        card_bill_phone = raw_input("Please enter something: ")
+        card_bill_city = str(raw_input("\nPlease enter your billing city: "))
+        card_bill_addr = str(raw_input("Please enter your card billing address: "))
+        card_bill_state = str(raw_input("Please enter your billing state: "))
+        card_bill_zip = str(raw_input("Please enter your billing zip: "))
+        card_bill_phone = str(raw_input("Please enter your billing phone: "))
     else:
         card_bill_addr = addr
         card_bill_city = city
@@ -70,6 +86,11 @@ def run():
         card_bill_zip = zip_code
         card_bill_phone = phone
 
-    make_delivery(addr,city,zip_code,em,first_name,last_name,phone,state,card_number,card_cvc,card_expiry,card_bill_addr,card_bill_city,card_bill_state,card_bill_zip,card_bill_phone)
+    delivery = make_delivery(addr, city, zip_code, em, first_name, last_name, phone, state, card_number, card_cvc, card_expiry, card_bill_addr, card_bill_city, card_bill_state, card_bill_zip, card_bill_phone)
+    if delivery:
+        print delivery['name']
+        print delivery['price']
+    else:
+        print "No freaking food jackpiss"
 
 run()
