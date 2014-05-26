@@ -246,5 +246,7 @@ Parts, Repair, Maintenence:
 08/30/2013: 246,405: Differential Gasket FEL-PRO #RDS 55028-1 and Fluid Valvoline 80w-90
 08/30/2013: 246,405: Transmission Filter w/ Gasket ACDELCO 8657926 / Mobil 1 Synthetic ATF
 09/14/2013: 247,200: Front Brake Pads
+01/20/2014: 253,000: Repair truck lock
 04/26/2014: 256,636: Oil Change Conventional 10W30 w/ Fram Filter
 05/23/2014: Miles: Replaced Heater Bypass Valve with ACDELCO unit
+
