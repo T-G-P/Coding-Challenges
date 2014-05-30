@@ -172,6 +172,7 @@ Odometer readings/Gas Mileage
 05/15/2014: 257,277 21.725 Gallons - 87 Octane - $3.439/Gal
 05/20/2014: 257,698 23.037 Gallons - 87 Octane - $3.399/Gal
 05/24/2014: 257,976 16.408 Gallons - 87 Octane - $3.749/Gal
+05/29/2014: 258,298 21.709 Gallons - 87 Octane - $3.379/Gal
 
 
 
@@ -249,4 +250,3 @@ Parts, Repair, Maintenence:
 01/20/2014: 253,000: Repair truck lock
 04/26/2014: 256,636: Oil Change Conventional 10W30 w/ Fram Filter
 05/23/2014: Miles: Replaced Heater Bypass Valve with ACDELCO unit
-
