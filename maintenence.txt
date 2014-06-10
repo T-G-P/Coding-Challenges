@@ -174,12 +174,7 @@ Odometer readings/Gas Mileage
 05/20/2014: 257,698 23.037 Gallons - 87 Octane - $3.399/Gal
 05/24/2014: 257,976 16.408 Gallons - 87 Octane - $3.749/Gal
 05/29/2014: 258,298 21.709 Gallons - 87 Octane - $3.379/Gal
-
-
-
-
-
-   
+06/07/2014: 258,570 18.312 Gallons - 87 Octane - $3.399/Gal
 
 
 Parts, Repair, Maintenence:
