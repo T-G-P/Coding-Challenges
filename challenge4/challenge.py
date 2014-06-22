@@ -22,7 +22,7 @@ def parse_text():
                     letters[char]+=1
 
 def print_word():
-    print "Here are the sorted letters"
+    print "Here are the sorted letters:\n"
     for char in sorted(letters, key=letters.get, reverse=True):
         if(char != '_'):
             print(char, letters[char])
@@ -31,7 +31,7 @@ def print_word():
            result = ''.join(word)
            continue 
 
-    print "The secret word is: \n"+result
+    print "\nThe secret word is: \n"+result
 
 parse_text()
 print_word()
