@@ -10,6 +10,7 @@ Here are the sorted letters:
 ('a', 93)
 ('r', 92)
 ('s', 91)
+('_', 90)
 ('f', 89)
 ('m', 88)
 ('g', 87)
