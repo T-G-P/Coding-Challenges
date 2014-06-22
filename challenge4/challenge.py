@@ -24,8 +24,8 @@ def parse_text():
 def print_word():
     print "Here are the sorted letters:\n"
     for char in sorted(letters, key=letters.get, reverse=True):
+        print(char, letters[char])
         if(char != '_'):
-            print(char, letters[char])
             word.append(char)
         else:
            result = ''.join(word)
