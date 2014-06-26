@@ -14,7 +14,7 @@ public class ChapterOne_Problem1{
 
         ArrayList<Character> chars = new ArrayList<Character>();
 
-        for(int i=0; i<testString.length()-1; i++){
+        for(int i=0; i<testString.length(); i++){
             if(!chars.contains(testString.charAt(i))){
                 chars.add(testString.charAt(i));
             }
@@ -47,6 +47,7 @@ public class ChapterOne_Problem1{
         System.out.println("\nThis string does have all unique characters\n");
         return true;
     }
+
     public static void main(String[] args){
 
         InputStreamReader inputStream = new InputStreamReader(System.in);
