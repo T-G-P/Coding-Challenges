@@ -8,8 +8,49 @@
 
 public class ChapterOne_Problem3.java{
 
+    public void removeDuplicates(char[] string){
+
+        if(string.length == 0 || string.length == 1){
+            return;
+        }
+
+        for(int i=0; i<string.length; i++){
+            for(int j=i+1; i<string.length; i++){
+                if(j == string.length){
+                    return;
+                }
+                if(string[i] == string[j]){
+                    if(string[i] == '\0'){
+                        break;
+                    }
+                    string[j]='\0';
+                }
+            }
+        }
+        shiftChars(string);
+    }
+
+    public void shiftChars(char[] string){
+        for(int i=0; i<string.length; i++){
+            if(string[i]=='\0'){
+                for(int j=i+1; j<string.length; j++){
+                    if(j == string.length){
+                        return;
+                    }
+                    if(string[j] != '\0'){
+                        string[i]=string[j];
+                        string[j]='\0';
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
     public static void main(String[] args){
 
+        String str = "hello world"; 
+        char[] charArray = str.toCharArray();
+        removeDuplicates(charArray);
     }
 }
