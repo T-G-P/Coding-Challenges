@@ -6,31 +6,32 @@
  * Write the test cases for this method.
  * */
 
-public class ChapterOne_Problem3.java{
+public class ChapterOne_Problem3{
 
-    public void removeDuplicates(char[] string){
+    public static void removeDuplicates(char[] string){
 
         if(string.length == 0 || string.length == 1){
             return;
         }
 
         for(int i=0; i<string.length; i++){
-            for(int j=i+1; i<string.length; i++){
+            for(int j=i+1; j<string.length; j++){
                 if(j == string.length){
                     return;
                 }
                 if(string[i] == string[j]){
                     if(string[i] == '\0'){
-                        break;
+                        continue;
                     }
                     string[j]='\0';
                 }
             }
         }
+        System.out.println(string);
         shiftChars(string);
     }
 
-    public void shiftChars(char[] string){
+    public static void shiftChars(char[] string){
         for(int i=0; i<string.length; i++){
             if(string[i]=='\0'){
                 for(int j=i+1; j<string.length; j++){
@@ -52,5 +53,6 @@ public class ChapterOne_Problem3.java{
         String str = "hello world"; 
         char[] charArray = str.toCharArray();
         removeDuplicates(charArray);
+        System.out.println(charArray);
     }
 }
