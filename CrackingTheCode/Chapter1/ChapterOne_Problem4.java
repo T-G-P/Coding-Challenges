@@ -32,13 +32,9 @@ public class ChapterOne_Problem4{
         for(char key: charCount1.keySet()){
             if(charCount1.get(key) != charCount2.get(key)){
                 System.out.println("\nThese are not anagrams\n");
-                System.out.println("charCount1.get(key) "+charCount1.get(key));
-                System.out.println("charCount2.get(key) "+charCount2.get(key));
                 return false;
             }
             else{
-                System.out.println(key+" charCount1.get(key) "+charCount1.get(key));
-                System.out.println(key+" charCount2.get(key) "+charCount2.get(key));
             }
 
         }
@@ -61,10 +57,6 @@ public class ChapterOne_Problem4{
                 }
                 else{
                     numArgs = false;
-                    for(String s: stringArray){
-                        System.out.println("\n"+s);
-                    }
-                    System.out.println("test: "+stringArray[0]+" "+stringArray[1]);
                     areAnagrams(stringArray[0],stringArray[1]);
                 }
             }
