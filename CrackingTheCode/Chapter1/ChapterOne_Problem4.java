@@ -4,6 +4,12 @@ import java.util.*;
 
 public class ChapterOne_Problem4{
 
+    /*This is a complicated solution. It takes each string and sets up a key value pair for each 
+     * character in the string. If the length of the strings is different, then they cannot be anagrams so 
+     * this is immediately ruled out. Otherwise, the count value for each character of one of the hash maps is compared
+     * to the count value of the same character in the other hash map. If these counts are the same, the strings are anagrams 
+     * since the strings are the same length
+     * */
     public static boolean areAnagrams1(String string1, String string2){
 
         if(string1.length() != string2.length()){
@@ -42,6 +48,10 @@ public class ChapterOne_Problem4{
         return true;
     }
 
+    /*This is a much simpler solution. It sorts each string and then does a string comparison.
+     * If the strings are equal, then they are anagrams. Otherwise, they are not. This uses a helper method
+     * to sort each string. The algorithm for the sort is Insertion sort*/
+
     public static boolean areAnagrams2(String string1, String string2){
         if(mySort(string1).equals(mySort(string2))){
             System.out.println("\nThese are definitely anagrams\n");
@@ -51,6 +61,7 @@ public class ChapterOne_Problem4{
         return false;
 
     }
+    /*Helper insertion sort method for myAnagrams2*/
     public static String mySort(String str){
         char[] charArray = str.toLowerCase().toCharArray();
         for(int i=0; i<charArray.length; i++){
@@ -88,9 +99,9 @@ public class ChapterOne_Problem4{
                     System.out.println("\nSorting: "+stringArray[0]+" => "+mySort(stringArray[0]));
                     System.out.println("\nSorting: "+stringArray[1]+" => "+mySort(stringArray[1]));
                     numArgs = false;
-                    System.out.println("Using complicated solution: \n");
+                    System.out.println("Using complicated solution: ");
                     areAnagrams1(stringArray[0],stringArray[1]);
-                    System.out.println("Using better solution: \n");
+                    System.out.println("Using better solution: ");
                     areAnagrams2(stringArray[0],stringArray[1]);
                 }
             }
