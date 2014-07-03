@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ChapterOne_Problem4{
 
-    public static boolean areAnagrams(String string1, String string2){
+    public static boolean areAnagrams1(String string1, String string2){
 
         if(string1.length() != string2.length()){
             System.out.println("\nThese are not anagrams\n");
@@ -41,6 +41,35 @@ public class ChapterOne_Problem4{
         System.out.println("\nThese are definitely anagrams\n");
         return true;
     }
+
+    public static boolean areAnagrams2(String string1, String string2){
+        if(mySort(string1).equals(mySort(string2))){
+            System.out.println("\nThese are definitely anagrams\n");
+            return true;
+        }
+        System.out.println("\nThese are not anagrams\n");
+        return false;
+
+    }
+    public static String mySort(String str){
+        char[] charArray = str.toLowerCase().toCharArray();
+        for(int i=0; i<charArray.length; i++){
+            for(int j=i+1; j<charArray.length; j++){
+                if((int)charArray[i] > (int)charArray[j]){
+                    char temp = charArray[j];
+                    charArray[j] = charArray[i]; 
+                    charArray[i] = temp;
+                }
+            }
+        }
+        String result="";
+        for(char s: charArray){
+            result+=s;
+        }
+        return result;
+
+    }
+
     public static void main(String[] args){
 
         InputStreamReader input = new InputStreamReader(System.in);
@@ -56,8 +85,13 @@ public class ChapterOne_Problem4{
                     System.out.println("Invalid Input...try again\n");
                 }
                 else{
+                    System.out.println("\nSorting: "+stringArray[0]+" => "+mySort(stringArray[0]));
+                    System.out.println("\nSorting: "+stringArray[1]+" => "+mySort(stringArray[1]));
                     numArgs = false;
-                    areAnagrams(stringArray[0],stringArray[1]);
+                    System.out.println("Using complicated solution: \n");
+                    areAnagrams1(stringArray[0],stringArray[1]);
+                    System.out.println("Using better solution: \n");
+                    areAnagrams2(stringArray[0],stringArray[1]);
                 }
             }
 
