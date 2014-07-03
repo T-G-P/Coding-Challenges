@@ -7,6 +7,7 @@ public class ChapterOne_Problem4{
     public static boolean areAnagrams(String string1, String string2){
 
         if(string1.length() != string2.length()){
+            System.out.println("\nThese are not anagrams\n");
             return false;
         }
 
@@ -30,9 +31,11 @@ public class ChapterOne_Problem4{
         }
         for(char key: charCount1.keySet()){
             if(charCount1.get(key) != charCount2.get(key)){
+                System.out.println("\nThese are not anagrams\n");
                 return false;
             }
         }
+        System.out.println("\nThese are definitely anagrams\n");
         return true;
     }
     public static void main(String[] args){
@@ -51,6 +54,9 @@ public class ChapterOne_Problem4{
                 }
                 else{
                     numArgs = false;
+                    for(String s: stringArray){
+                        System.out.println("\n"+s);
+                    }
                     areAnagrams(stringArray[0],stringArray[1]);
                 }
             }
