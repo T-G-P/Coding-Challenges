@@ -13,19 +13,19 @@ public class ChapterOne_Problem4{
         HashMap<Character,Integer> charCount1 = new HashMap<Character,Integer>();
         HashMap<Character,Integer> charCount2 = new HashMap<Character,Integer>();
         for(int i=0; i<string1.length(); i++){
-            if(!charCount1.containskey(string.charAt(i))){
-                charCount1.put(string.charAt(i),1); 
+            if(!charCount1.containsKey(string1.charAt(i))){
+                charCount1.put(string1.charAt(i),1); 
             }
             else{
-                charCount1.put(string.charAt(i),charCount1.get(string.charAt(i))+1); 
+                charCount1.put(string1.charAt(i),charCount1.get(string1.charAt(i))+1); 
             }
         }
         for(int i=0; i<string2.length(); i++){
-            if(!charCount1.containskey(string.charAt(i))){
-                charCount1.put(string.charAt(i),1); 
+            if(!charCount1.containsKey(string2.charAt(i))){
+                charCount1.put(string2.charAt(i),1); 
             }
             else{
-                charCount1.put(string.charAt(i),charCount1.get(string.charAt(i))+1); 
+                charCount1.put(string2.charAt(i),charCount1.get(string2.charAt(i))+1); 
             }
         }
         for(char key: charCount1.keySet()){
@@ -51,9 +51,9 @@ public class ChapterOne_Problem4{
                 }
                 else{
                     numArgs = false;
+                    areAnagrams(stringArray[0],stringArray[1]);
                 }
             }
-            areAnagrams(stringArray[0],stringArray[1]){
 
         }catch(IOException e){
             System.out.println("Input Error");
