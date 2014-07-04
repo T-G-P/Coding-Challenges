@@ -6,10 +6,11 @@ import java.util.*;
 public class ChapterOne_Problem5{
 
     /*This method takes in a character array and then calculates the number of spaces in it. A new array
-     * is then made. It's size is calculated by subtracting the number of space characters and adding the number of 
-     * replacement characters. We then loop through all of hte characters in the character array and keep track of the position. 
-     * Since the space is being replaced by 3 new characters, we increment the position by 3 if these characters are inserted.
-     * Otherwise, we insert the respective character and increment the position by 1.
+     * is then made. It's size is calculated by subtracting the number of space characters and adding the 
+     * number of replacement characters. We then loop through all of the characters in the character array 
+     * and keep track of the position. Since the space is being replaced by 3 new characters, we increment 
+     * the position by 3 if these characters are inserted. Otherwise, we insert the respective character and 
+     * increment the position by 1.
      */
 
     public static String replaceAllSpaces1(char[] str){
