@@ -10,15 +10,29 @@ public class ChapterOne_Problem6{
 
     }
 
+    public static int findnumPlaces(int num){
+        int count=1;
+        //need to count tens place too
+        while(num/10 >= 1){
+            num = num/10;
+            count++;
+        }
+        return count;
+    }
+
     public static void printImage(int[][] image){
+
+        int maxNum = image[image.length-1][image.length-1];
+        int numPlaces = findnumPlaces(maxNum);
+
         for(int i=0; i<image.length; i++){
             for(int j=0; j<image.length; j++){
                 if(j!=image.length-1){
-                    if(image[i][j] < 10){
-                    System.out.print(image[i][j]+"  ");
-                    }
-                    else{
-                    System.out.print(image[i][j]+" ");
+                    String value = image[i][j]+"";
+                    System.out.print(value);
+                    while(value.length() <= numPlaces) {
+                        System.out.print(" ");
+                        value+=" ";
                     }
                 }
                 else{
