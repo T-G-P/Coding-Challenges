@@ -11,42 +11,32 @@ import DNS
 import re
 
 #Global varialbes
+global msg,part,smtpObj
 GMAIL_SMTP = "smtp.gmail.com"
 GMAIL_SMTP_PORT = 587
 TEXT_SUBTYPE = "plain"
  
-#This function takes in a recipient and sends them an email
-def send_email(recipient):
      
-    #Create the message
-    msg = MIMEMultipart()
-    #msg = MIMEText(email_text, TEXT_SUBTYPE)
-    msg["Subject"] = subject 
-    msg["From"] = from_email 
-    msg["To"] = recipient 
+#Create the message
+msg = MIMEMultipart()
+msg["Subject"] = subject 
+msg["From"] = from_email 
 
-    part = MIMEText(email_text, TEXT_SUBTYPE)
-    msg.attach(part)
-    part = MIMEApplication(open("Resume_Tobias_Perelstein.pdf","rb").read())
-    part.add_header('Content-Disposition', 'attachment', filename="Resume_Tobias_Perelstein.pdf")
-    msg.attach(part)
+#Body of message
+part = MIMEText(email_text, TEXT_SUBTYPE)
+msg.attach(part)
+part = MIMEApplication(open("Resume_Tobias_Perelstein.pdf","rb").read())
+part.add_header('Content-Disposition', 'attachment', filename="Resume_Tobias_Perelstein.pdf")
+msg.attach(part)
      
-    try:
-      smtpObj = SMTP(GMAIL_SMTP, GMAIL_SMTP_PORT)
-      #Identify yourself to GMAIL ESMTP server.
-      smtpObj.ehlo()
-      #Put SMTP connection in TLS mode and call ehlo again.
-      smtpObj.starttls()
-      smtpObj.ehlo()
-      #Login to service
-      smtpObj.login(user=from_email, password=gmail_password)
-      #Send email
-      print "Sending the message to: "+recipient
-      smtpObj.sendmail(from_email, recipient.split(), msg.as_string())
-      #close connection and session.
-      smtpObj.quit();
-    except SMTPException as error:
-      print "Error: unable to send email :  {err}".format(err=error)
+smtpObj = SMTP(GMAIL_SMTP, GMAIL_SMTP_PORT)
+#Identify yourself to GMAIL ESMTP server.
+smtpObj.ehlo()
+#Put SMTP connection in TLS mode and call ehlo again.
+smtpObj.starttls()
+smtpObj.ehlo()
+#Login to service
+smtpObj.login(user=from_email, password=gmail_password)
 
 #This function takes a tab or comma delimited file and parses the file for all valid emails. 
 def send_emails():
@@ -58,6 +48,15 @@ def send_emails():
                 user_email = user_email.strip(' ')
                 is_valid = validate_email(user_email)
                 if is_valid:
-                    send_email(user_email)
+                    try:
+                        print "Sending the message to: "+user_email
+                        msg["To"] = user_email 
+                        #Send email
+                        smtpObj.sendmail(from_email, user_email.split(), msg.as_string())
+                    except SMTPException as error:
+                        print "Error: unable to send email :  {err}".format(err=error)
+
 
 send_emails()
+#close connection and session.
+smtpObj.quit();
