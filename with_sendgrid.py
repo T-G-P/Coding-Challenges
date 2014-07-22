@@ -5,25 +5,21 @@ import sendgrid
 import DNS
 import re
 
+global sg,message,status 
 
-def sendgrid_email(user_email):
-    #Securely connect to SendGrid
-    sg = sendgrid.SendGridClient(username, password, secure=True)
-    #Make Empty Message
-    message = sendgrid.Mail()
-    #attach a file
-    message.add_attachment_stream('Resume_Tobias_Perelstein.pdf','Resume')
-    #Add recipient
-    message.add_to(user_email)
-    #set the subject of the email
-    message.set_subject(subject)
-    #set the body of the message
-    message.set_text(email_text)
-    #set the message from field
-    message.set_from(from_email)
-    #send the message
-    print "Sending the message to: "+user_email
-    status, msg = sg.send(message)
+#Securely connect to SendGrid
+sg = sendgrid.SendGridClient(username, password, secure=True)
+#Make Empty Message
+message = sendgrid.Mail()
+#attach a file
+message.add_attachment_stream('Resume_Tobias_Perelstein.pdf','Resume')
+#set the subject of the email
+message.set_subject(subject)
+#set the body of the message
+message.set_text(email_text)
+#set the message from field
+message.set_from(from_email)
+
 
 #This function takes a tab or comma delimited file and parses the file for all valid emails. 
 def send_emails():
@@ -35,6 +31,9 @@ def send_emails():
                 user_email = user_email.strip(' ')
                 is_valid = validate_email(user_email)
                 if is_valid:
-                    sendgrid_email(user_email)
-
+                    #Add recipient
+                    message.add_to(user_email)
+                    #send the message
+                    print "Sending the message to: "+user_email
+                    status, msg = sg.send(message)
 send_emails()
