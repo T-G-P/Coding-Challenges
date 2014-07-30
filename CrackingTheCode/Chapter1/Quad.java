@@ -85,7 +85,6 @@ public class Quad{
                 System.out.println("Invalid argument, please enter a number");
             }
 
-
         }
 
     }
