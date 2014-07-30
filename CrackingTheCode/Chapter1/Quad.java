@@ -1,11 +1,20 @@
 import java.io.* ;
 import java.util.*;
 
+
 public class Quad{
 
-    public static Result Quad(double x, double y, double z){
-        Result res = new Result(0,0);
-        return res;
+    public static double[] computeQuad(double a, double b, double c){
+        double root1, root2;
+        double temp = (b*b-4*a*c);
+        if(temp < 0){
+            System.out.println("No imaginary roots..");
+            return null;
+        }
+        root1 = (-1*b + temp)/(2*a);
+        root2 = (-1*b - temp)/(2*a);
+
+        return new double[] {root1, root2};
     }
 
     public static void main(String[] args){
@@ -67,11 +76,7 @@ public class Quad{
                 }
                 double z = Double.parseDouble(temp);
 
-                Result ret = Quad(1,2,3);
-                System.out.println(ret.x);
-                System.out.println(ret.y);
-                System.out.println(ret.getX());
-                System.out.println(ret.getY());
+                System.out.println("And the roots are: "+Arrays.toString(computeQuad(x,y,z)));
 
             }catch(IOException e){
                 System.out.println("Input Error");
@@ -95,7 +100,7 @@ public class Quad{
         return true;  
     }
 
-
+/*Not sure if needed, for this type of question*/
     public static class Result{
 
         private double x;
