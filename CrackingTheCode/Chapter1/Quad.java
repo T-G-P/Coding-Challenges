@@ -12,8 +12,8 @@ public class Quad{
             System.out.println("No imaginary roots..");
             return null;
         }
-        root1 = (-1*b + temp)/(2*a);
-        root2 = (-1*b - temp)/(2*a);
+        root1 = -1*(-1*b + Math.sqrt(temp))/(2*a);
+        root2 = -1*(-1*b - Math.sqrt(temp))/(2*a);
 
         return new double[] {root1, root2};
     }
@@ -77,7 +77,7 @@ public class Quad{
                 }
                 double z = Double.parseDouble(temp);
 
-                System.out.println("And the roots are: "+Arrays.toString(computeQuad(x,y,z)));
+                System.out.printf("And the roots are: "+Arrays.toString(computeQuad(x,y,z)));
 
             }catch(IOException e){
                 System.out.println("Input Error");
@@ -100,7 +100,7 @@ public class Quad{
         return true;  
     }
 
-/*Not sure if needed, for this type of question*/
+    /*Not sure if needed, for this type of question*/
     public static class Result{
 
         private double x;
