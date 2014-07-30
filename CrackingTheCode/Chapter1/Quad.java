@@ -1,6 +1,7 @@
 import java.io.* ;
 import java.util.*;
 
+/*Google interview question. Return both roots of a quadratic equation. Do not return if there is an imaginary root*/
 
 public class Quad{
 
