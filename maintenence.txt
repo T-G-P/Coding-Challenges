@@ -45,7 +45,7 @@ Odometer readings/Gas Mileage
 08/11/2011: 224,229 21.776 Gallons - 87 Octane
 08/26/2011: 224,568 21.882 Gallons - 87 Octane
 08/27/2011: 224,946 20.003 Gallons - 87 Octane
-09/02/2011: 225,316 22.337 Gallons - 87 Octane 
+09/02/2011: 225,316 22.337 Gallons - 87 Octane
 09/15/2011: 225,646 21.900 Gallons - 87 Octane
 10/03/2011: 225,960 22.563 Gallons - 87 Octane
 10/16/2011: 226,307 23.328 Gallons - 87 Octane
@@ -97,9 +97,9 @@ Odometer readings/Gas Mileage
 10/05/2012: 236,232 19.488 Gallons - 87 Octane
 10/19/2012: 236,515 20.832 Gallons - 87 Octane
 10/26/2012: 236,792 18.950 Gallons - 87 Octane
-11/03/2012: 236,937 10.362 Gallons - 87 Octane  
+11/03/2012: 236,937 10.362 Gallons - 87 Octane
 11/14/2012: 237,203 06.217 Gallons - 87 Octane
-11/16/2012: 237,318 21.251 Gallons - 87 Octane 
+11/16/2012: 237,318 21.251 Gallons - 87 Octane
 11/26/2012: 237,619 20.303 Gallons - 87 Octane
 12/08/2012: 237,923 21.483 Gallons - 87 Octane
 12/19/2012: 238,221 01.326 Gallons - 87 Octane
@@ -110,20 +110,20 @@ Odometer readings/Gas Mileage
 01/22/2013: 239,378 21.978 Gallons - 87 Octane
 02/04/2013: 239,677 21.906 Gallons - 87 Octane
 02/19/2013: 239,954 19.785 Gallons - 87 Octane
-02/26/2013: 240,249 20.350 Gallons - 87 Octane 
+02/26/2013: 240,249 20.350 Gallons - 87 Octane
 03/12/2013: 240,548 21.987 Gallons - 87 Octane
 03/25/2013: 240,876 22.804 Gallons - 87 Octane
 04/01/2013: 241,178 20.396 Gallons - 87 Octane
 04/08/2013: 241,494 20.000 Gallons - 87 Octane
 04/17/2013: 241,781 22.333 Gallons - 87 Octane
-04/25/2013: 242,106 22.275 Gallons - 87 Octane 
+04/25/2013: 242,106 22.275 Gallons - 87 Octane
 05/10/2013: 242,395 21.404 Gallons - 87 Octane
 05/16/2013: 242,688 18.833 Gallons - 87 Octane
 05/23/2013: 242,982 18.377 Gallons - 87 Octane
 05/24/2013: 243,309 19.608 Gallons - 87 Octane
-05/25/2013: 243,642 21.200 Gallons - 87 Octane		
+05/25/2013: 243,642 21.200 Gallons - 87 Octane
 06/04/2013: 243,962 19.097 Gallons - 87 Octane
-06/18/2013: 244,268 21.368 Gallons - 87 Octane 
+06/18/2013: 244,268 21.368 Gallons - 87 Octane
 07/03/2013: 244,586 21.051 Gallons - 87 Octane
 07/17/2013: 244,886 20.310 Gallons - 87 Octane
 07/24/2013: 245,177 21.185 Gallons - 87 Octane
@@ -134,7 +134,7 @@ Odometer readings/Gas Mileage
 08/30/2013: 246,451 18.105 Gallons - 87 Octane
 09/05/2013: 246,821 22.690 Gallons - 87 Octane
 09/11/2013: 247,162 20.850 Gallons - 87 Octane
-09/26/2013: 247,473 21.171 Gallons - 87 Octane     
+09/26/2013: 247,473 21.171 Gallons - 87 Octane
 10/03/2013: 247,785 19.878 Gallons - 87 Octane
 10/10/2013: 247,995 14.602 Gallons - 87 Octane
 10/16/2013: 248,350 23.166 Gallons - 87 Octane
@@ -154,7 +154,7 @@ Odometer readings/Gas Mileage
 12/14/2013: 252,118 23.829 Gallons - 87 Octane
 12/19/2013: 252,422 19.056 Gallons - 87 Octane
 12/25/2013: 252,724 22.251 Gallons - 87 Octane
-01/12/2014: 253,022 
+01/12/2014: 253,022
 01/14/2014: 253,279
 01/20/2014: 253,568
 01/21/2014: 253,625
@@ -164,7 +164,7 @@ Odometer readings/Gas Mileage
 02/14/2014: 254,428
 03/01/2014: 254,726
 03/15/2014: 255,315 21.246 Gallons - 87 Octane - $3.299/Gal
-03/31/2014: 255,616 
+03/31/2014: 255,616
 04/04/2014: 255,936
 04/16/2014: 256,256 22.435 Gallons - 87 Octane - $3.499/Gal
 04/25/2014: 256,590 23.214 Gallons - 87 Octane - $3.479/Gal
@@ -175,6 +175,16 @@ Odometer readings/Gas Mileage
 05/24/2014: 257,976 16.408 Gallons - 87 Octane - $3.749/Gal
 05/29/2014: 258,298 21.709 Gallons - 87 Octane - $3.379/Gal
 06/07/2014: 258,570 18.312 Gallons - 87 Octane - $3.399/Gal
+06/12/2014: 258,899 21.770 Gallons - 87 Octane - $3.399/Gal
+06/21/2014: 259,204 19.032 Gallons - 87 Octane - $3.459/Gal
+06/27/2014: 259,544 22.153 Gallons - 87 Octane - $3.519/Gal
+07/09/2014: 259,851
+07/19/2014: 260,166 21.968 Gallons - 87 Octane - $3.479/Gal
+08/02/2014: 260,493 21.772 Gallons - 87 Octane - $3.279/Gal
+08/11/2014: 260,781 20.008 Gallons - 87 Octane - $3.319/Gal
+08/17/2014: 261,106 21.500 Gallons - 87 Octane - $3.179/Gal
+08/22/2014: 261,342 15.830 Gallons - 87 Octane - $3.159/Gal
+08/28/2014: 261,681 21.302 Gallons - 87 Octane - $3.139/Gal
 
 
 Parts, Repair, Maintenence:
@@ -195,39 +205,39 @@ Parts, Repair, Maintenence:
 11/30/2010: 214,714: Thermostat Gasket FELPRO 35062
 01/19/2011: 216,150: PCV Valve ACDELCO CV789C
 03/05/2011: 217,772: Tire Rotation
-03/17/2011: 218,160: Oxygen Sensor ACDELCO AFS21 
+03/17/2011: 218,160: Oxygen Sensor ACDELCO AFS21
 03/17/2011: 218,160: Throttle Body Gasket FEL-PRO Part # 60903
 04/19/2011: 219,790: Lucas Fuel Injector Cleaner and Upper Cylinder Lubricant
-04/28/2011: 220,106: Install Both Lower Ball Joints and Grease MOOG Part # K6145T 
+04/28/2011: 220,106: Install Both Lower Ball Joints and Grease MOOG Part # K6145T
 05/01/2011: 220,278: Oil Change 10w-30, Slick50 & Full Synthetic Mobil 1 Extended Performance Oil/Filter M1-111
 05/19/2011: 221,415: Fuel Cap Part ACDELCO #GT172
-06/02/2011: 222,100: Coolant Temperature Sensor ACDELCO# 213-928 
-07/01/2011: 223,038: All 11 Suspension lubrication fittings greased 
+06/02/2011: 222,100: Coolant Temperature Sensor ACDELCO# 213-928
+07/01/2011: 223,038: All 11 Suspension lubrication fittings greased
 07/29/2011: 223,780: Tire Rotation
 08/31/2011: 225,194: Throttle Body Rebuild: rebushed throttle shafts, gaskets, fuel pressure regulator
 10/08/2011: 226,052: Oil Change 10w-30, Slick50 & Full Synthetic Mobil 1 Extended Performance Oil/Filter M1-111
 10/21/2011: 226,550: Compression Test/Replacement of Plugs ACDELCO Part # 41817 and Wires ACDELCO Part # 708S
-01/10/2012: 228,420: Tire Rotation 
-01/13/2012: 228,500: Wiper Blades ACDELCO Part # 82182 
-01/20/2012: 228,820: Distributor replaced with MSD Part #8366 
+01/10/2012: 228,420: Tire Rotation
+01/13/2012: 228,500: Wiper Blades ACDELCO Part # 82182
+01/20/2012: 228,820: Distributor replaced with MSD Part #8366
 01/20/2012: 228,820: Ignition coil replaced with MSD Part #8226
 01/20/2012: 228,820: Intake Manifold Gaskets replaced with FEL-PRO Part # MS93317
 01/20/2012: 228,820: Oil Change 10w-30, Lucas Synthetic Oil Stabilizer & Full Synthetic Mobil 1 Oil/Filter M1-111
 01/22/2012: 228,880: Air Cleaner Spacer Mr. Gasket 6411G added to compensate for new ignition coil
-02/03/2012: 229,150: Fan Clutch ACDELCO Part # 1540109 
+02/03/2012: 229,150: Fan Clutch ACDELCO Part # 1540109
 02/03/2012: 229,150: Serpentine Belt ACDELCO Part # 6K990
 02/18/2012: 229,780: Remanufactured ECM Holley II 67-183 / GM 1228746
 04/06/2012: 231,038: Headlight switch replaced with used Delco unit
 06/16/2012: 233,380: Stabilizer Bar Links MOOG Part # K6630
 08/02/2012: 234,531: Ignition coil replaced with MSD Part #8226
-08/02/2012: 234,531: Black Ignition coil harness replaced with ACDELCO #PT1909 
+08/02/2012: 234,531: Black Ignition coil harness replaced with ACDELCO #PT1909
 08/02/2012: 234,531: Grey Ignition coil harness replaced with ACDELCO #PT166
 08/08/2012: 234,810: Bowtie push-in oil filler cap Proform Part #141-630
 08/20/2012: 235.161: Oil Change 10w-30, Lucas Oil Stop Leak & Full Synthetic Mobil 1 Oil/Filter M1-111
 08/20/2012: 235.161: Tire Rotation
-08/20/2012: 235,161: All 11 Suspension lubrication fittings greased 
+08/20/2012: 235,161: All 11 Suspension lubrication fittings greased
 08/25/2012: 235,333: Water pump replaced with ACDELCO part #19201601
-09/01/2012: 235,333: Radiator replaced with SPECTRA PREMIUM / COOLING DEPOT Part # CU920 
+09/01/2012: 235,333: Radiator replaced with SPECTRA PREMIUM / COOLING DEPOT Part # CU920
 09/01/2012: 235,333: Radiator Cap ACDELCO RC27
 09/29/2012: 235,996: Repair of front exhaust pipe
 10/05/2012: 236,199: Replace Front Shocks Bilstein Part # 24-011044
