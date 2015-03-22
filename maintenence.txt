@@ -147,7 +147,7 @@ Odometer readings/Gas Mileage
 11/17/2013: 250,435 22.490 Gallons - 87 Octane
 11/23/2013: 250,698 17.482 Gallons - 87 Octane
 11/26/2013: 251,028 21.957 Gallons - 87 Octane
-11/28/2013: 251,359 21.884 Gallons - 87 Octane
+11/28/2013: 251,359 21.884 Gallons - 87 Octane - $3.159/Gal
 11/30/2013: 251,671 22.087 Gallons - 87 Octane
 12/08/2013: 251,991 02.967 Gallons - 87 Octane
 12/10/2013: 252,037 06.213 Gallons - 87 Octane
@@ -178,13 +178,42 @@ Odometer readings/Gas Mileage
 06/12/2014: 258,899 21.770 Gallons - 87 Octane - $3.399/Gal
 06/21/2014: 259,204 19.032 Gallons - 87 Octane - $3.459/Gal
 06/27/2014: 259,544 22.153 Gallons - 87 Octane - $3.519/Gal
-07/09/2014: 259,851
+07/09/2014: 259,851		          - 87 Octane
 07/19/2014: 260,166 21.968 Gallons - 87 Octane - $3.479/Gal
 08/02/2014: 260,493 21.772 Gallons - 87 Octane - $3.279/Gal
 08/11/2014: 260,781 20.008 Gallons - 87 Octane - $3.319/Gal
 08/17/2014: 261,106 21.500 Gallons - 87 Octane - $3.179/Gal
 08/22/2014: 261,342 15.830 Gallons - 87 Octane - $3.159/Gal
 08/28/2014: 261,681 21.302 Gallons - 87 Octane - $3.139/Gal
+09/09/2014: 262,003		          - 87 Octane
+09/14/2014: 262,331		          - 87 Octane
+09/21/2014: 262,516		          - 87 Octane
+09/26/2014: 262,685		          - 87 Octane
+10/06/2014: 262,986		          - 87 Octane
+10/13/2014: 263,292		          - 87 Octane
+10/23/2014: 263,604 22.237 Gallons - 87 Octane - $2.819/Gal
+10/28/2014: 263,915		          - 87 Octane
+11/03/2014: 264,228 22.899 Gallons - 87 Octane - $2.639/Gal
+11/15/2014: 264,535 22.828 Gallons - 87 Octane - $2.679/Gal
+11/27/2014: 264,823 21.873 Gallons - 87 Octane - $2.679/Gal
+12/09/2014: 265,110 22.370 Gallons - 87 Octane - $2.459/Gal
+12/20/2014: 265,401 22.890 Gallons - 87 Octane - $2.299/Gal
+12/23/2014: 265,687 20.948 Gallons - 87 Octane - $2.339/Gal
+12/27/2014: 266,012 23.339 Gallons - 87 Octane - $2.239/Gal
+01/01/2015: 266,291 21.494 Gallons - 87 Octane - $2.099/Gal
+01/15/2015: 266,847                - 87 Octane
+01/21/2015: 267,130 20.583 Gallons - 87 Octane - $1.819/Gal
+01/21/2015: 267,130 20.583 Gallons - 87 Octane - $1.819/Gal
+01/23/2015: 267,432                - 87 Octane
+01/25/2015:         20.687 Gallons - 87 Octane - $2.079/Gal
+01/26/2015: 267,922 12.573 Gallons - 87 Octane - $1.719/Gal
+02/03/2015: 268,198 22.173 Gallons - 87 Octane - $1.839/Gal
+02/06/2015: 268,459 19.514 Gallons - 87 Octane - $1.979/Gal
+02/10/2015: 268,710 22.116 Gallons - 87 Octane - $1.999/Gal
+02/18/2015: 268,937                - 87 Octane
+02/19/2015: 269,242                - 87 Octane
+02/25/2015: 269,492 22.525 Gallons - 87 Octane - $1.999/Gal
+03/06/2015: 269,732                - 87 Octane
 
 
 Parts, Repair, Maintenence:
