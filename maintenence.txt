@@ -215,7 +215,14 @@ Odometer readings/Gas Mileage
 02/25/2015: 269,492 22.525 Gallons - 87 Octane - $1.999/Gal
 03/06/2015: 269,732                - 87 Octane
 03/13/2015:         18.789 Gallons - 87 Octane - $2.159/Gal
-
+03/27/2015: 270,572 21.292 Gallons - 87 Octane - $2.079/Gal
+04/11/2015: 270,808 21.417 Gallons - 87 Octane - $2.099/Gal
+04/20/2015: 271,086 20.817 Gallons - 87 Octane - $2.239/Gal
+05/03/2015: 271,355 20.000 Gallons - 87 Octane - $2.179/Gal
+05/17/2015: 271,608
+05/24/2015: 271,881 19.371 Gallons - 87 Octane - $2.439/Gal
+05/24/2015: 272,030 12.532 Gallons - 87 Octane - $2.599/Gal
+05/30/2015: 272,257 21.045 Gallons - 87 Octane - $2.479/Gal
 
 Parts, Repair, Maintenence:
 
@@ -284,5 +291,7 @@ Parts, Repair, Maintenence:
 08/30/2013: 246,405: Transmission Filter w/ Gasket ACDELCO 8657926 / Mobil 1 Synthetic ATF
 09/14/2013: 247,200: Front Brake Pads
 01/20/2014: 253,000: Repair truck lock
-04/26/2014: 256,636: Oil Change Conventional 10W30 w/ Fram Filter
+04/26/2014: 256,636: Oil Change Conventional 72,25710W30 w/ Fram Filter
 05/23/2014: Miles: Replaced Heater Bypass Valve with ACDELCO unit
+05/26/2015: 272,257: Oil Change Conventional 10W30 w/ Mobil1 M111 Filter
+05/26/2015: 272,257: Fuel Filter ACDELCO GF580
