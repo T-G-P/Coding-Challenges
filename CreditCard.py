@@ -3,12 +3,13 @@ class CreditCard:
     card_number = None
 
     def __init__(self, card_number):
+        if len(card_number) > 19:
+            raise "Invalid Credit Card"
         if not CreditCard.is_luhn_valid(card_number):
             raise "Invalid Credit Card"
         self.card_number = card_number
 
-
-    #Luhn-10 validator taken from wiki page on algorithm
+    # Luhn-10 validator taken from wiki page on algorithm
     @staticmethod
     def luhn_checksum(card_number):
         def digits_of(n):
