@@ -19,15 +19,13 @@ class CreditCard:
         return CreditCard.luhn_checksum(card_number) == 0
 
     @staticmethod
-    def is_valid_card(card_number):
+    def validate_card(card_number):
         if all(
             [
                 CreditCard.is_luhn_valid(card_number) == 0,
-                len(card_number) > 19
+                len(card_number) <= 19
             ]
         ):
             return True
         else:
             raise Exception("ERROR: Invalid Credit Card Entered")
-
-

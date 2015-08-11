@@ -6,32 +6,37 @@ class MiniVenmo():
     credit_cards = {}
     transactions = []
 
-    def validate_user(self, name):
-        if name not in self.users.keys():
+    def check_user(self, name, new=False):
+        if new and name in self.users.keys():
+            raise Exception("ERROR: This user: %s already exists" % name)
+        elif name not in self.users.keys():
             raise Exception("ERROR: This user: %s doesn't exist" % name)
         return True
 
+    def check_credit_card(self, card_number):
+        if card_number in credit_cards:
+            raise Exception("ERROR: that card number has already been added by"
+                            " another user, reported for fraud!")
+            return
+        return True
+
     def add_user(self, name):
-        if name in self.users.keys():
-            print "ERROR: This user: %s already exists" % name
+        try:
+            self.check_user(name, new=True)
+        except Exception as e:
+            print e.message
             return
         user = User(name)
         self.users['name'] = user
 
     def add_credit_card(self, name, card_number):
         try:
-            self.validate_user(name)
+            self.check_user(name)
+            self.check_credit_card(card_number)
         except Exception as e:
             print e.message
             return
         user = users[name]
-        if user.card_number:
-            print("ERROR: this user already has a valid credit card")
-            return
-        elif card_number in credit_cards:
-            print ("ERROR: that card number has already been added by"
-                   " another user, reported for fraud!")
-            return
         try:
             CreditCard.validate_card(card_number)
         except Exception as e:
@@ -41,7 +46,7 @@ class MiniVenmo():
 
     def pay_user(self, actor, target, amount, *note):
         try:
-            map(self.validate_user, [actor, target])
+            map(self.check_user, [actor, target])
         except Exception as e:
             print e.message
             return
@@ -57,7 +62,7 @@ class MiniVenmo():
 
     def display_feed(self, name):
         try:
-            self.validate_user(name)
+            self.check_user(name)
         except Exception as e:
             print e.message
             return
@@ -67,7 +72,7 @@ class MiniVenmo():
 
     def display_balance(self, name):
         try:
-            self.validate_user(name)
+            self.check_user(name)
         except Exception as e:
             print e.message
             return
