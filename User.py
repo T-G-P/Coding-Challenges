@@ -10,19 +10,19 @@ class User:
     balance = 0.00
 
     def __init__(self, name):
-        if User.is_valid_name(name):
+        if User.validate_name(name):
             self.name = name
 
     @staticmethod
-    def is_valid_name(name):
+    def validate_name(name):
         valid_chars = string.ascii_letters+string.digits+'_-'
         if len(name) < 4 or len(name) > 15:
-            raise "Invalid Name"
+            raise Exception("Invalid length for name: %s" % name)
         elif not any({c for c in name if c in valid_chars}):
-            raise "invalid Name"
+            raise Exception("Invalid length for name: %s" % name)
         return True
 
-    def set_credit_card(self, card_number):
+    def set_card_number(self, card_number):
         # credit card wll already be  processed before set
         self.card_number = card_number
 

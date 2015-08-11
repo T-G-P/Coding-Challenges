@@ -1,14 +1,5 @@
 class CreditCard:
 
-    card_number = None
-
-    def __init__(self, card_number):
-        if len(card_number) > 19:
-            raise "Invalid Credit Card"
-        if not CreditCard.is_luhn_valid(card_number):
-            raise "Invalid Credit Card"
-        self.card_number = card_number
-
     # Luhn-10 validator taken from wiki page on algorithm
     @staticmethod
     def luhn_checksum(card_number):
@@ -26,3 +17,17 @@ class CreditCard:
     @staticmethod
     def is_luhn_valid(card_number):
         return CreditCard.luhn_checksum(card_number) == 0
+
+    @staticmethod
+    def is_valid_card(card_number):
+        if all(
+            [
+                CreditCard.is_luhn_valid(card_number) == 0,
+                len(card_number) > 19
+            ]
+        ):
+            return True
+        else:
+            raise Exception("ERROR: Invalid Credit Card Entered")
+
+
