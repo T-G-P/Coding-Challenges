@@ -1,5 +1,5 @@
 import string
-# from Transaction import Transaction
+from Transaction import Transaction
 
 
 class User:
@@ -7,6 +7,7 @@ class User:
     name = None
     card_number = None
     feed = []
+    transactions = []
     balance = 0.00
 
     def __init__(self, name):
@@ -14,6 +15,7 @@ class User:
             User.validate_name(name)
         except Exception as e:
             print e.message
+            return
         self.name = name
 
     @staticmethod
@@ -35,17 +37,23 @@ class User:
     def pay(self, target, amount, note):
         # create transaction, process it, then add to both users feeds
         # transaction = Transaction(self, target, amount, note)
-        if self is target:
+        actor = self
+        if actor is target:
             raise Exception("ERROR: users cannot pay themselves")
-        elif amount < 0:
-            raise Exception("ERROR: Invalid amount")
-        elif not self.credit_card:
-            raise Exception("ERROR: this user does not have a credit card")
-        elif type(amount) is not float:
-            raise Exception("ERROR: Invalid amount entered")
+        try:
+            float_amount = float(amount.split('$')[-1])
+        except ValueError:
+            raise Exception("ERROR: Invalid Amount Entered")
+        if float_amount < 0:
+            raise Exception("ERROR: Can't have negative amount")
 
-        self.feed.append('--You paid %s $%.2f for %s' % (target, amount, note))
-        target.feed.append('--%s paid you $%.2f for %s' % (self, amount, note))
+        if not self.credit_card:
+            raise Exception("ERROR: this user does not have a credit card")
+
+        transaction = Transaction(actor, target, float_amount, note)
+        transaction.update_feeds()
+        self.transactions.append(transaction)
+        target.transactions.append(transaction)
         target.balance += amount
 
     def get_balance(self):

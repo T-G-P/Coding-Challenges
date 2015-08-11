@@ -6,14 +6,11 @@ class Transaction:
     note = None
 
     def __init__(self, actor, target, amount, note):
-        if actor is target:
-            raise "Cannot pay themselves"
-        if amount < 0:
-            raise "Cannot have negative amount"
-        if not actor.credit_card:
-            raise "Can't pay without credit card"
-
         self.actor = actor
         self.target = target
         self.amount = amount
         self.note = note
+
+    def update_feeds(self):
+        self.actor.feed.append('--You paid %s $%.2f for %s' % (self.target, float_amount, note))
+        self.target.feed.append('--%s paid you $%.2f for %s' % (self.actor, float_amount, note))

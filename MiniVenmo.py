@@ -6,14 +6,14 @@ class MiniVenmo():
     credit_cards = {}
     transactions = []
 
-    def check_user(self, name, new=False):
+    def lookup_user(self, name, new=False):
         if new and name in self.users.keys():
             raise Exception("ERROR: This user: %s already exists" % name)
         elif name not in self.users.keys():
             raise Exception("ERROR: This user: %s doesn't exist" % name)
         return True
 
-    def check_credit_card(self, card_number):
+    def lookup_credit_card(self, card_number):
         if card_number in credit_cards:
             raise Exception("ERROR: that card number has already been added by"
                             " another user, reported for fraud!")
@@ -22,7 +22,7 @@ class MiniVenmo():
 
     def add_user(self, name):
         try:
-            self.check_user(name, new=True)
+            self.lookup_user(name, new=True)
         except Exception as e:
             print e.message
             return
@@ -31,8 +31,8 @@ class MiniVenmo():
 
     def add_credit_card(self, name, card_number):
         try:
-            self.check_user(name)
-            self.check_credit_card(card_number)
+            self.lookup_user(name)
+            self.lookup_credit_card(card_number)
         except Exception as e:
             print e.message
             return
@@ -46,7 +46,7 @@ class MiniVenmo():
 
     def pay_user(self, actor, target, amount, *note):
         try:
-            map(self.check_user, [actor, target])
+            map(self.lookup_user, [actor, target])
         except Exception as e:
             print e.message
             return
@@ -62,7 +62,7 @@ class MiniVenmo():
 
     def display_feed(self, name):
         try:
-            self.check_user(name)
+            self.lookup_user(name)
         except Exception as e:
             print e.message
             return
@@ -72,7 +72,7 @@ class MiniVenmo():
 
     def display_balance(self, name):
         try:
-            self.check_user(name)
+            self.lookup_user(name)
         except Exception as e:
             print e.message
             return
@@ -83,9 +83,9 @@ class MiniVenmo():
     def process_args(args):
         choices = ['user', 'add', 'pay', 'feed', 'balance']
         if not args or len(args) < 2:
-            print "ERROR: invalid arguments"
+            raise Exception("ERROR: invalid arguments")
         elif args[0] not in choices:
-            print "ERROR: command not recognized"
+            raise Exception("ERROR: command not recognized")
         elif args[0].lower() == 'user' and len(args) == 2:
             add_user(*args[1:])
         elif args[0].lower() == 'add' and len(args) == 3:
@@ -101,7 +101,10 @@ class MiniVenmo():
 
     def process_file(self, file_obj):
         for command in file_ob:
-            self.process_args(line.split(' '))
+            try:
+                self.process_args(line.split(' '))
+            except Exception as e:
+                print e.message
         return
 
     def usage(self):
@@ -128,6 +131,9 @@ class MiniVenmo():
                 self.usage()
                 return
 
-            process_args(args)
+            try:
+                self.process_args(line.split(' '))
+            except Exception as e:
+                print e.message
 
         return
