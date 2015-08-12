@@ -4,12 +4,6 @@ from Transaction import Transaction
 
 class User:
 
-    name = None
-    card_number = None
-    feed = []
-    transactions = []
-    balance = 0.00
-
     def __init__(self, name):
         try:
             User.validate_name(name)
@@ -17,6 +11,10 @@ class User:
             print e.message
             return
         self.name = name
+        self.card_number = None
+        self.feed = []
+        self.transactions = []
+        self.balance = 0.00
 
     @staticmethod
     def validate_name(name):
@@ -32,8 +30,6 @@ class User:
         self.card_number = card_number
 
     def pay(self, target, amount, note):
-        # create transaction, process it, then add to both users feeds
-        # transaction = Transaction(self, target, amount, note)
         actor = self
         if actor is target:
             raise Exception("ERROR: users cannot pay themselves")
@@ -51,6 +47,8 @@ class User:
         transaction.update_feeds()
         self.transactions.append(transaction)
         target.transactions.append(transaction)
+        # self.feed.append('fuck you')
+        # target.feed.append('NO! fuck YOU')
         target.balance += float_amount
 
     def get_feed(self):

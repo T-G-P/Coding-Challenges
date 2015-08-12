@@ -47,14 +47,14 @@ class MiniVenmo:
         user.set_card_number(card_number)
         self.credit_cards.add(card_number)
 
-    def pay_user(self, actor, target, amount, *note):
+    def pay_user(self, actor_name, target_name, amount, *note):
         try:
-            map(self.lookup_user, [actor, target])
+            map(self.lookup_user, [actor_name, target_name])
         except Exception as e:
             print e.message
             return
-        actor_user = self.users[actor]
-        target_user = self.users[target]
+        actor_user = self.users[actor_name]
+        target_user = self.users[target_name]
         payment_note = ' '.join(note)
         try:
             actor_user.pay(target_user, amount, payment_note)
@@ -104,7 +104,7 @@ class MiniVenmo:
     def process_file(self, file_obj):
         for command in file_obj:
             try:
-                self.process_args(line.split(' '))
+                self.process_args(command.split(' '))
             except Exception as e:
                 print e.message
         return
