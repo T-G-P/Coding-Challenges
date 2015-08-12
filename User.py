@@ -1,7 +1,6 @@
 import string
 from Transaction import Transaction
 
-
 class User:
 
     def __init__(self, name):
@@ -50,7 +49,7 @@ class User:
         target.balance += float_amount
 
     def get_feed(self):
-        for payment in self.feed[::-1]:
+        for payment in self.feed:
             print payment
 
     def get_balance(self):
