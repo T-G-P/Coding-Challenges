@@ -84,7 +84,7 @@ class MiniVenmo:
 
     def process_args(self, args):
         choices = ['user', 'add', 'pay', 'feed', 'balance']
-        if not args or len(args) < 2:
+        if not args or all([len(args) < 2, args[0] in choices]):
             raise Exception("ERROR: invalid arguments")
         elif args[0] not in choices:
             raise Exception("ERROR: command not recognized")
@@ -110,9 +110,10 @@ class MiniVenmo:
         return
 
     def usage(self):
-        print '\nUsage: MOVE X ONTO Y. ex: MOVE 4 ONTO 1\n'
-        print 'Enter a command or press q or Q to quit\n'
-        print 'Type \'help\' for usage info'
+        print ('\nUsage:\nuser <user>' '\nadd <user> <card_number>'
+               '\npay <actor> <target> <amount> <note>'
+               '\nfeed <user>'
+               '\nbalance <user>')
         return
 
     def run(self):
@@ -121,7 +122,7 @@ class MiniVenmo:
         args = parser.parse_args()
 
         if args.filename:
-            process_file(args.filename)
+            self.process_file(args.filename)
             return
 
         self.usage()
