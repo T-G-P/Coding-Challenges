@@ -47,8 +47,6 @@ class User:
         transaction.update_feeds()
         self.transactions.append(transaction)
         target.transactions.append(transaction)
-        # self.feed.append('fuck you')
-        # target.feed.append('NO! fuck YOU')
         target.balance += float_amount
 
     def get_feed(self):
