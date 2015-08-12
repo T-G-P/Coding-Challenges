@@ -1,11 +1,17 @@
 class Transaction:
 
-    def __init__(self, actor, target, amount, note):
-        self.actor = actor
-        self.target = target
-        self.amount = amount
-        self.note = note
+    def process_transaction(self, actor, target, amount, note):
+        if actor is target:
+            raise Exception("ERROR: users cannot pay themselves")
+        try:
+            float_amount = float(amount.split('$')[-1])
+        except ValueError:
+            raise Exception("ERROR: Invalid Amount Entered")
+        if float_amount < 0:
+            raise Exception("ERROR: Can't have negative amount")
 
-    def update_feeds(self):
-        self.actor.feed.append('--You paid %s $%.2f for %s' % (self.target.name, self.amount, self.note))
-        self.target.feed.append('--%s paid you $%.2f for %s' % (self.actor.name, self.amount, self.note))
+        if not self.card_number:
+            raise Exception("ERROR: this user does not have a credit card")
+
+        target.balance += float_amount
+        return

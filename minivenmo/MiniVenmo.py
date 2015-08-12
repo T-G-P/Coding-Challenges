@@ -1,72 +1,53 @@
 import argparse
 from .creditcard.CreditCard import CreditCard
-from .user.User import User
+from .Database import db
+
 
 class MiniVenmo:
 
-    users = {}
-    credit_cards = set()
-
-    def lookup_user(self, name, new=False):
-        if new and name in self.users.keys():
-            raise Exception("ERROR: This user: %s already exists" % name)
-        elif not new and name not in self.users.keys():
-            raise Exception("ERROR: This user: %s doesn't exist" % name)
-        return True
-
-    def lookup_credit_card(self, user, card_number):
-        if user.card_number or user.card_number == card_number:
-            raise Exception("ERROR: this user already has a valid credit card")
-        elif card_number in self.credit_cards:
-            raise Exception("ERROR: that card number has already been added by"
-                            " another user, reported for fraud!")
-        return True
-
     def add_user(self, name):
+        new = True
         try:
-            self.lookup_user(name, True)
+            self.lookup_user(name, new)
         except Exception as e:
-            print e.message
+            print(e.message)
             return
-        user = User(name)
-        self.users[name] = user
+        db.add_user(name)
 
     def add_credit_card(self, name, card_number):
         try:
-            self.lookup_user(name)
-            user = self.users[name]
-            self.lookup_credit_card(user, card_number)
+            user = db.lookup_user(name)
+            card_number = db.lookup_credit_card(user, card_number)
         except Exception as e:
-            print e.message
+            print(e.message)
             return
         try:
             CreditCard.validate_card(card_number)
         except Exception as e:
-            print e.message
+            print(e.message)
             return
         user.set_card_number(card_number)
         self.credit_cards.add(card_number)
 
     def pay_user(self, actor_name, target_name, amount, *note):
         try:
-            map(self.lookup_user, [actor_name, target_name])
+            actor_user, target_user = tuple(map(db.lookup_user,
+                                                [actor_name, target_name]))
         except Exception as e:
-            print e.message
+            print(e.message)
             return
-        actor_user = self.users[actor_name]
-        target_user = self.users[target_name]
         payment_note = ' '.join(note)
         try:
             actor_user.pay(target_user, amount, payment_note)
         except Exception as e:
-            print e.message
+            print(e.message)
         return
 
     def display_feed(self, name):
         try:
             self.lookup_user(name)
         except Exception as e:
-            print e.message
+            print(e.message)
             return
         user = self.users[name]
         user.get_feed()
@@ -76,7 +57,7 @@ class MiniVenmo:
         try:
             self.lookup_user(name)
         except Exception as e:
-            print e.message
+            print(e.message)
             return
         user = self.users[name]
         user.get_balance()
@@ -108,17 +89,17 @@ class MiniVenmo:
                 try:
                     self.process_args(args)
                 except Exception as e:
-                    print e.message
+                    print(e.message)
         return
 
     def usage(self):
-        print ('\nUsage:\nuser <user>'
-               '\nadd <user> <card_number>'
-               '\npay <actor> <target> <amount> <note>'
-               '\nfeed <user>'
-               '\nbalance <user>'
-               '\nHelp: type help to repeat this message'
-               '\nQuit: type Q or q to quit')
+        print('\nUsage:\nuser <user>'
+              '\nHelp: type help to repeat this message'
+              '\nQuit: type Q or q to quit\n'
+              '\nadd <user> <card_number>'
+              '\npay <actor> <target> <amount> <note>'
+              '\nfeed <user>'
+              '\nbalance <user>')
         return
 
     def run(self):
@@ -132,9 +113,9 @@ class MiniVenmo:
 
         self.usage()
         while True:
-            args = raw_input('> ').split()
+            args = input('> ').split()
             if args[0].lower() == 'q':
-                print 'Exiting...\n'
+                print('Exiting...\n')
                 return
             elif args[0].lower() == 'help':
                 self.usage()
@@ -142,5 +123,5 @@ class MiniVenmo:
             try:
                 self.process_args(args)
             except Exception as e:
-                print e.message
+                print(e.message)
         return
