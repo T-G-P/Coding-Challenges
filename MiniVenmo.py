@@ -99,26 +99,31 @@ class MiniVenmo:
         elif args[0].lower() == 'balance' and len(args) == 2:
             self.display_balance(*args[1:])
         else:
-            self.usage()
+            raise Exception("ERROR: invalid arguments")
 
-    def process_file(self, file_obj):
-        for command in file_obj:
-            try:
-                self.process_args(command.split(' '))
-            except Exception as e:
-                print e.message
+    def process_file(self, file_name):
+        with open(file_name) as f:
+            for line in f:
+                args = line.replace('\n', '').split()
+                try:
+                    self.process_args(args)
+                except Exception as e:
+                    print e.message
         return
 
     def usage(self):
-        print ('\nUsage:\nuser <user>' '\nadd <user> <card_number>'
+        print ('\nUsage:\nuser <user>'
+               '\nadd <user> <card_number>'
                '\npay <actor> <target> <amount> <note>'
                '\nfeed <user>'
-               '\nbalance <user>')
+               '\nbalance <user>'
+               '\nHelp: type help to repeat this message'
+               '\nQuit: type Q or q to quit')
         return
 
     def run(self):
         parser = argparse.ArgumentParser(description='MiniVenmo')
-        parser.add_argument('filename', nargs='?', type=argparse.FileType('r'))
+        parser.add_argument('filename', nargs='?')
         args = parser.parse_args()
 
         if args.filename:
@@ -133,7 +138,7 @@ class MiniVenmo:
                 return
             elif args[0].lower() == 'help':
                 self.usage()
-                return
+                continue
             try:
                 self.process_args(args)
             except Exception as e:
