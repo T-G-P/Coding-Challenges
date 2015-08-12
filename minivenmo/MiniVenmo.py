@@ -1,6 +1,6 @@
 import argparse
-from User import User
-from CreditCard import CreditCard
+from .creditcard.CreditCard import CreditCard
+from .user.User import User
 
 class MiniVenmo:
 

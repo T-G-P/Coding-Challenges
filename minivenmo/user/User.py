@@ -1,5 +1,5 @@
 import string
-from Transaction import Transaction
+from ..transaction.Transaction import Transaction
 
 class User:
 
