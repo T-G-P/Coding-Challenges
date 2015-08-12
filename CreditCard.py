@@ -28,4 +28,4 @@ class CreditCard:
         ):
             return True
         else:
-            raise Exception("ERROR: Invalid Credit Card Entered")
+            raise Exception("ERROR: This card is invalid")
