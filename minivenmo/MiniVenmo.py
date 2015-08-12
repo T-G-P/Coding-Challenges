@@ -144,7 +144,3 @@ class MiniVenmo:
             except Exception as e:
                 print e.message
         return
-
-if __name__ == "__main__":
-    test = MiniVenmo()
-    test.run()
