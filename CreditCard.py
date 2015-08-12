@@ -22,7 +22,7 @@ class CreditCard:
     def validate_card(card_number):
         if all(
             [
-                CreditCard.is_luhn_valid(card_number) == 0,
+                CreditCard.is_luhn_valid(card_number),
                 len(card_number) <= 19
             ]
         ):
