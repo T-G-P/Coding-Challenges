@@ -28,7 +28,10 @@ class MiniVenmo:
     def process_file(self, file_name):
         with open(file_name) as f:
             for line in f:
-                args = line.replace('\n', '').split()
+                stripped_line = line.rstrip('\n')
+                print(stripped_line)
+
+                args = stripped_line.split()
                 try:
                     self.process_args(args)
                 except Exception as e:
