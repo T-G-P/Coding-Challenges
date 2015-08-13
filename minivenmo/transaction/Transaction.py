@@ -1,6 +1,17 @@
-class Transaction:
+from .MiniVenmo import db
 
-    def process_transaction(self, actor, target, amount, note):
+
+class TransactionController:
+
+    def create_transaction(self, actor_name, target_name, amount, *note):
+        try:
+            actor, target = tuple(map(db.lookup_user,
+                                                [actor_name, target_name]))
+        except Exception as e:
+            print(e.message)
+            return
+
+        payment_note = ' '.join(note)
         if actor is target:
             raise Exception("ERROR: users cannot pay themselves")
         try:
@@ -14,4 +25,24 @@ class Transaction:
             raise Exception("ERROR: this user does not have a credit card")
 
         target.balance += float_amount
-        return
+        transaction = Transaction(actor_name, target_name, float_amount, payment_note)
+        db.add_transaction(transaction)
+
+    def get_feed(self, name):
+        try:
+            user = db.lookup_user(name)
+        except Exception as e:
+            print(e.message)
+            return
+
+        transactions = db.lookup_transactions(name)
+        if transactions:
+            for transaction in transactions:
+                if transaction.actor is user:
+                    print('-- You paid %s $%.2f for %s' % (transaction.target.name,
+                                                           transaction.amount,
+                                                           transaction.note))
+                elif transaction.target is user:
+                    print('-- %s paid you $%.2f for %s' % (transaction.actor.name,
+                                                           transaction.amount,
+                                                           transaction.note))
