@@ -1,7 +1,6 @@
-import string
 from .models import User
 from ..creditcard.CreditCard import CreditCard
-from .MiniVenmo import db
+from .Database import db
 
 
 class UserController:
@@ -32,17 +31,7 @@ class UserController:
         user.card_number = card_number
         db.database['credit_cards'].add(card_number)
 
-    def get_feed(self):
-        try:
-            user = db.lookup_user(name)
-        except Exception as e:
-            print(e.message)
-            return
-
-        for payment in user.feed:
-            print(payment)
-
-    def display_balance(self):
+    def display_balance(self, name):
         try:
             user = db.lookup_user(name)
         except Exception as e:

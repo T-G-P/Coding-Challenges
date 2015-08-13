@@ -1,6 +1,3 @@
-from .user.User import User
-
-
 class Database:
 
     database = {
@@ -8,6 +5,9 @@ class Database:
         'credit_cards': set(),
         'transactions': {}
     }
+
+    def __init_db(self):
+        self = self.db
 
     def lookup_user(self, name, new=False):
         if new and name in self.database['users'].keys():
@@ -36,12 +36,19 @@ class Database:
         return card_number
 
     def add_transaction(self, transaction):
+        actor = transaction.actor
+        target = transaction.target
         if all([
-                self.database['transactions'].get(transaction.actor),
-                self.database['transactions'].get(transaction.target)
+                self.database['transactions'].get(actor),
+                self.database['transactions'].get(target)
                 ]):
-            self.database['transactions'][transaction.actor].append(transaction)
-            self.database['transactions'][transaction.target].append(transaction)
+            self.database['transactions'][actor].append(transaction)
+            self.database['transactions'][target].append(transaction)
         else:
-            self.database['transactions'][transaction.actor] = [transaction]
-            self.database['transactions'][transaction.target] = [transaction]
+            self.database['transactions'][actor] = [transaction]
+            self.database['transactions'][target] = [transaction]
+
+
+def init_db():
+    global db
+    db = Database()

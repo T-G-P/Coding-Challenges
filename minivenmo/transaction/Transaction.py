@@ -1,4 +1,5 @@
-from .MiniVenmo import db
+from .Database import db
+from .models import Transaction
 
 
 class TransactionController:
@@ -6,7 +7,7 @@ class TransactionController:
     def create_transaction(self, actor_name, target_name, amount, *note):
         try:
             actor, target = tuple(map(db.lookup_user,
-                                                [actor_name, target_name]))
+                                      [actor_name, target_name]))
         except Exception as e:
             print(e.message)
             return
@@ -25,7 +26,8 @@ class TransactionController:
             raise Exception("ERROR: this user does not have a credit card")
 
         target.balance += float_amount
-        transaction = Transaction(actor_name, target_name, float_amount, payment_note)
+        transaction = Transaction(actor_name, target_name,
+                                  float_amount, payment_note)
         db.add_transaction(transaction)
 
     def get_feed(self, name):
@@ -38,11 +40,11 @@ class TransactionController:
         transactions = db.lookup_transactions(name)
         if transactions:
             for transaction in transactions:
-                if transaction.actor is user:
-                    print('-- You paid %s $%.2f for %s' % (transaction.target.name,
+                if transaction.actor == user.name:
+                    print('-- You paid %s $%.2f for %s' % (transaction.target,
                                                            transaction.amount,
                                                            transaction.note))
-                elif transaction.target is user:
-                    print('-- %s paid you $%.2f for %s' % (transaction.actor.name,
+                elif transaction.target == user.name:
+                    print('-- %s paid you $%.2f for %s' % (transaction.actor,
                                                            transaction.amount,
                                                            transaction.note))

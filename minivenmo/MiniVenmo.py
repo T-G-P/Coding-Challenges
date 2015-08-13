@@ -1,10 +1,8 @@
 import argparse
-import sys
+import Database
 from .user.UserController import UserController
 from .transaction.TransactionController import TransactionController
-from .Database import Database
 
-db = Database()
 
 class MiniVenmo:
 
@@ -48,6 +46,7 @@ class MiniVenmo:
         return
 
     def run(self):
+        Database.init_db()
         parser = argparse.ArgumentParser(description='MiniVenmo')
         parser.add_argument('filename', nargs='?')
         args = parser.parse_args()
@@ -56,8 +55,10 @@ class MiniVenmo:
             self.process_file(args.filename)
             return
 
-        if sys.version_info < (3,):
+        try:
             input = raw_input
+        except NameError:
+            pass
 
         self.usage()
         while True:
