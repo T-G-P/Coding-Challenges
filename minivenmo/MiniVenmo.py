@@ -1,7 +1,7 @@
 import argparse
-import Database
-from .user.UserController import UserController
-from .transaction.TransactionController import TransactionController
+from minivenmo import Database
+from .user.UsersController import UsersController
+from .transaction.TransactionsController import TransactionsController
 
 
 class MiniVenmo:
@@ -13,15 +13,15 @@ class MiniVenmo:
         elif args[0] not in choices:
             raise Exception("ERROR: command not recognized")
         elif args[0].lower() == 'user' and len(args) == 2:
-            UserController.add_user(*args[1:])
+            UsersController.add_user(*args[1:])
         elif args[0].lower() == 'add' and len(args) == 3:
-            UserController.add_credit_card(*args[1:])
+            UsersController.add_credit_card(*args[1:])
         elif args[0].lower() == 'pay' and len(args) >= 5:
-            TransactionController.create_transaction(*args[1:])
+            TransactionsController.create_transaction(*args[1:])
         elif args[0].lower() == 'feed' and len(args) == 2:
-            TransactionController.display_feed(*args[1:])
+            TransactionsController.display_feed(*args[1:])
         elif args[0].lower() == 'balance' and len(args) == 2:
-            UserController.display_balance(*args[1:])
+            UsersController.display_balance(*args[1:])
         else:
             raise Exception("ERROR: invalid arguments")
 
@@ -55,14 +55,9 @@ class MiniVenmo:
             self.process_file(args.filename)
             return
 
-        try:
-            input = raw_input
-        except NameError:
-            pass
-
         self.usage()
         while True:
-            args = input('> ').split()
+            args = raw_input('> ').split()
             if args[0].lower() == 'q':
                 print('Exiting...\n')
                 return

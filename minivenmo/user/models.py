@@ -5,7 +5,7 @@ class User:
 
     def __init__(self, name):
             try:
-                User.validate_name(name)
+                self.__validate_name(name)
             except Exception as e:
                 print(e.message)
                 return
@@ -15,8 +15,7 @@ class User:
             self.transactions = []
             self.balance = 0.00
 
-    @staticmethod
-    def validate_name(name):
+    def __validate_name(self, name):
         valid_chars = string.ascii_letters+string.digits+'_-'
         if len(name) < 4 or len(name) > 15:
             raise Exception("ERROR: Invalid length for name: %s" % name)

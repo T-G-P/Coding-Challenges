@@ -1,12 +1,13 @@
-from .Database import db
+import minivenmo.Database as Database
 from .models import Transaction
 
 
-class TransactionController:
+class TransactionsController:
 
-    def create_transaction(self, actor_name, target_name, amount, *note):
+    @staticmethod
+    def create_transaction(actor_name, target_name, amount, *note):
         try:
-            actor, target = tuple(map(db.lookup_user,
+            actor, target = tuple(map(Database.db.lookup_user,
                                       [actor_name, target_name]))
         except Exception as e:
             print(e.message)
@@ -22,22 +23,23 @@ class TransactionController:
         if float_amount < 0:
             raise Exception("ERROR: Can't have negative amount")
 
-        if not self.card_number:
+        if not actor.card_number:
             raise Exception("ERROR: this user does not have a credit card")
 
         target.balance += float_amount
         transaction = Transaction(actor_name, target_name,
                                   float_amount, payment_note)
-        db.add_transaction(transaction)
+        Database.db.add_transaction(transaction)
 
-    def get_feed(self, name):
+    @staticmethod
+    def display_feed(name):
         try:
-            user = db.lookup_user(name)
+            user = Database.db.lookup_user(name)
         except Exception as e:
             print(e.message)
             return
 
-        transactions = db.lookup_transactions(name)
+        transactions = Database.db.lookup_transactions(name)
         if transactions:
             for transaction in transactions:
                 if transaction.actor == user.name:

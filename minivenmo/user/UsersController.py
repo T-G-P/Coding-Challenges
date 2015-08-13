@@ -1,24 +1,26 @@
+import minivenmo.Database as Database
 from .models import User
 from ..creditcard.CreditCard import CreditCard
-from .Database import db
 
 
-class UserController:
+class UsersController:
 
-    def add_user(self, name):
+    @staticmethod
+    def add_user(name):
         new = True
         try:
-            db.lookup_user(name, new)
+            Database.db.lookup_user(name, new)
         except Exception as e:
             print(e.message)
             return
         user = User(name)
-        db.add_user(user)
+        Database.db.add_user(user)
 
-    def add_credit_card(self, name, card_number):
+    @staticmethod
+    def add_credit_card(name, card_number):
         try:
-            user = db.lookup_user(name)
-            card_number = db.lookup_credit_card(user, card_number)
+            user = Database.db.lookup_user(name)
+            card_number = Database.db.lookup_credit_card(user, card_number)
         except Exception as e:
             print(e.message)
             return
@@ -29,11 +31,12 @@ class UserController:
             return
 
         user.card_number = card_number
-        db.database['credit_cards'].add(card_number)
+        Database.db.database['credit_cards'].add(card_number)
 
-    def display_balance(self, name):
+    @staticmethod
+    def display_balance(name):
         try:
-            user = db.lookup_user(name)
+            user = Database.db.lookup_user(name)
         except Exception as e:
             print(e.message)
             return
