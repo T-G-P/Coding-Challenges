@@ -8,7 +8,7 @@ class UserController:
     def add_user(self, name):
         new = True
         try:
-            self.lookup_user(name, new)
+            db.lookup_user(name, new)
         except Exception as e:
             print(e.message)
             return

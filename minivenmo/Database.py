@@ -6,9 +6,6 @@ class Database:
         'transactions': {}
     }
 
-    def __init_db(self):
-        self = self.db
-
     def lookup_user(self, name, new=False):
         if new and name in self.database['users'].keys():
             raise Exception("ERROR: This user: %s already exists" % name)
