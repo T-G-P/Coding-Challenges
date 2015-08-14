@@ -12,8 +12,12 @@ class UsersController:
         except Exception as e:
             print(e.message)
             return
+
         user = User(name)
-        Database.db.add_user(user)
+        try:
+            Database.db.add_user(user)
+        except AttributeError:
+            pass
 
     @staticmethod
     def add_credit_card(name, card_number):
