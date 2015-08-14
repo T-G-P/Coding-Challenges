@@ -4,16 +4,16 @@ import string
 class User:
 
     def __init__(self, name):
-            try:
-                self.__validate_name(name)
-            except Exception as e:
-                print(e.message)
-                return None
-            self.name = name
-            self.card_number = None
-            self.feed = []
-            self.transactions = []
-            self.balance = 0.00
+        try:
+            self.__validate_name(name)
+        except Exception as e:
+            print(e.message)
+            return None
+        self.name = name
+        self.card_number = None
+        self.feed = []
+        self.transactions = []
+        self.balance = 0.00
 
     def __validate_name(self, name):
         valid_chars = string.ascii_letters+string.digits+'_-'
