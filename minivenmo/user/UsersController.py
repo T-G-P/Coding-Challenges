@@ -44,4 +44,4 @@ class UsersController:
             print(e.message)
             return
 
-        print('--$%.2f' % user.balance)
+        print('-- $%.2f' % user.balance)
