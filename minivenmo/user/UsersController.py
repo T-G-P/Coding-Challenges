@@ -1,6 +1,5 @@
 import minivenmo.Database as Database
-from .models import User
-from ..creditcard.CreditCard import CreditCard
+from .models import User, CreditCard
 
 
 class UsersController:
