@@ -1,111 +1,168 @@
-![Venmo logo](https://dl.dropboxusercontent.com/s/puvb3qyb272qo28/logoblue-233x44.png)
+*MiniVenmo challenge implemented and designed by Tobias Perelstein*
 
-*Venmo values trust. Please do not share this coding challenge with anyone else.*
-
-Imagine that your phone and wallet are trying to have a beautiful baby.
-In order to make this happen, you must write a social payment app.
-Implement a program that will feature users, credit cards, and payment feeds.
 
 ## Requirements:
 
-Your executable must support two modes of execution:
+To execute the code, python 2.7 - 2.7.10 is needed
 
-  * interactively (from stdin), when run with no arguments
-  * from a file of newline-delimited commands, when provided with one argument
 
-State does not need to persist between runs.
+The application can be run via:
 
-You may implement your solution in any programming language.
-If you wrote tests, include them with your submission.
+$ python app.py
 
-In addition, please provide a README that explains:
+The script  supports both interactive and new line delimited files for input
 
-  * how to make/run your code (a script or makefile is appreciated!)
-  * your design decisions
-  * the language you chose, and why you chose it
+To pass a file simply run via:
+$ python app.py filename.txt
 
-### Commands
+State will not persist between runs.
 
-You must support the following commands.
-Any input that does not fit these specifications should print an error.
+### Tests :
 
-0. "user" will create a new user with a given name.
-  * e.g., `user <user>`
-  * User names should be alphanumeric but also allow underscores and dashes.
-  * User names should be no shorter than 4 characters but no longer than 15.
-  * Users start with a balance of $0.
+Tests are located in the main project folder. Tests are run for the
+all the modules of the application
 
-0. "add" will create a new credit card for a given name, card number
-  * e.g., `add <user> <card_number>`
-  * Card numbers should be validated using Luhn-10.
-  * Cards that fail Luhn-10 will display an error.
-  * Cards that have already been added will display an error.
-  * Users can only have one card.
-    Attempting to add a second valid card will display an error.
+Unit Tests can be run via:
+$ python tests.py
 
-0. "pay" will create a payment between two users.
-  * e.g., `pay <actor> <target> <amount> <note>`
-  * `<actor>` and `<target>` are usernames that were created in #1
-  * Users cannot pay themselves.
-  * Payments will always charge the actor's credit card (not decrement their balance).
-  * Payments will always increase the target's balance.
-  * If the actor user has no credit card, display an error.
-  
-0. "feed" will display a feed of the respective user's payments.
-  * e.g., `feed <user>`
+# NOTES :
+I chose to build the application in python as I enjoy it for its performance, flexibilty,
+readability, data structures and community. I also am most experienced with python.
 
-0. "balance" will display a user's balance
-  * e.g. `balance <user>`
-  
-### Input Assumptions
-  * All input will be space delimited.
-  * Credit card numbers may vary in length, up to 19 characters.
-  * Credit card numbers will always be numeric.
-  * Amounts will be prefixed with "$" and will be dollars and cents
+I designed and built the application with MVC in mind. I separated the project
+into two main modules:
+    
+    *Users
+    *Transactions
+    
+both depend on these modules:
+    
+    *Database
+    *MiniVenmo
 
-### Example Input/Output:
+I broke it down this way because I felt that the payment and feed commands would
+be stored as part of a User/Transaction relationship. With a real production application
+in mind, I felt that transactions would have their own model and table and Users would
+have a one to many relationship for transactions. Once I started buildling the application,
+I realized that feeds and transactions were directly related so I separated the 'pay' and
+'feed' functionality and put them inside the Transactions model. The Users module
+provides a way to retrieve and modify specific properties on a User whereas Transactions
+are between multiple Users and this is why I felt it would be better to keep a transactions
+model and controller.
 
-Extra newlines in this example are for clarity.
+The Users and Transactions modules are accesed via a route that process command line
+input or file input depending on how the program is executed. I separated the routing logic
+to keep things more modular and maintanable. Since the command line is used to access
+both resources, I thought it was best to keep all the main application logic separate.
 
-    $ ./mini-venmo
-    > user Thomas
-    > user Lisa
-    > user
-    ERROR: invalid arguments
-    > foobar
-    ERROR: command not recognized
-    > user Quincy
+The main routing functionality occurs in: *MiniVenmo.py* where arguments are validated
+prior to being sent off to the User and Transaction controllers
 
-    > add Thomas 4111111111111111
-    > add Thomas 5454545454545454
-    ERROR: this user already has a valid credit card
-    > add Lisa 5454545454545454
-    > add Quincy 1234567890123456
-    ERROR: this card is invalid
+Additionally, I abstracted all the app storage functionality into its own script called
+*Database.py* located in the same directory as *MiniVenmo.py*. All of the information that
+is stored throughout app context is processed by *Database.py* I abstracted all the
+storage functionality as it's consistent across all modules and acts as the database layer
+for this project. Despite not using a database, I felt that it would be best to keep things
+consistent with MVC design where database logic is separate from the main controller logic.
 
-    > pay Thomas Lisa $10.25 burritos
-    > pay Thomas Quincy $10.00 you're awesome
-    > pay Lisa Quincy $5.00 pot-luck supplies
-    > pay Thomas Thomas $1.00 to myself
-    ERROR: users cannot pay themselves
-    > pay Quincy Thomas $2.00 a subway card
-    ERROR: this user does not have a credit card
+Both the User module and Transaction module have controllers and models associated to them.
+The models represent the resources and the controllers deal with all the logic of processing
+the models and storing them within the context of the app.
 
-    > add Quincy 5454545454545454
-    ERROR: that card has already been added by another user, reported for fraud!
-    > add Quincy 5555555555554444
-    > pay Quincy Thomas $14.50 a redbull vodka
+### Main
+The main script *app.py* instantiates the MiniVenmo class which is the routing layer of the
+whole application. It calls the only public method of the MiniVenmo class which then runs
+the application. There's not much to it and I built it this way so that the routeing class
+is part of the *minivenmo* module
 
-    > feed Quincy
-    -- Thomas paid you $10.00 for you're awesome
-    -- Lisa paid you $5.00 for pot-luck supplies
-    -- You paid Thomas $14.50 for a redbull vodka
-    > balance Quincy
-    -- $15.00
-    > feed Thomas
-    -- You paid Lisa $10.25 for burritos
-    -- You paid Quincy $10.00 for you're awesome
-    -- Quincy paid you $14.50 for a redbull vodka
-    > feed Lisa
-    -- Thomas paid you $10.25 for burritos
-    -- You paid Quincy $5.00 for pot-luck supplies
+## Modules
+### minivenmo.user
+
+##### Scripts
+
+*user/UsersController.py
+
+*user/models.py
+
+The Users module includes a Users Controller which handles all of the logic for the
+'user', 'add', 'balance' commands. The Users Controller processes the input from
+the command line and depending on the arguments, will instantiate a User object using
+the User object in the *models.py* script. The UsersController makes extensive use of the
+app Database for looking up and processing arguments.
+
+The models script contains all the models directly associated with a User. In this case,
+I split it up into a *User* model and a *CreditCard* model. However, I chose not to make
+the Credit Card class instantiable and made all of its methods static. I broke it up this way
+because I felt that credit card processing was specific to credit cards and not a user directly,
+but a User should have a credit card property for the purpose of this app. To keep things localized,
+I designed the CreditCard model to be used for validation alone. After sucessful credit card
+validation, the credit card property of the user gets assigned.
+
+Additional to the basic properties a User object has, I also gave it a static method
+to be used for validating names prior to instantiation. I did it this way in order to
+prevent user objects from being created and stored with bad input. Since name validation
+is an action on a User, I left it as part of the class.
+
+Exceptions are rasied in the database, model, and controller with appropriate
+error messages. I designed the app to raise exceptions to make input processing
+straight forward and to have the flexibilty of the try/catch. I thought about
+building a custom exception class that inherited from Exception,
+but for the purpose of this project, I used the default python Exception class.
+
+### minivenmo.transaction
+
+##### Scripts
+
+*transaction/TransactionsController
+
+*transaction/models.py
+
+The Transactions module contains respective controllers and models similar to the User model.
+The commands 'pay' and 'feed' are those having to do with retrieving or adding transactions
+which is why they are the main methods in the TransActionsController. The TransactionsController
+process arguments sent by the commands and heavily makes use of the app Database script.
+
+The Transaction model is very simple and has the actor, target, amount, and note as properties.
+These properties are needed to retrieve feeds and are the bare essentials for a transaction
+which is why I designed it this way.
+
+The controller processes arguments and raises exceptions for all cases in which input
+is invalid. Feeds are retrieved by doing a lookup on the database and printing out
+all transactions associated to the user passed in. Part of the reason why I abstracted
+transactions is to make transactions more flexible and extensible. For the purpose
+of this project, transactions are simple objects but, feeds are generated based on transactions
+rather than simply storing feeds as strings on the User object.
+
+
+
+### minivenmo.Database
+##### Scripts:
+*Database.py
+
+The database for the project is a hash table/dictionary configured to store all of the objects/models
+used by the app. I used a dictionary to emulate the key/value storage that a database provides.
+I emulated the one to many relationship for users and transactions by having the value as an array of
+transactions associated to a username key. I noticed that the app didn't require a two way relationship
+between credit cards and users, so I designed the dictionary to only hold a set of credit card numbers.
+I chose a set due to its awesome property of only storing unique values. User objects are stored as a key
+value relationship as well with the key being the username, and the value being the user object.
+
+The dictionary storage acts as a lookup layer as well as a write layer. All add/lookup methods
+of the database are called within the User and Transaction controllers as they would
+be in the event an actual database was used.
+
+The database class uses the add/lookup methods to insert into the database and retrieve information
+
+I designed the module to also set set a global property *db* that acts as a Database class instance
+across all modules. This was necessary to keep the database in a global namespace during app context.
+
+### minivenmo.MiniVenmo
+
+##### Scripts:
+*MiniVenmo.py
+
+This script acts essentially as the routing part of the application and deals
+with input/fileprocessing. Based on the input, the script directs/routes to the
+UsersController/TransactionsController and errors out if the input is bad. I built it
+this way in order to keep the logic separate from the controllers and to keep things
+as small as possible.
