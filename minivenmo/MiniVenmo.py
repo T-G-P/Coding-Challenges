@@ -6,7 +6,7 @@ from .transaction.TransactionsController import TransactionsController
 
 class MiniVenmo:
 
-    def process_args(self, args):
+    def __process_args(self, args):
         choices = ['user', 'add', 'pay', 'feed', 'balance']
         if not args or all([len(args) < 2, args[0] in choices]):
             raise Exception("ERROR: invalid arguments")
@@ -24,8 +24,9 @@ class MiniVenmo:
             UsersController.display_balance(*args[1:])
         else:
             raise Exception("ERROR: invalid arguments")
+        return True
 
-    def process_file(self, file_name):
+    def __process_file(self, file_name):
         with open(file_name) as f:
             for line in f:
                 stripped_line = line.rstrip('\n')
@@ -33,12 +34,12 @@ class MiniVenmo:
 
                 args = stripped_line.split()
                 try:
-                    self.process_args(args)
+                    self.__process_args(args)
                 except Exception as e:
                     print(e.message)
-        return
+        return True
 
-    def usage(self):
+    def __usage(self):
         print('\nUsage:\nuser <user>'
               '\nHelp: type help to repeat this message'
               '\nQuit: type Q or q to quit\n'
@@ -46,7 +47,7 @@ class MiniVenmo:
               '\npay <actor> <target> <amount> <note>'
               '\nfeed <user>'
               '\nbalance <user>')
-        return
+        return True
 
     def run(self):
         Database.init_db()
@@ -55,20 +56,20 @@ class MiniVenmo:
         args = parser.parse_args()
 
         if args.filename:
-            self.process_file(args.filename)
-            return
+            self.__process_file(args.filename)
+            return True
 
-        self.usage()
+        self.__usage()
         while True:
             args = raw_input('> ').split()
             if args[0].lower() == 'q':
                 print('Exiting...\n')
-                return
+                return True
             elif args[0].lower() == 'help':
-                self.usage()
+                self.__usage()
                 continue
             try:
-                self.process_args(args)
+                self.__process_args(args)
             except Exception as e:
                 print(e.message)
-        return
+        return True
