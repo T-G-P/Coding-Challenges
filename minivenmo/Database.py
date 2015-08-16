@@ -6,6 +6,10 @@ class Database:
         'transactions': {}
     }
 
+    def clear_db(self):
+        for key in self.database.keys():
+            self.database[key].clear()
+
     def lookup_user(self, name, new=False):
         if new and name in self.database['users'].keys():
             raise Exception("ERROR: This user: %s already exists" % name)
