@@ -17,6 +17,8 @@ $ python app.py filename.txt
 
 State will not persist between runs.
 
+Additionally, there are screenshots in the main directory showing app usage
+
 ### Tests :
 
 Tests are located in the main project folder. Tests are run for the
