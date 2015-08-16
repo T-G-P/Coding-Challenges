@@ -11,17 +11,17 @@ class TransactionsController:
                                       [actor_name, target_name]))
         except Exception as e:
             print(e.message)
-            return
+            return False
 
         payment_note = ' '.join(note)
         if actor is target:
             raise Exception("ERROR: users cannot pay themselves")
         try:
             float_amount = float(amount.split('$')[-1])
+            if float_amount < 0:
+                raise ValueError
         except ValueError:
             raise Exception("ERROR: Invalid Amount Entered")
-        if float_amount < 0:
-            raise Exception("ERROR: Can't have negative amount")
 
         if not actor.card_number:
             raise Exception("ERROR: this user does not have a credit card")
@@ -30,6 +30,7 @@ class TransactionsController:
         transaction = Transaction(actor_name, target_name,
                                   float_amount, payment_note)
         Database.db.add_transaction(transaction)
+        return True
 
     @staticmethod
     def display_feed(name):
@@ -37,7 +38,7 @@ class TransactionsController:
             user = Database.db.lookup_user(name)
         except Exception as e:
             print(e.message)
-            return
+            return False
 
         transactions = Database.db.lookup_transactions(name)
         if transactions:
@@ -50,3 +51,4 @@ class TransactionsController:
                     print('-- %s paid you $%.2f for %s' % (transaction.actor,
                                                            transaction.amount,
                                                            transaction.note))
+        return True

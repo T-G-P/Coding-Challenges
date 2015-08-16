@@ -8,16 +8,23 @@ class UsersController:
     def add_user(name):
         new = True
         try:
+            User.validate_name(name)
+        except Exception as e:
+            print(e.message)
+            return False
+
+        try:
             Database.db.lookup_user(name, new)
         except Exception as e:
             print(e.message)
-            return
+            return False
 
         user = User(name)
         try:
             Database.db.add_user(user)
         except AttributeError:
             pass
+        return True
 
     @staticmethod
     def add_credit_card(name, card_number):
@@ -26,15 +33,16 @@ class UsersController:
             card_number = Database.db.lookup_credit_card(user, card_number)
         except Exception as e:
             print(e.message)
-            return
+            return False
         try:
             CreditCard.validate_card(card_number)
         except Exception as e:
             print(e.message)
-            return
+            return False
 
         user.card_number = card_number
         Database.db.database['credit_cards'].add(card_number)
+        return True
 
     @staticmethod
     def display_balance(name):
@@ -42,6 +50,7 @@ class UsersController:
             user = Database.db.lookup_user(name)
         except Exception as e:
             print(e.message)
-            return
+            return False
 
         print('-- $%.2f' % user.balance)
+        return True
