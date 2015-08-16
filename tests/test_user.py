@@ -2,7 +2,7 @@ import unittest
 from minivenmo.user.UsersController import UsersController, Database
 
 
-class TestUserController(unittest.TestCase):
+class TestUsersController(unittest.TestCase):
     def test_add_user(self):
         Database.db.clear_db()
         test_username = "Tobias-P_88"

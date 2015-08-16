@@ -27,16 +27,19 @@ class MiniVenmo:
         return True
 
     def __process_file(self, file_name):
-        with open(file_name) as f:
-            for line in f:
-                stripped_line = line.rstrip('\n')
-                print(stripped_line)
+        try:
+            with open(file_name) as f:
+                for line in f:
+                    stripped_line = line.rstrip('\n')
+                    print(stripped_line)
 
-                args = stripped_line.split()
-                try:
-                    self.__process_args(args)
-                except Exception as e:
-                    print(e.message)
+                    args = stripped_line.split()
+                    try:
+                        self.__process_args(args)
+                    except Exception as e:
+                        print(e.message)
+        except IOError:
+            raise
         return True
 
     def __usage(self):
