@@ -23,12 +23,38 @@ class TestTransactionsController(unittest.TestCase):
         UsersController.add_user(target_username)
         UsersController.add_credit_card(actor_username, valid_card)
 
-        # A valid transaction
+        # A valid transaction. Check to see the balance
+        # incremented  Also check to see that the transaction
+        # is stored for both users
+        target = Database.db.lookup_user(target_username)
+        old_balance = target.balance
         self.assertTrue(
             TransactionsController.create_transaction(
                 actor_username, target_username, valid_amount, note
             )
         )
+        float_amount = float(valid_amount.split('$')[-1])
+        self.assertEqual(target.balance-old_balance, float_amount)
+
+        actor_trans, target_trans = tuple(map(
+            Database.db.lookup_transactions,
+            [actor_username, target_username]
+        ))
+
+        total_transactions = list(set(actor_trans).union(set(target_trans)))
+        transaction = list({
+            transaction for transaction in total_transactions
+            if all(
+                [
+                    transaction.actor == actor_username,
+                    transaction.target == target_username,
+                    transaction.amount == float_amount,
+                    transaction.note == note
+                ]
+            )})
+        # Checking to see that the transaction exists for both users
+        self.assertIn(transaction[0], actor_trans)
+        self.assertIn(transaction[0], target_trans)
 
         # Nonexistant user trying to pay
         with self.assertRaises(Exception) as cm:
@@ -90,6 +116,7 @@ class TestTransactionsController(unittest.TestCase):
         )
 
         # Display feed should return true for both users
+        # If True, the feeds get printed to the screen
         self.assertTrue(
             TransactionsController.display_feed(actor_username)
         )
