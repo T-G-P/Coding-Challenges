@@ -27,7 +27,11 @@ class CreditCard:
     def luhn_checksum(card_number):
         def digits_of(n):
             return [int(d) for d in str(n)]
-        digits = digits_of(card_number)
+        try:
+            digits = digits_of(card_number)
+        except ValueError:
+            raise Exception("ERROR: This card is invalid")
+
         odd_digits = digits[-1::-2]
         even_digits = digits[-2::-2]
 

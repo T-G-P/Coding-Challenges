@@ -10,8 +10,9 @@ class TransactionsController:
             actor, target = tuple(map(Database.db.lookup_user,
                                       [actor_name, target_name]))
         except Exception as e:
-            print(e.message)
-            return False
+            # print(e.message)
+            # return False
+            raise
 
         payment_note = ' '.join(note)
         if actor is target:
@@ -37,8 +38,9 @@ class TransactionsController:
         try:
             user = Database.db.lookup_user(name)
         except Exception as e:
-            print(e.message)
-            return False
+            # print(e.message)
+            # return False
+            raise
 
         transactions = Database.db.lookup_transactions(name)
         if transactions:

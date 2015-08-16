@@ -7,7 +7,7 @@ from minivenmo.transaction.TransactionsController import (
 class TestTransactionsController(unittest.TestCase):
 
     def test_create_transaction(self):
-        print 'in create transaction'
+        Database.db.clear_db()
         valid_card = "4111111111111111"
         invalid_card = "12345678910111213"
         note = "This is a test note"
@@ -22,7 +22,6 @@ class TestTransactionsController(unittest.TestCase):
         UsersController.add_user(actor_username)
         UsersController.add_user(target_username)
         UsersController.add_credit_card(actor_username, valid_card)
-        UsersController.add_credit_card(target_username, invalid_card)
 
         # A valid transaction
         self.assertTrue(
@@ -32,11 +31,12 @@ class TestTransactionsController(unittest.TestCase):
         )
 
         # Nonexistant user trying to pay
-        self.assertFalse(
+        with self.assertRaises(Exception) as cm:
             TransactionsController.create_transaction(
                 dne_username, target_username, valid_amount, note
             )
-        )
+        exception = cm.exception
+        self.assertIn("doesn't exist", exception.message)
 
         # Paying themselves
         with self.assertRaises(Exception) as cm:
@@ -70,10 +70,9 @@ class TestTransactionsController(unittest.TestCase):
         exception = cm.exception
         self.assertEqual(exception.message, "ERROR: Invalid Amount Entered")
 
-        Database.db.clear_db()
 
     def test_display_feed(self):
-        print 'in display feed'
+        Database.db.clear_db()
         valid_card = "4111111111111111"
         valid_card = "4111111111111111"
         note = "This is a test note"
@@ -91,13 +90,18 @@ class TestTransactionsController(unittest.TestCase):
         )
 
         # Display feed should return true for both users
-        self.assertTrue(TransactionsController.display_feed(actor_username))
-        self.assertTrue(TransactionsController.display_feed(target_username))
+        self.assertTrue(
+            TransactionsController.display_feed(actor_username)
+        )
+        self.assertTrue(
+            TransactionsController.display_feed(target_username)
+        )
 
-        # feed will throw exception and return false for invalid users
-        self.assertFalse(TransactionsController.display_feed(dne_username))
-
-        Database.db.clear_db()
+        # Nonexistant user trying to get feed
+        with self.assertRaises(Exception) as cm:
+            TransactionsController.display_feed(dne_username)
+        exception = cm.exception
+        self.assertIn("doesn't exist", exception.message)
 
 if __name__ == '__main__':
     unittest.main()

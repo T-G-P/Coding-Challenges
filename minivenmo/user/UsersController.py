@@ -10,14 +10,12 @@ class UsersController:
         try:
             User.validate_name(name)
         except Exception as e:
-            print(e.message)
-            return False
+            raise
 
         try:
             Database.db.lookup_user(name, new)
         except Exception as e:
-            print(e.message)
-            return False
+            raise
 
         user = User(name)
         try:
@@ -32,13 +30,12 @@ class UsersController:
             user = Database.db.lookup_user(name)
             card_number = Database.db.lookup_credit_card(user, card_number)
         except Exception as e:
-            print(e.message)
-            return False
+            raise
+
         try:
             CreditCard.validate_card(card_number)
         except Exception as e:
-            print(e.message)
-            return False
+            raise
 
         user.card_number = card_number
         Database.db.database['credit_cards'].add(card_number)
@@ -49,8 +46,7 @@ class UsersController:
         try:
             user = Database.db.lookup_user(name)
         except Exception as e:
-            print(e.message)
-            return False
+            raise
 
         print('-- $%.2f' % user.balance)
         return True
