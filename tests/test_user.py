@@ -9,8 +9,10 @@ class TestUserController(unittest.TestCase):
         invalid_user = "Tobias!@#$%^&*"
         invalid_user2 = 'abc'
 
-        # Add a user user and expect no problems
+        # Add a new valid user and expect no problems
         self.assertTrue(UsersController.add_user(test_username))
+        user = Database.db.lookup_user(test_username)
+        self.assertEqual(test_username, user.name)
 
         # Add invalid characters username
         with self.assertRaises(Exception) as cm:
@@ -42,16 +44,20 @@ class TestUserController(unittest.TestCase):
 
         UsersController.add_user(test_username)
         UsersController.add_user(test_username2)
+        user1 = Database.db.lookup_user(test_username)
+        user2 = Database.db.lookup_user(test_username2)
 
         # Add invalid card to existing user
         with self.assertRaises(Exception) as cm:
             UsersController.add_credit_card(test_username, invalid_card)
         exception = cm.exception
         self.assertEqual("ERROR: This card is invalid", exception.message)
+        self.assertNotEqual(user1.card_number, invalid_card)
 
         # Add valid card to existing user
         self.assertTrue(UsersController.add_credit_card(test_username,
                                                         valid_card))
+        self.assertEqual(user1.card_number, valid_card)
 
         # Add a valid card to a user that already has a card
         with self.assertRaises(Exception) as cm:
@@ -71,14 +77,13 @@ class TestUserController(unittest.TestCase):
              " another user, reported for fraud!"),
             exception.message
         )
+        self.assertNotEqual(user2.card_number, valid_card)
 
         # Add a valid card to a user that isn't in the database
         with self.assertRaises(Exception) as cm:
             UsersController.add_credit_card(dne_username, valid_card)
         exception = cm.exception
         self.assertIn("doesn't exist", exception.message)
-
-        Database.db.clear_db()
 
     def test_display_balance(self):
         Database.db.clear_db()
