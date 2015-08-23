@@ -25,8 +25,6 @@ def get_increasing_concurrents():
         #bad request
         abort(400)
 
-
-    Host.query.first()
     api_key_obj = ApiKey.query.filter_by(api_key=api_key).first()
     if not api_key_obj:
         api_key_obj = ApiKey(api_key=api_key)
@@ -83,4 +81,4 @@ def get_increasing_concurrents():
         return Response(json.dumps(result),  mimetype='application/json')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0')
