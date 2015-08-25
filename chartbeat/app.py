@@ -1,15 +1,17 @@
 from flask import Flask, request, abort, Response
 from models import Host, ApiKey, db
-#from extensions import db
-from utils import chartbeat_request, process_data
+from utils import chartbeat_request, convert_data
 import datetime
 import os
 import json
 
+
 app = Flask(__name__)
+
 app.config.from_object(os.environ['APP_SETTINGS'])
 
 db.init_app(app)
+
 
 @app.route('/api/v1.0/increasingconcurrents', methods=['GET'])
 def get_increasing_concurrents():
@@ -22,7 +24,7 @@ def get_increasing_concurrents():
 
     res = chartbeat_request(api_key, host_name)
     if res.status_code != 200:
-        #bad request
+        # bad request
         abort(400)
 
     api_key_obj = ApiKey.query.filter_by(api_key=api_key).first()
@@ -33,26 +35,37 @@ def get_increasing_concurrents():
 
     host_obj = Host.query.filter_by(host_name=host_name).first()
     if not host_obj:
-        #make new host store in db and return nothing
-        #create relationship for this api key and host
+        # make new host store in db and return nothing
+        # create relationship for this api key and host
         host_obj = Host(host_name=host_name, top_pages=res.json())
-        #do async
         if host_obj not in api_key_obj.hosts:
             api_key_obj.add_host(host_obj)
 
         db.session.add(host_obj)
         db.session.commit()
-        return jsonify(result)
+
+        return Response(json.dumps(result),  mimetype='application/json')
 
     if host_obj:
+        # if the request is cached, there is a responsed associated
+        # to it in the postgres db
+        if res.from_cache:
+            return Response(
+                json.dumps(host_obj.increasing_visitors),
+                mimetype='application/json'
+            )
+
         if host_obj not in api_key_obj.hosts:
-            #do async
             api_key_obj.add_host(host_obj)
-        #need to compare against current chartbeat data
-        #need to also return new page visitor count
-        local_data = process_data(host_obj.top_pages)
-        current_data = process_data(res.json())
+        # need to compare against current chartbeat data
+        # need to process the data to make it more usable and
+        # get faster lookup time for visitor counts
+        local_data = convert_data(host_obj.top_pages)
+        current_data = convert_data(res.json())
+
         for page in current_data:
+            # If a new page is encountered, ignore it since there is no
+            # history for it locally yet
             try:
                 change = current_data[page][0]-local_data[page][0]
             except KeyError:
@@ -66,19 +79,19 @@ def get_increasing_concurrents():
                 )
 
         if result:
-            #sort result by increasing visitors
+            # sort result by increasing visitors using the change value
             result = sorted(
                 result,
                 key=lambda result: result['change'],
                 reverse=True
             )
 
-        #do async
+        host_obj.increasing_visitors = result
         host_obj.top_pages = res.json()
         host_obj.updated_at = datetime.datetime.utcnow()
         db.session.commit()
 
-        return Response(json.dumps(result),  mimetype='application/json')
+    return Response(json.dumps(result),  mimetype='application/json')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
