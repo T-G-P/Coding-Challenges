@@ -1,9 +1,10 @@
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import JSON
-#from .extensions import db
+# from .extensions import db
 import datetime
 
 db = SQLAlchemy()
+
 
 class Host(db.Model):
 
@@ -15,9 +16,11 @@ class Host(db.Model):
                            default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime)
     top_pages = db.Column(JSON)
+    increasing_visitors = db.Column(JSON)
 
     def __repr__(self):
         return '<Host ID%r>' % self.id
+
 
 class ApiKey(db.Model):
 
@@ -32,3 +35,6 @@ class ApiKey(db.Model):
         self.hosts.append(host_obj)
         db.session.commit()
         return self
+
+    def __repr__(self):
+        return '<ApiKey ID%r>' % self.id
