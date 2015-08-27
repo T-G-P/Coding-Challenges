@@ -1,5 +1,5 @@
 import unittest
-from problem3 import incr_dict
+from incr_dict import incr_dict
 
 
 class TestIncrDict(unittest.TestCase):

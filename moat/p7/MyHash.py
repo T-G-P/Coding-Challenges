@@ -21,7 +21,7 @@ Load factor and size constants taken from examples and other implementations.
 class Item:
     """
     Item class represents the key value pair inserted
-    into the dictionary. Abstracted to make things more clear
+    into the dictionary. Abstracted to make things clearer.
     """
 
     def __init__(self, key, value):
@@ -76,6 +76,7 @@ class MyHash:
             item = Item(key, value)
         index = self._hash_djb2(item.key)
         self._buckets[index].append(item)
+        return value
 
     def delete(self, key):
         """Checks the total bucket usage on call to delete,
@@ -83,12 +84,28 @@ class MyHash:
         """
 
         index = self._hash_djb2(key)
-        self._buckets[index] = []
+        bucket = self._buckets[index]
+        for item in bucket:
+            bucket.remove(item)
 
         # If the buckets seem under-utilized, resize and rehash
         if 0 < self._load <= self._min_load:
-            if len(self._buckets) > self.min_size:
+            if len(self._buckets) > self._min_size:
                 self._resize(len(self._buckets) / self._size_factor)
+
+    def values(self):
+        """
+        Gets all the values in the hash table
+        """
+        values = [item.value for bucket in self._buckets for item in bucket]
+        return values
+
+    def keys(self):
+        """
+        Gets all the keys from the hash table
+        """
+        keys = [item.key for bucket in self._buckets for item in bucket]
+        return keys
 
     def _resize(self, size):
         """Resizes the hash table either on insertion or deletion.
@@ -99,7 +116,7 @@ class MyHash:
         self._buckets = [[] for i in range(size)]
         self._size = size
 
-        # Make sure the old data gets re-indexed into the new store
+        # Rehash all data into new buckets
         for bucket in old_buckets:
             for item in bucket:
                 self.set(item.key, item.value, item)
@@ -122,10 +139,12 @@ class MyHash:
         I did some research and saw that this hash function has a
         good reputation. This is the python equivalent to the C
         implementation here http://www.cse.yorku.ca/~oz/hash.html
+        Returns the index at which to insert the item.
         """
-        _hash = 5381
         # in the event an int is passed in for a key
         key = str(key)
+
+        _hash = 5381
 
         for i in range(0, len(key)):
             _hash = ((_hash << 5) + _hash) + ord(key[i])

@@ -1,5 +1,6 @@
 import argparse
 
+
 def main():
     parser = argparse.ArgumentParser(description='P5')
     parser.add_argument('filename', nargs='?')
@@ -7,13 +8,15 @@ def main():
 
     if args.filename:
         result = process_file(args.filename)
+
         for k, v in result.items():
-            print('%s: %d' % (k, v))
+            print('%s => %d\n' % (k, v))
+
 
 def process_file(file_name):
     """
-    Won't be good for large files, need to use a
-    generator
+    Won't be good for large files, need to implement
+    either with generator or a database
     """
     valid_chars = "[ \t{}[]\n]+"
     result = {c: 0 for c in valid_chars}
