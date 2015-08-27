@@ -28,6 +28,8 @@ its data is erased and set to a new dict.
 def incr_dict(data, tup):
     if not all([isinstance(data, dict), isinstance(tup, tuple)]):
         raise Exception("Invalid data types. Must be dict and tuple.")
+    if not tup:
+        raise Exception("Invalid tuple, must have at least 1 value")
 
     # cast tuple as list for lists flexibility/methods
     letters = list(tup)
@@ -89,6 +91,16 @@ def main():
     print(data)
     incr_dict(data, ('b', 'c', 'd'))
     print(data)
+
+    try:
+        incr_dict(data, ())
+    except Exception as e:
+        print(e.message)
+
+    try:
+        incr_dict([], {})
+    except Exception as e:
+        print(e.message)
 
 if __name__ == '__main__':
     main()
