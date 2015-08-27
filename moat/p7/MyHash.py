@@ -8,9 +8,14 @@ https://sites.google.com/site/usfcomputerscience/hash-tables-imp
 
 I implemented this to provide amortized O(1) lookup and insertion time
 by focusing heavily on picking the right hash function and allowing
-for various table sizes based on a load factor.
-"""
+for various table sizes based on a load factor. Once the load factor is
+reaches, the table is resized and rehashed and the items get redistributed
+The Hash table uses a list of lists for each bucket in order to resolve
+collisions by chaining them. The chaining occurs by appending the item class
+to the list at the index returned from the hash function.
 
+Load factor and size constants taken from examples and other implementations.
+"""
 
 
 class Item:
@@ -23,18 +28,26 @@ class Item:
         self.key = key
         self.value = value
 
+    def __repr__(self):
+        return '<Item: (%s => %s) >' % (self.key, self.value)
+
 
 class MyHash:
     """Main Hash implementation. The class has the min size property
     to initialize the size of the table, the load factor property to
     determine when or not to resize, and the load amount, which is
-    calculated during insertion or deletion
+    calculated during insertion or deletion. The minimum load is used
+    to reduce the size of the hash table if it's sparsely populated and
+    bigger than the minimum size. The size factor is the factor used
+    to resize and rehash all the values in the table.
     """
 
     _min_size = 8
     _size = _min_size
     _load_factor = .66
+    _min_load = .16
     _load_amount = 0
+    _size_factor = 4
 
     def __init__(self):
         self._buckets = [[] for i in range(self._min_size)]
@@ -53,8 +66,8 @@ class MyHash:
         internally as well during resize to copy items
         """
 
-        if self._usage >= self._load_factor:
-            self._resize(len(self._buckets) * 4)
+        if self._load >= self._load_factor:
+            self._resize(len(self._buckets) * self._size_factor)
         if not item:
             if not key:
                 raise KeyError(key)
@@ -70,17 +83,17 @@ class MyHash:
         """
 
         index = self._hash_djb2(key)
-        bucket = self._buckets[index]
         self._buckets[index] = []
 
-        # If the buckets seem under-utilized, shrink and re-index
-        if 0 < self._usage<= 0.16 and len(self._buckets) > self.min_size:
-            self._resize(len(self._buckets) / 4)
+        # If the buckets seem under-utilized, resize and rehash
+        if 0 < self._load <= self._min_load:
+            if len(self._buckets) > self.min_size:
+                self._resize(len(self._buckets) / self._size_factor)
 
     def _resize(self, size):
         """Resizes the hash table either on insertion or deletion.
         Copies over all the old information and calls the set method
-        internally to reinsert all the items
+        internally to rehash all the items
         """
         old_buckets = self._buckets
         self._buckets = [[] for i in range(size)]
@@ -92,7 +105,7 @@ class MyHash:
                 self.set(item.key, item.value, item)
 
     @property
-    def _usage(self):
+    def _load(self):
         """Deterimines the overall load amount. Used as a property
         to compare to the maximum load factor of 2/3
         """
@@ -115,6 +128,6 @@ class MyHash:
         key = str(key)
 
         for i in range(0, len(key)):
-           _hash = ((_hash << 5) + _hash) + ord(key[i])
+            _hash = ((_hash << 5) + _hash) + ord(key[i])
 
         return _hash % self._size
