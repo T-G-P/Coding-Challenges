@@ -1,0 +1,1 @@
+1 */1 * * * source /var/www/chartbeat_api/venv/bin/activate; cd /var/www/chartbeat_api && /var/www/chartbeat_api/venv/bin/python manage.py populate_top_pages >> cron_history.txt 2>&1; deactivate; cd -
