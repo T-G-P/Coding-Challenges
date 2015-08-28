@@ -7,13 +7,13 @@ def output(dictionary):
 
 def get_word_frequency():
 
-    with open('queries_file.txt') as queries_file:
+    with open('queries.txt') as queries_file:
         # make query set sa generator as it's only needed once
         query_sets = (
             set(query.rstrip('\n').split(','))
             for query in queries_file
         )
-        with open('records_file.txt') as records_file:
+        with open('records.txt') as records_file:
             # make record_sets a list as it's needed for every query
             record_sets = [
                 set(record.rstrip('\n').split(','))
