@@ -1,37 +1,48 @@
+import argparse
 from json import dumps
 
 
 def output(dictionary):
     print(dumps(dictionary, sort_keys=True))
 
+def generate_item_sets(filename):
 
-def get_word_frequency():
+    with open(filename) as items_file:
+        # process file line by line, strip new lines, tokenize on commas
+        # cast each line as a set for flexibile and fast operations
+        item_sets = [
+            set(item.rstrip('\n').split(','))
+            for item in items_file
+        ]
 
-    with open('queries.txt') as queries_file:
-        # make query set sa generator as it's only needed once
-        query_sets = (
-            set(query.rstrip('\n').split(','))
-            for query in queries_file
-        )
-        with open('records.txt') as records_file:
-            # make record_sets a list as it's needed for every query
-            record_sets = [
-                set(record.rstrip('\n').split(','))
-                for record in records_file
-            ]
-            # check that query is a subset, take difference and build result
-            for query_set in query_sets:
-                res = {}
-                for record_set in record_sets:
-                    if query_set.issubset(record_set):
-                        difference = record_set.difference(query_set)
-                        for word in difference:
-                            if word not in res:
-                                res[word] = 1
-                            else:
-                                res[word] += 1
+    return item_sets
 
-                output(res)
+def get_word_frequency(files):
+
+    try:
+        query_sets, record_sets = tuple(map(generate_item_sets, files))
+    except Exception as e:
+        print(str(e))
+        return
+
+    # check that query is a subset, take difference and build result
+    for query_set in query_sets:
+        res = {}
+        for record_set in record_sets:
+            if query_set.issubset(record_set):
+                difference = record_set.difference(query_set)
+                for word in difference:
+                    if word not in res:
+                        res[word] = 1
+                    else:
+                        res[word] += 1
+
+        output(res)
 
 if __name__ == '__main__':
-    get_word_frequency()
+    parser = argparse.ArgumentParser(description='Get the Word Frequency')
+    parser.add_argument("queries", help="The queries text file")
+    parser.add_argument("records", help="The records text file")
+    args = parser.parse_args()
+
+    get_word_frequency([args.queries, args.records])
