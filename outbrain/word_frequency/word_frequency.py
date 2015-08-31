@@ -18,10 +18,12 @@ def generate_item_sets(filename):
 
     return item_sets
 
+
 def get_word_frequency(files):
+
     try:
         query_sets, record_sets = tuple(map(generate_item_sets, files))
-    except IOError as e:
+    except Exception as e:
         print(str(e))
         return
 
