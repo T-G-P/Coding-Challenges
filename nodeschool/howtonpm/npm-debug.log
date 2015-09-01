@@ -1,0 +1,46 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'dist-tag',
+1 verbose cli   'add',
+1 verbose cli   '@tobias/how-to-npm@1.0.1',
+1 verbose cli   'test' ]
+2 info using npm@2.14.0
+3 info using node@v0.12.7
+4 verbose dist-tag add test to @tobias/how-to-npm@1.0.1
+5 silly mapToRegistry name @tobias/how-to-npm
+6 silly mapToRegistry scope (from package name) @tobias
+7 verbose mapToRegistry no registry URL found in name for scope @tobias
+8 silly mapToRegistry using default registry
+9 silly mapToRegistry registry http://localhost:15443/
+10 silly mapToRegistry uri http://localhost:15443/@tobias%2fhow-to-npm
+11 verbose request uri http://localhost:15443/-/package/@tobias%2fhow-to-npm/dist-tags
+12 verbose request no auth needed
+13 info attempt registry request try #1 at 2:22:45 PM
+14 verbose request id 3ca68dcfb80f4345
+15 http request GET http://localhost:15443/-/package/@tobias%2fhow-to-npm/dist-tags
+16 http 404 http://localhost:15443/-/package/@tobias%2fhow-to-npm/dist-tags
+17 verbose headers { 'content-type': 'application/json',
+17 verbose headers   date: 'Fri, 21 Aug 2015 18:22:45 GMT',
+17 verbose headers   connection: 'keep-alive',
+17 verbose headers   'transfer-encoding': 'chunked' }
+18 verbose stack Error: missing : -/package/@tobias%2fhow-to-npm/dist-tags
+18 verbose stack     at makeError (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:263:12)
+18 verbose stack     at CachingRegistryClient.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:251:14)
+18 verbose stack     at Request._callback (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:171:14)
+18 verbose stack     at Request.self.callback (/usr/lib/node_modules/npm/node_modules/request/request.js:198:22)
+18 verbose stack     at Request.emit (events.js:110:17)
+18 verbose stack     at Request.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1057:14)
+18 verbose stack     at Request.emit (events.js:129:20)
+18 verbose stack     at IncomingMessage.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1003:12)
+18 verbose stack     at IncomingMessage.emit (events.js:129:20)
+18 verbose stack     at _stream_readable.js:908:16
+19 verbose statusCode 404
+20 verbose cwd /home/tobias/Coding-Challenges/nodeschool/howtonpm
+21 error Linux 4.1.4-1-ARCH
+22 error argv "node" "/usr/bin/npm" "dist-tag" "add" "@tobias/how-to-npm@1.0.1" "test"
+23 error node v0.12.7
+24 error npm  v2.14.0
+25 error code E404
+26 error 404 missing : -/package/@tobias%2fhow-to-npm/dist-tags
+27 verbose exit [ 1, true ]
