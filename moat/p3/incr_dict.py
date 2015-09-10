@@ -46,29 +46,21 @@ def incr_dict(data, tup):
         # last index
         if index == len(letters)-1:
             try:
-                # reduces to single value from nested dict.
-                # iterates over the letters from each index
-                reduce(lambda d, k: d[k], letters[index:], curr)
+                # try to get value at this key
+                curr[letters[index]]
             except KeyError:
                 # letter doesnt exist, setting it
-                curr = curr.setdefault(letter, 1)
-                return data
+                curr.setdefault(letter, 1)
             except TypeError:
-                # unable to reduce to value
-                # letter exists but it's already set to an int
-                # set curr dict at previous letter
-                prev[letters[-2]] = {letter: 1}
-                return data
-
-            # Check to see if the last value
-            # is a dictionary or not. If it is
-            # then clear it out and set it to 1, otherwise increment
-            val = curr.setdefault(letter, {})
-            if isinstance(val, dict):
-                curr[letter].clear()
-                curr[letter] = 1
-                return data
-            curr[letter] += 1
+                # curr is an int at this point
+                # (meaning we need to change this into to a dict)
+                # can't call get on an int
+                # use dict from previous iteration and previous key
+                prev[letters[index-1]] = {letter: 1}
+            else:
+                # accounted for all cases where count needs to be
+                # initialized so increment count
+                curr[letter] += 1
         else:
             prev = curr
             curr = curr.setdefault(letter, {})
