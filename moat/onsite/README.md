@@ -3,6 +3,7 @@ In person question #3
 
 Given a requests object like this:
 
+```javascript
 requests = [
     {
         'url': 'A',
@@ -18,6 +19,7 @@ requests = [
     }
 ....
 ]
+```
 
 Find all parent chains for a given node.
 Ex:
