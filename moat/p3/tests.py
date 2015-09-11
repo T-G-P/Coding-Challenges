@@ -34,7 +34,19 @@ class TestIncrDict(unittest.TestCase):
 
     def test_valid_input(self):
         data = {}
-        # Test basic example
+
+        # Test case where root is leaf
+        self.assertEqual(
+            incr_dict(data, tuple('a')),
+            {'a': 1}
+        )
+        # Test case where root is leaf and incremenation
+        self.assertEqual(
+            incr_dict(data, tuple('a')),
+            {'a': 2}
+        )
+
+        # Test basic example where old root is no longer leaf
         self.assertEqual(
             incr_dict(data, ('a', 'b', 'c')),
             {'a': {'b': {'c': 1}}}

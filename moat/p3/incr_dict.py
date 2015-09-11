@@ -1,14 +1,14 @@
 """
 @Author: Tobias Perelstein
 
+***UPDATED VERSION***
 Removed call to reduce because it is unecessary. It works great
 for getting nested values from a dictionary  but calling reduce while
-simultaneously iterating over the letters is a redundant and
-more expensive solution (still better than recursive). Also, I was only calling
-reduce for one letter at a time, thus defeating the purpose of using it. It's
-great for getting nested values of a dictionary, but was an overcomplication
-for the purpose of this problem. I also cleaned up the code to only have one return
-Got rid of some redundant logic as well.
+simultaneously iterating over the letters is a redundant  I also cleaned
+up the code to only have  one return. Added logic for case in which  childless
+root gets children on a subsequent call. Got rid of some unecessary logic.
+
+
 
 The implementation of incr_dict below was designed with a large
 data set in mind. I initially approached the problem recursively,
@@ -40,6 +40,9 @@ def incr_dict(data, tup):
     # if the first letter is not in the nested dict, clear it
     if letters[0] not in data:
         data.clear()
+    # Case where root is leaf and on next call, the root is not the leaf
+    elif len(letters) > 1 and isinstance(data[letters[0]], int):
+        data[letters[0]] = {}
 
     # set curr, prev value to use for looking up nested values
     prev = None
@@ -72,6 +75,10 @@ def incr_dict(data, tup):
 
 def main():
     data = {}
+    incr_dict(data, tuple('a'))
+    print(data)
+    incr_dict(data, tuple('a'))
+    print(data)
     incr_dict(data, ('a', 'b', 'c'))
     print(data)
     incr_dict(data, ('a', 'b', 'c'))
