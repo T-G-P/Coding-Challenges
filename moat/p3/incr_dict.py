@@ -1,16 +1,19 @@
 """
 @Author: Tobias Perelstein
 
+Removed call to reduce because it is unecessary. It works great
+for getting nested values from a dictionary  but calling reduce while
+simultaneously iterating over the letters is a redundant and
+more expensive solution (still better than recursive). Also, I was only calling
+reduce for one letter at a time, thus defeating the purpose of using it. It's
+great for getting nested values of a dictionary, but was an overcomplication
+for the purpose of this problem. I also cleaned up the code to only have one return
+Got rid of some redundant logic as well.
+
 The implementation of incr_dict below was designed with a large
 data set in mind. I initially approached the problem recursively,
 but then realized that I would exceed recursion depth in the situation
 that the data set is too large. As a result, I chose the iterative approach.
-I made use of 'reduce' which iteratively retreives the values for
-the dictionary and returns the value at the key if it exists. If
-the key doesn't exist, it's created and set to 1. If, it was the
-terminal value from a previous call, then reduce won't work, so
-I make use of the previous iterations dictionary and set it to
-have a default value of {letter: 1}
 
 The function iterates over the letters by index and value and
 uses the 'setdefault' method of dicts which makes it very easy
@@ -39,7 +42,7 @@ def incr_dict(data, tup):
         data.clear()
 
     # set curr, prev value to use for looking up nested values
-    prev = data
+    prev = None
     curr = data
 
     for index, letter in enumerate(letters):
