@@ -86,7 +86,8 @@ class MyHash:
         index = self._hash_djb2(key)
         bucket = self._buckets[index]
         for item in bucket:
-            bucket.remove(item)
+            if item.key == key:
+                bucket.remove(item)
 
         # If the buckets seem under-utilized, resize and rehash
         if 0 < self._load <= self._min_load:
