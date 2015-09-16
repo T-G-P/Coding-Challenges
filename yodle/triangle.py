@@ -32,7 +32,8 @@ def max_sum(tree):
             elif i == len(row) - 1:
                 next_sums.append(row[i]+sums[i-1])
             else:
-                next_sums.append(row[i]+max(sums[i-1], sums[i]))
+                # next_sums.append(row[i]+max(sums[i-1], sums[i]))
+                next_sums.append(row[i]+max(sums[i-1:i+1]))
         sums = next_sums
 
     return max(sums)
