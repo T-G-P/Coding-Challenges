@@ -27,6 +27,7 @@ class File(db.Model):
 
         db.session.add(new_file)
         db.session.commit()
+        return new_file
 
     @classmethod
     def _hash_password(cls, password):

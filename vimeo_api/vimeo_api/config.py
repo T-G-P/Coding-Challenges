@@ -8,6 +8,8 @@ class DefaultConfig(object):
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
     CSRF_ENABLED = True
     UPLOAD_FOLDER = '/tmp/files'
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class ProductionConfig(DefaultConfig):
@@ -27,3 +29,4 @@ class DevelopmentConfig(DefaultConfig):
 class TestingConfig(DefaultConfig):
     TESTING = True
 
+print(os.environ['DATABASE_URL'])

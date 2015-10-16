@@ -6,12 +6,13 @@ import mimetypes
 import os
 
 
-api = Blueprint('api', __name__, url_prefix='vimeo/api/v1.0')
+api = Blueprint('api', __name__, url_prefix='/vimeo/api/v1.0')
 
 
 @api.route('/upload', methods=['PUT'])
 def upload_file():
     if not request.files:
+        print('fuck')
         abort(400)
 
     password = request.form.get('password')
@@ -23,11 +24,14 @@ def upload_file():
         abort(400)
 
     filename = new_file_obj.filename
-    File.add_file(filename, password)
+    new_file_record = File.add_file(filename, password)
 
     new_file_obj.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-    response = {"status": "File Uploaded Successfully"}
+    response = {
+        "status": "File Uploaded Successfully",
+        "url": "%s/%s" % (request.url_root, new_file_record.filehash)
+    }
 
     return jsonify(response), 201
 
@@ -46,7 +50,7 @@ def download_file(filehash):
     if file_obj.password and not password:
         abort(401)
 
-    if password and not File.validate_password(password):
+    if password and not file_obj.validate_password(password):
         abort(401)
 
     file_obj.gone = True
