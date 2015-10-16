@@ -58,3 +58,7 @@ def configure_error_handlers(app):
     @app.errorhandler(404)
     def not_found(error):
         return jsonify(error='Not Found'), 404
+
+    @app.errorhandler(410)
+    def gone(error):
+        return jsonify(error='Gone'), 410
