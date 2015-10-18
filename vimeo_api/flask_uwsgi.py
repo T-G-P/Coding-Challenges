@@ -1,4 +1,4 @@
-from chartbeat_app import create_app
+from vimeo_api import create_app
 
 app = create_app()
 

@@ -13,8 +13,8 @@ class File(db.Model):
     password = db.Column(db.String(255))
     created_at = db.Column(db.DateTime,
                            default=datetime.datetime.utcnow)
-    gone = db.Column(db.Enum('True', 'False', name='gone'),
-                     default='False')
+    status = db.Column(db.Enum('Gone', 'Available', name='statuses'),
+                       default='Available')
 
     @staticmethod
     def add_file(filename, password=None):
@@ -48,7 +48,7 @@ class File(db.Model):
     def _hash_filename(cls, filename):
 
         hash = md5()
-        hash.update(filename.encode('utf-8'))
+        hash.update(filename.encode('utf-8')+str(datetime.datetime.utcnow()))
         hash = hash.hexdigest()
         return hash
 

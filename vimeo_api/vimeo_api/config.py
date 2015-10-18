@@ -10,6 +10,8 @@ class DefaultConfig(object):
     UPLOAD_FOLDER = '/tmp/files'
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    CELERY_BROKER_URL = 'redis://localhost:6380',
+    CELERY_RESULT_BACKEND = 'redis://localhost:6380'
 
 
 class ProductionConfig(DefaultConfig):
