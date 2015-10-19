@@ -1,6 +1,7 @@
 from flask.ext.script import Manager
 from flask_migrate import MigrateCommand
 from vimeo_api import create_app
+from vimeo_api.extensions import celery
 
 app = create_app()
 

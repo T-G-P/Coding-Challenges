@@ -71,6 +71,6 @@ def download_file(filehash):
     response.headers["X-Accel-Redirect"] = redirect_path
     response.headers["Content-Type"] = mimetype
 
-    delete_file.apply_async(args=[filehash], countdown=30)
+    delete_file.apply_async(args=[filehash], countdown=10)
 
     return response

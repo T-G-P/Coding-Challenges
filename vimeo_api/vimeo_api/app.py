@@ -77,8 +77,3 @@ def configure_error_handlers(app):
     @cache.cached(timeout=50, key_prefix='gone')
     def gone(error):
         return jsonify(error='Gone'), 410
-
-    @app.errorhandler(413)
-    @cache.cached(timeout=50, key_prefix='too_large')
-    def request_entity_to_large(error):
-        return jsonify(error='Request Entity too Large'), 413
