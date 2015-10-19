@@ -187,3 +187,22 @@ res = requests.get(url, params=params)
             "error" : "Gone"
         }
         
+
+Screenshots
+-----------
+
+# Photo Uploads
+[No Password](screenshots/photo_upload__no_password.png)
+
+[With Password](screenshots/photo_upload____with_password.png)
+
+# Photo Downloads
+[No Password](screenshots/photo_download__no_password.png)
+
+[With Password](screenshots/photo_download__with_password.png)
+
+# File Task Queue
+[Celery/Redis Queue](screenshots/file_task_queue.png)
+
+# UWSGI server log
+[Uwsgi Server Log](screenshots/serverinaction.png)
