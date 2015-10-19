@@ -1,8 +1,7 @@
 from flask import Flask, jsonify
-from celery import Celery
 from .config import DefaultConfig
 from .api import api
-from .extensions import db, migrate, cache
+from .extensions import db, migrate, cache, celery
 import os
 
 DEFAULT_BLUEPRINTS = {api}
@@ -42,6 +41,9 @@ def configure_extensions(app):
     # flask-cache
     cache.init_app(app)
 
+    # celery
+    celery.init_app(app)
+
 
 def configure_blueprints(app, blueprints):
     # only one blueprint in this case, but
@@ -80,20 +82,3 @@ def configure_error_handlers(app):
     @cache.cached(timeout=50, key_prefix='too_large')
     def request_entity_to_large(error):
         return jsonify(error='Request Entity too Large'), 413
-
-
-def create_celery(app=None):
-    app = app or create_app()
-    celery = Celery(app.import_name, broker=app.config['CELERY_BROKER_URL'])
-    celery.conf.update(app.config)
-    TaskBase = celery.Task
-
-    class ContextTask(TaskBase):
-        abstract = True
-
-        def __call__(self, *args, **kwargs):
-            with app.app_context():
-                return TaskBase.__call__(self, *args, **kwargs)
-
-    celery.Task = ContextTask
-    return celery

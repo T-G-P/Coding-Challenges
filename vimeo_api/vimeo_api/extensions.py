@@ -10,3 +10,6 @@ cache = Cache(config={'CACHE_TYPE': 'redis',
                       'CACHE_REDIS_URL': 'redis://localhost:6379',
                       'CACHE_REDIS_PORT': '6379',
                       'CACHE_REDIS_HOST': 'localhost'})
+
+from flask.ext.celery import Celery
+celery = Celery()

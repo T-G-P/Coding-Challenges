@@ -6,7 +6,6 @@ from .models import File
 import mimetypes
 import os
 
-
 api = Blueprint('api', __name__, url_prefix='/vimeo/api/v1.0')
 
 
