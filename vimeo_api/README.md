@@ -146,9 +146,9 @@ This endpoint allows you to retrieve a file based on its hash.
 ```python
 import requests
 
-url = 'http://tobias.perelste.in:8002/vimeo/api/v1.0/file'
+url = 'http://tobias.perelste.in:8002/vimeo/api/v1.0/file/d1c5b168e5782c80fe36f601a9df3b47'
 
-params = {'password': 'd1c5b168e5782c80fe36f601a9df3b47'}
+params = {'password': 'hello world'}
 
 res = requests.get(url, params=params)
 ```
