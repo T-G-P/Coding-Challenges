@@ -53,7 +53,7 @@ I picked Postgres for the initial data store as I wanted a reliable persistant d
 
 I knew that I could cache the 4XX responses so I could handle more concurrent requests so I chose Redis as a backend for storing those responses and I made use of the Flask-Cache extensions which made it very easy to wrap the responses with a decorator. 
 
-Lastly all files are not served by Flask but by nginx. This was one of my bigger decisions. Despite the api not getting much use at the moment, nginx is tremendously faster than flask and is much better for serving static content and this would scale much better. In order to do this, I needed to flask to send a specific header which provides a redirect to nginx, which in turn is aliases to a directory on the filesystem. This way, flask does not have anything to do with the file serving and is only used for application logic. 
+Lastly all files are not served by Flask but by nginx. This was one of my bigger decisions. Despite the api not getting much use at the moment, nginx is tremendously faster than flask and is much better for serving static content and this would scale much better. In order to do this, I needed flask to send a specific header which provides a redirect to nginx, which in turn is aliases to a directory on the filesystem. This way, flask does not have anything to do with the file serving and is only used for application logic. 
 
 Models
 ----------------
@@ -90,6 +90,7 @@ http://tobias.perelste.in:8002/vimeo/api/v1.0/
 ## Upload File [/file] 
 This endpoint allows you to upload a file with an optional password. Only allowed method is PUT so a 405 will be returned for other request methods.
 * NOTE: The endpoint allows for a maximum file size of 16 megs. The web server will return a 413: Request Entity too Large for anything larger. 
+
 ### params
         file - the file being sent *REQUIRED
         password - the password for the file *OPTIONAL
@@ -133,9 +134,11 @@ res = requests.put(url, files=files, data=data)
         }
 
 # GET
-## Download Photo [/file/<filehash>]
+## Download File[/file/filehash]
 This endpoint allows you to retrieve a file based on its hash. 
 
+### url params
+        filehash - the MD5 hash generated from the PUT request.
 ### query string params
         password - the password for the file *OPTIONAL
 
@@ -149,7 +152,7 @@ params = {'password': 'd1c5b168e5782c80fe36f601a9df3b47'}
 
 res = requests.get(url, params=params)
 ```
-### Download photo [GET]
+### Download File[GET]
 
 ### Possible Responses
 
