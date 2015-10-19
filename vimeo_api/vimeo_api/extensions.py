@@ -1,3 +1,6 @@
+"""
+Instantiate all extensions used by the application here
+"""
 from flask.ext.sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 

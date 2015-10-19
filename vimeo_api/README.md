@@ -6,7 +6,7 @@ The following readme will provide an overview of the design and functionality of
 
 Production
 -------------
-The api is currently live with BASE URL:
+The api is currently live hosted on Digital Ocean with BASE URL:
 
 [http://tobias.perelste.in:8002/vimeo/api/v1.0/](http://tobias.perelste.in:8002/vimeo/api/v1.0/)
 

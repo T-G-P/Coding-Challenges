@@ -1,5 +1,12 @@
 import os
 
+"""
+All app configurations are set here and
+the configuration used by the app can easily be updated
+by switching an enviornmental variable since everything
+inherits from DefaultConfig
+"""
+
 
 class DefaultConfig(object):
     PROJECT = 'vimeo_api'
