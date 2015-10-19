@@ -100,6 +100,9 @@ This endpoint allows you to upload a file with an optional password. Only allowe
 ```python
 import requests
 
+# If no password is set during upload, do not have to send data dictionary
+# with the request. The data dictionary acts as the form data
+
 url = 'http://tobias.perelste.in:8002/vimeo/api/v1.0/file'
 
 files = {'file': open('report.xls', 'rb')}
@@ -137,6 +140,7 @@ res = requests.put(url, files=files, data=data)
 ## Download File[/file/filehash]
 This endpoint allows you to retrieve a file based on its hash. 
 
+
 ### url params
         filehash - the MD5 hash generated from the PUT request.
 ### query string params
@@ -145,6 +149,8 @@ This endpoint allows you to retrieve a file based on its hash.
 #### Python example request to download a file
 ```python
 import requests
+# If no password was set during upload, do not have to send params dictionary
+# with the request
 
 url = 'http://tobias.perelste.in:8002/vimeo/api/v1.0/file/d1c5b168e5782c80fe36f601a9df3b47'
 
