@@ -56,15 +56,16 @@ def upload_file():
 
     response = {
         "status": "File Uploaded Successfully",
-        "url": "%s%s/file/%s" % (request.url_root,
-                                 api.url_prefix.lstrip('/'),
-                                 new_file_record.filehash)
+        "url": "%s%s/file/%s/%s" % (request.url_root,
+                                    api.url_prefix.lstrip('/'),
+                                    new_file_record.filehash,
+                                    new_file_record.filename)
     }
     return jsonify(response), 201
 
 
-@api.route('/file/<filehash>', methods=['GET'])
-def download_file(filehash):
+@api.route('/file/<filehash>/<filename>', methods=['GET'])
+def download_file(filehash, filename):
     """This endpoint is used to download a file via GET request."""
     # @url params:
     #     filehash *REQUIRED
