@@ -21,9 +21,7 @@ def index():
 
 @api.route('/file', methods=['PUT'])
 def upload_file():
-    """
-    This endpoint is used to upload a file via PUT request.
-    """
+    """This endpoint is used to upload a file via PUT request."""
     # @params:
     #     file *REQUIRED
     #     password *OPTIONAL
@@ -67,9 +65,7 @@ def upload_file():
 
 @api.route('/file/<filehash>', methods=['GET'])
 def download_file(filehash):
-    """
-    This endpoint is used to download a file via PUT request.
-    """
+    """This endpoint is used to download a file via GET request."""
     # @url params:
     #     filehash *REQUIRED
     # @query params:
