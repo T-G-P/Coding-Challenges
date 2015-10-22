@@ -1,10 +1,11 @@
 from flask import Flask, jsonify
 from .config import DefaultConfig
 from .api import api
+from .frontend import frontend
 from .extensions import db, migrate, cache, celery
 import os
 
-DEFAULT_BLUEPRINTS = {api}
+DEFAULT_BLUEPRINTS = {api, frontend}
 
 
 def create_app(config=None, app_name=None, blueprints=None):
