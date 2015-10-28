@@ -32,27 +32,16 @@ $(function() {
                     if (evt.lengthComputable) {
                         var percentComplete = (evt.loaded / evt.total) * 100;
                       //Do something with upload progress
-                        var progressbar = document.getElementById("bar");
-                        progressbar.style.display = 'block';
-                        var text = progressbar.childNodes[1].childNodes[1];
+                        var progressBar = document.getElementById("bar");
+                        progressBar.style.display = 'block';
+                        var text = progressBar.childNodes[1].childNodes[1];
                         text.innerHTML = percentComplete + '%';
-                        progressbar.style.width = text.innerHTML;
-                        //text.innerHTML = percentComplete;
-                        //console.log(percentComplete);
-                        //alert(percentComplete);
+                        progressBar.style.width = text.innerHTML;
                     }
                 }, false);
-                //Download progress
-                //xhr.addEventListener("progress", function(evt){
-                //  if (evt.lengthComputable) {
-                //    var percentComplete = evt.loaded / evt.total;
-                //    //Do something with download progress
-                //    console.log(percentComplete);
-                //  }
-                //}, false);
                 return xhr;
             },
-            url: 'api/v1.0/file',
+            url: '/api/v1.0/file',
             headers: {"X-HTTP-Method-Override": "PUT"}, // X-HTTP-Method-Override set to PUT.
             type: 'PUT',
             method: 'PUT',
@@ -73,8 +62,8 @@ $(function() {
                     a.href = data.url;
                     entry.appendChild(a)
                     filelist.appendChild(entry)
-                    var progressbar = document.getElementById("bar");
-                    progressbar.style.display = 'none';
+                    var progressBar = document.getElementById("bar");
+                    progressBar.style.display = 'none';
     
                 }
                 else {
@@ -85,6 +74,7 @@ $(function() {
             error: function(jqXHR, textStatus, errorThrown) {
                 // Handle errors here
                 console.log('ERRORS: ' + textStatus);
+                alert("Please keep uploads limited to 16MB for now")
                 // STOP LOADING SPINNER
             }
         });
