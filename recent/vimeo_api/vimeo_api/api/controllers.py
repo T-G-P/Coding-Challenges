@@ -6,7 +6,7 @@ from .models import File
 import mimetypes
 import os
 
-api = Blueprint('api', __name__, url_prefix='/vimeo/api/v1.0')
+api = Blueprint('api', __name__, url_prefix='/api/v1.0')
 
 
 @api.route('/', methods=['GET', 'POST'])
@@ -103,7 +103,7 @@ def download_file(filehash, filename):
     mimetype = mimetypes.guess_type(filename)[0]
 
     # specify nginx redirect path that is aliased to local directory
-    redirect_path = "/vimeo/api/v1.0/files/%s/%s" % (filehash, filename)
+    redirect_path = "/api/v1.0/files/%s/%s" % (filehash, filename)
 
     response = make_response("")
     # Send redirect path with this header as well as calculated mimetype
