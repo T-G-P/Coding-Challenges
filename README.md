@@ -13,6 +13,6 @@ At the moment there is only one route and that is to retrieve information for
 any specified badge id. Routes are in 'app/app/Http/'
 
 ## Controllers
-In 'app/app/Http'/Controllers' I implemented a BaseController class which is
+In 'app/app/Http'/Controllers' I implemented a CredlyApiClientController class which is
 used to instantiate the CredlyApi class and make the credly api call with the guzzle
 instance parameter
