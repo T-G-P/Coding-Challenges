@@ -1,1 +1,69 @@
-# payperks
+payperks coding challenge
+=========================
+
+Here we have the pay perks coding challenge. This is the second time I've touched django in
+over a year and I really had a great time this time around. The first time I used django I was 
+still a student and everything about it was overwhelming. This time around after using
+flask for a while, I really was able to appreciate the features that django has to offer. 
+Postgres was chosen as the persistent data store.
+
+Modules
+=======
+# payperks.login
+This module contains the models, views, and controllers for the login system. 
+It's heavily inspired from resources I've found online. Credit is given where it's due. 
+This is still a work in progress.
+
+## models
+For the purpose of the application
+the default Django User does not contain enough fields so I extended the User and made a
+UserProfile model that contains all the other relevant fields. I import the signals module
+so that the UserProfile table is populated automatically on User object creation.
+
+
+## views
+The login module views are farely straight forward. The register view creates a new user and processes
+the input. The other views either render the templates associated to them or redirect the user
+to a different page
+
+## forms
+
+The registration form class handles all the registration form input validation.
+
+
+# payperks.api
+Here lies the core of the application. It is still a work in progress, but the core functionality
+behind the application is implemented. 
+
+## models
+I designed the api to support two models (Sweep and Drawing). These relatoinships allow for
+straight forward querying and basic logic. Sweeps have a one to many relatoinship with 
+drawings. Users also have a one to many relationship with drawings. 
+The sweep also stores the prize amount and number of prizes at launch which are  arbitrarily determined 
+using a small utility function in api/utils.py. I tried to design a system where the data was as normalized
+as possible. 
+
+## views
+
+The api supports the main views outlined in the writeup. An admin user can run the sweep process
+in which drawings are queried for and the highest open drawings are selected as winners based on
+the number of prizes configured at the launch of the sweep.  Here are the following views
+
+### earn points (POST)
+When a user visits this endpoint, a drawing object is created and is set with a random amount of points. 
+These points will later be used by another endpoint to determine the winner. The drawing is then appended to the users queryset.
+
+### run sweeps (POST)
+When the admin runs the sweep process, a sweep object is created. Aftewrad, all of the current open drawings are found. With the open drawings, the winners are then determined based on the number of prizes initialized with the sweep. At this point, every drawing is marked closed and it is marked as a winner depending on the points scored.
+
+
+### check prize(GET)
+This endpoint is straightforward and simply queries for the Drawing that the user submitted and determines whether or not they are a winner
+
+###  claim_prize(POST)
+This shares the same url as the check prize endpoint. However, this time data is changed on the server so the request is differentiated by a POST request. At this point, the drawings prize property is marked as claimed and the user simply gets a return saying that the prize was claimed. Aside from that, several edge cases are evaluated in the event the user is ineligible to claim a prize.
+
+
+Deployment
+==========
+Once the application is complete, it will be deployed to my digital ocean VPS and I'll also provide a local docker deployment setup. 
