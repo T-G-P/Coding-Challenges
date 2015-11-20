@@ -1,12 +1,16 @@
 from django.conf.urls import patterns, url, include
 
-from .views import UserSweeps, UserDetail
+from api import views
 
-user_urls = patterns('',
-    url(r'^/(?P<username>[0-9a-zA-Z_-]+)/sweeps$', UserPostList.as_view(), name='user-sweeps'),
-    url(r'^/(?P<username>[0-9a-zA-Z_-]+)$', UserDetail.as_view(), name='user-detail'),
+user_urls = patterns(
+    '',
+    url(r'^users/(?P<id>[0-9]+)/points$', views.earn_points),
+    url(r'^users/(?P<id>[0-9]+)/sweeps$', views.run_sweeps),
+    url(r'^users/(?P<id>[0-9]+)/drawings/(?P<id>[0-9]+)$', views.check_prize),
+    url(r'^users/(?P<id>[0-9]+)/drawings/(?P<id>[0-9]+)$', views.claim_prize),
 )
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^users', include(user_urls)),
 )
