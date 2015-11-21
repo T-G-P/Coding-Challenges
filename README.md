@@ -31,21 +31,21 @@ to a different page
 The registration form class handles all the registration form input validation.
 
 
-# payperks.api
+# payperks.sweepstakes
 Here lies the core of the application. It is still a work in progress, but the core functionality
 behind the application is implemented. 
 
 ## models
-I designed the api to support two models (Sweep and Drawing). These relatoinships allow for
+I designed the sweepstakes to support two models (Sweep and Drawing). These relatoinships allow for
 straight forward querying and basic logic. Sweeps have a one to many relatoinship with 
 drawings. Users also have a one to many relationship with drawings. 
 The sweep also stores the prize amount and number of prizes at launch which are  arbitrarily determined 
-using a small utility function in api/utils.py. I tried to design a system where the data was as normalized
+using a small utility function in sweepstakes/utils.py. I tried to design a system where the data was as normalized
 as possible. 
 
 ## views
 
-The api supports the main views outlined in the writeup. An admin user can run the sweep process
+The sweepstakes supports the main views outlined in the writeup. An admin user can run the sweep process
 in which drawings are queried for and the highest open drawings are selected as winners based on
 the number of prizes configured at the launch of the sweep.  Here are the following views
 
