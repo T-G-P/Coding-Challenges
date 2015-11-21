@@ -19,15 +19,12 @@ class UserProfile(models.Model):
     street = models.CharField(max_length=200, blank=True)
     zip_code = models.CharField(max_length=200, blank=True)
 
+
 def user_post_save(sender, instance, created, **kwargs):
     """Create a user profile when a new user account is created"""
-    if created == True:
+    if created:
         user_profile = UserProfile()
-        user_profile.user= instance
-        user_profile.city = kwargs['city']
-        user_profile.state = kwargs['state']
-        user_profile.street = kwargs['street']
-        user_profile.zip_code = kwargs['zip_code']
+        user_profile.user = instance
         user_profile.save()
 
 post_save.connect(user_post_save, sender=User)
