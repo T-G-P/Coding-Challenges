@@ -15,7 +15,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -57,7 +56,10 @@ ROOT_URLCONF = 'payperks.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'login', 'templates'),
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,9 +116,5 @@ STATIC_URL = '/static/'
 
 import django.contrib.auth
 django.contrib.auth.LOGIN_URL = '/'
-
-TEMPLATE_DIRS = (
-      os.path.join(os.path.dirname(__file__), 'templates'),
-)
 
 AUTH_PROFILE_MODULE = 'login.UserProfile'
