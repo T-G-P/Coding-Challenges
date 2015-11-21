@@ -1,6 +1,6 @@
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
-from api.models import Sweep, Drawing
+from sweepstakes.models import Sweep, Drawing
 from django.contrib.auth.models import User
 import json
 import random

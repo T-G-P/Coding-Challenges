@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url, include
 
-from api import views
+from sweepstakes import views
 
 user_urls = patterns(
     '',

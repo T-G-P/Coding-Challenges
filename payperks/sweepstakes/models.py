@@ -7,6 +7,7 @@ from .utils import gen_random_prize_num, gen_random_prize_amount
 
 class Sweep(models.Model):
 
+    user = models.ForeignKey(User)
     num_prizes = models.IntegerField(default=gen_random_prize_num)
     prize_amount = models.IntegerField(default=gen_random_prize_amount)
     created_date = models.DateTimeField(auto_now_add=True)

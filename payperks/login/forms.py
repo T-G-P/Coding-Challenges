@@ -1,5 +1,5 @@
 """
-Vast majority of code is from here:
+Vast majority of code is taken and modified from here:
 https://mayukhsaha.wordpress.com/2013/05/09/simple-login-and-user-registration-application-using-django/
 """
 
@@ -55,8 +55,8 @@ class RegistrationForm(forms.Form):
         label=ugettext_lazy("Password (again)")
     )
     city = forms.CharField(label='City', required=True, max_length=100)
-    state = forms.CharField(label='State', required=True, max_length=100)
     street = forms.CharField(label='Street', required=True, max_length=100)
+    state = forms.CharField(label='State', required=True, max_length=100)
     zip_code = forms.CharField(label='Zip', required=True, max_length=100)
 
     def clean_username(self):

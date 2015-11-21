@@ -8,15 +8,10 @@ from django.db.models.signals import post_save
 
 
 class UserProfile(models.Model):
-    USER_TYPES = (
-        ('0', 'user'),
-        ('1', 'admin'),
-    )
     user = models.OneToOneField(User, primary_key=True)
-    user_type = models.CharField(max_length=1, choices=USER_TYPES, default=0)
+    street = models.CharField(max_length=200, blank=True)
     city = models.CharField(max_length=200, blank=True)
     state = models.CharField(max_length=200, blank=True)
-    street = models.CharField(max_length=200, blank=True)
     zip_code = models.CharField(max_length=200, blank=True)
 
 
