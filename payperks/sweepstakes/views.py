@@ -1,38 +1,31 @@
 from django.views.decorators.http import require_http_methods
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render_to_response
 from sweepstakes.models import Sweep, Drawing
-from django.contrib.auth.models import User
-import json
-import random
+from .utils import admins_only, randint
 
 
+@login_required
 @require_http_methods(["POST"])
-def earn_points(request, user_id):
-    user = User.objects.get(id=user_id)
-    drawing = user.drawing_set.first()
+def earn_points(request):
+    user = request.user
+    drawing = user.drawing_set.latest('id')
     if drawing and drawing.is_open:
-        error = {'status': 'You already have an open drawing'}
-        return HttpResponse(json.dumps(error),
-                            content_type="application/json",
-                            status=202)
+        response = {'status': 'You already have an open drawing'}
 
-    new_drawing = Drawing(points=random.randint(0, 999999))
-    user.drawing_set.add(new_drawing)
-    response = {'status': 'OK'}
-    return HttpResponse(json.dumps(response),
-                        content_type="application/json",
-                        status=200)
+    else:
+        new_drawing = Drawing(points=randint(0, 999999))
+        user.drawing_set.add(new_drawing)
+        response = {'status': new_drawing.points}
+
+    return render_to_response('prize.html', response,)
 
 
+@login_required
+@admins_only
 @require_http_methods(["POST"])
-def run_sweeps(request, user_id):
-    user = User.objects.get(id=user_id)
-
-    if not user.is_staff:
-        error = {'status': 'Unauthorized'}
-        return HttpResponse(json.dumps(error),
-                            content_type="application/json",
-                            status=404)
+def run_sweeps(request):
+    user = request.user
 
     new_sweep = Sweep()
     new_sweep.save()
@@ -40,75 +33,74 @@ def run_sweeps(request, user_id):
     prize_amount = new_sweep.prize_amount
     num_prizes = new_sweep.num_prizes
     drawing_prize = prize_amount/num_prizes
+    new_sweep.user = user
 
     drawings = Drawing.objects.filter(is_open=True)
-    new_sweep.drawing_set.add(*drawings.all())
 
-    winning_drawings = drawings.\
-        order_by('-points').\
-        all()[:num_prizes]
+    if drawings:
+        new_sweep.drawing_set.add(*drawings.all())
+        winning_drawings = drawings.\
+            order_by('-points').\
+            all()[:num_prizes]
 
-    for drawing in drawings.all():
-        if drawing in winning_drawings:
-            drawing.is_winner = True
-            drawing.prize_value = drawing_prize
-        drawing.is_open = False
-        drawing.save()
+        for drawing in drawings.all():
+            if drawing in winning_drawings:
+                drawing.is_winner = True
+                drawing.prize_value = drawing_prize
+            drawing.is_open = False
+            drawing.save()
+        response = {'status': 'Sweep Completed'}
 
-
-@require_http_methods(["GET"])
-def check_prize(request, user_id, drawing_id):
-    drawing = Drawing.query.filter(id=drawing_id).first()
-    if drawing.user.id != user_id:
-        error = {'status': 'Unauthorized'}
-        return HttpResponse(json.dumps(error),
-                            content_type="application/json",
-                            status=404)
-    elif drawing.is_winner:
-        response = {'status': 'Won'}
-        return HttpResponse(json.dumps(response),
-                            content_type="application/json",
-                            status=200)
-    elif drawing.is_open:
-        response = {'status': 'Open'}
-        return HttpResponse(json.dumps(response),
-                            content_type="application/json",
-                            status=200)
     else:
-        response = {'status': 'Lost'}
-        return HttpResponse(json.dumps(response),
-                            content_type="application/json",
-                            status=200)
+        response = {'status': 'No drawings entered'}
+
+    return render_to_response('sweeps.html', response,)
 
 
-@require_http_methods(["POST"])
-def claim_prize(request, user_id, drawing_id):
-    drawing = Drawing.query.filter(id=drawing_id).first()
-    if drawing.user.id != user_id:
-        error = {'status': 'Unauthorized'}
-        return HttpResponse(json.dumps(error),
-                            content_type="application/json",
-                            status=404)
-    elif drawing.prize_claimed:
-        error = {'status': 'Prize already claimed'}
-        return HttpResponse(json.dumps(),
-                            content_type="application/json",
-                            status=200)
+@login_required
+@require_http_methods(["GET"])
+def check_prize(request):
+    user = request.user
+    drawing = user.drawing_set.latest('id')
+
+    if drawing.is_winner:
+        response = {'status': 'You Won'}
+
     elif drawing.is_open:
-        error = {'status': 'Can\'t claim yet'}
-        return HttpResponse(json.dumps(),
-                            content_type="application/json",
-                            status=200)
+        response = {'status': 'Drawing is still open'}
+
+    else:
+        response = {'status': 'You Lost'}
+
+    return render_to_response('prize.html', response,)
+
+
+@login_required
+@require_http_methods(["POST"])
+def claim_prize(request):
+    user = request.user
+    drawing = user.drawing_set.latest('id')
+
+    if drawing.prize_claimed:
+        response = {'status': 'Prize already claimed'}
+
+    elif drawing.is_open:
+        response = {'status': 'Drawing is still open'}
+
     elif not drawing.is_winner:
-        error = {'status': 'Lost'}
-        return HttpResponse(json.dumps(error),
-                            content_type="application/json",
-                            status=200)
+        response = {'status': 'You Lost'}
 
-    drawing.prize_claimed = True
-    drawing.save()
+    else:
+        drawing.prize_claimed = True
+        drawing.save()
+        address = '{} {} {}'.format(user.userprofile.street,
+                                    user.userprofile.city,
+                                    user.userprofile.state)
+        response = {
+            'status': 'Payment of {} sent to {}'.format(
+                drawing.prize_value,
+                address
+            )
+        }
 
-    response = {'status': 'Payment of {} Sent'.format(drawing.prize_value)}
-    return HttpResponse(json.dumps(response),
-                        content_type="application/json",
-                        status=200)
+    return render_to_response('prize.html', response,)
