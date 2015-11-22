@@ -1,16 +1,10 @@
-from django.conf.urls import patterns, url, include
+from django.conf.urls import patterns, url
 
 from sweepstakes import views
 
-user_urls = patterns(
-    '',
-    url(r'^users/points/$', views.earn_points),
-    url(r'^users/sweeps/$', views.run_sweeps),
-    url(r'^users/prize/$', views.check_prize),
-    url(r'^users/prize/$', views.claim_prize),
-)
-
 urlpatterns = patterns(
     '',
-    url(r'^users', include(user_urls)),
+    url(r'^users/points/$', views.earn_points),
+    url(r'^users/prize/$', views.check_or_claim_prize),
+    url(r'^sweeps/$', views.run_sweeps),
 )
