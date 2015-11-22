@@ -104,7 +104,6 @@ def run_sweeps(request):
             drawing.save()
 
         winners = [drawing.user.username for drawing in winning_drawings]
-        print(winners)
         response = {
             'status': (
                 'Sweep Completed.'
