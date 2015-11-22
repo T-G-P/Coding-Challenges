@@ -85,6 +85,7 @@ DATABASES = {
         'NAME': 'payperks',
         'USER': 'postgres',
         'PORT': '5432',
+        'HOST': 'localhost',
     }
 }
 # Default
