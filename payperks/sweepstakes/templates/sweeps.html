@@ -2,6 +2,18 @@
 {% block title %}PayPerks Coding Challenge{% endblock %}
 {% block head %}PayPerks Coding Challenge{% endblock %}
 {% block content %}
-    <p>{{ status}}</p>
+    <p>{{status}}</p>
     <a href="/home/">Home</a>
+
+    {% if winners %}
+        <table border="1" style="width:100%">
+              <tr>
+                <th>Winners</th>
+              </tr>
+            {% for winner in winners %}
+                <tr>
+                  <td>"{{winner.username}}"</td>
+                </tr>
+            {% endfor %}
+    {% endif %}
 {% endblock %}
