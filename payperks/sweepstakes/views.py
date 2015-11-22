@@ -12,13 +12,36 @@ from .utils import admins_only, randint
 @require_http_methods(["POST"])
 def earn_points(request):
     user = request.user
+
+    unclaimed_drawing = user.drawing_set.\
+        filter(is_winner=True).\
+        filter(prize_claimed=False).\
+        first()
+
+    if unclaimed_drawing:
+        response = {
+            'status': (
+                'Please claim your prize before'
+                ' entering the next sweep!'
+            )
+        }
+        context_instance = RequestContext(request)
+        return render_to_response("points.html",
+                                  response,
+                                  context_instance=context_instance)
+
     try:
-        Drawing.objects.filter(user=user).latest('id')
+        current_drawing = Drawing.objects.\
+            filter(user=user).\
+            filter(is_open=True).\
+            latest('id')
     except Drawing.DoesNotExist:
         try:
-            current_sweep = Sweep.objects.latest('id')
+            current_sweep = Sweep.objects.\
+                filter(completed=False).\
+                latest('id')
         except Sweep.DoesNotExist:
-            current_sweep = Sweep(initiating_user=user)
+            current_sweep = Sweep(user=user)
             current_sweep.save()
 
         current_drawing = Drawing(user=user,
@@ -26,10 +49,13 @@ def earn_points(request):
                                   points=randint(0, 999999))
         user.drawing_set.add(current_drawing)
 
-        response = {'status': current_drawing.points}
+        response = {
+            'status': 'Total Points: {}'.format(
+                current_drawing.points
+            )
+        }
 
     else:
-        current_drawing = Drawing.objects.latest('id')
         response = {
             'status': (
                 'You already have an open drawing'
@@ -51,19 +77,20 @@ def earn_points(request):
 def run_sweeps(request):
 
     try:
-        current_sweep = Sweep.objects.latest('id')
+        current_sweep = Sweep.objects.\
+            filter(completed=False).\
+            latest('id')
     except Sweep.DoesNotExist:
-        current_sweep = Sweep()
+        response = {'status': 'No drawings entered'}
+    else:
+        current_sweep.completed = True
         current_sweep.save()
+        prize_amount = current_sweep.prize_amount
+        num_prizes = current_sweep.num_prizes
+        drawing_prize = prize_amount/num_prizes
 
-    prize_amount = current_sweep.prize_amount
-    num_prizes = current_sweep.num_prizes
-    drawing_prize = prize_amount/num_prizes
-    # current_sweep.user = user
+        drawings = Drawing.objects.filter(is_open=True)
 
-    drawings = Drawing.objects.filter(is_open=True)
-
-    if drawings:
         current_sweep.drawing_set.add(*drawings.all())
         winning_drawings = drawings.\
             order_by('-points').\
@@ -75,15 +102,16 @@ def run_sweeps(request):
                 drawing.prize_value = drawing_prize
             drawing.is_open = False
             drawing.save()
+
+        winners = [drawing.user.username for drawing in winning_drawings]
+        print(winners)
         response = {
             'status': (
                 'Sweep Completed.'
-                '{} prizes awarded'.format(len(winning_drawings))
-            )
+                '{} prize(s) awarded'.format(len(winning_drawings))
+            ),
+            'winners': winners
         }
-
-    else:
-        response = {'status': 'No drawings entered'}
 
     context_instance = RequestContext(request)
     return render_to_response("sweeps.html",
@@ -103,8 +131,11 @@ def check_or_claim_prize(request):
         return render_to_response('prize.html', response)
 
     if request.method == 'GET':
-        if drawing.is_winner:
-            response = {'status': 'You Won'}
+        if drawing.is_winner and not drawing.prize_claimed:
+            response = {'status': 'You Won. Please claim your prize'}
+
+        elif drawing.is_winner or not drawing.is_open:
+            response = {'status': 'Sweep ended. Enter a new drawing!'}
 
         elif drawing.is_open:
             response = {'status': 'Current drawing is still open'}
@@ -114,7 +145,7 @@ def check_or_claim_prize(request):
             response = {'status': 'Prize already claimed'}
 
         elif drawing.is_open:
-            response = {'status': 'No prize available for claim'}
+            response = {'status': 'No prize available to claim yet'}
         else:
             drawing.prize_claimed = True
             drawing.save()
