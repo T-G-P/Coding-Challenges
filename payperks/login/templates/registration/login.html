@@ -2,6 +2,22 @@
 {% block title %}Login{% endblock %}
 {% block head %}Login{% endblock %}
 {% block content %}
+    <style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+        text-align: left;    
+    }
+    input {
+        clear:left;
+        text-align:;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+    </style>
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}

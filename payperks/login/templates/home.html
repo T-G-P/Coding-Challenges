@@ -2,6 +2,21 @@
 {% block title %}PayPerks Coding Challenge{% endblock %}
 {% block head %}PayPerks Coding Challenge{% endblock %}
 {% block content %}
+    <style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+        text-align: left;    
+    }
+    input {
+        clear:left;
+        text-align:;
+        margin-bottom: 20px;
+    }
+    </style>
     <p>Welcome {{ user.username }} !!!</p>
 
     <form method="post" action="/users/points/">{% csrf_token %}
