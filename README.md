@@ -50,20 +50,14 @@ in which drawings are queried for and the highest open drawings are selected as 
 the number of prizes configured at the launch of the sweep.  Here are the following views
 
 ### earn points (POST)
-When a user visits this endpoint, a drawing object is created and is set with a random amount of points. 
-These points will later be used by another endpoint to determine the winner. The drawing is then appended to the users queryset.
+When a user visits this view, a drawing object is created and is set with a random amount of points. 
+These points will later be used by another view to determine the winner. The drawing is then appended to the users queryset.
 
 ### run sweeps (POST)
 When the admin runs the sweep process, a sweep object is created. Aftewrad, all of the current open drawings are found. With the open drawings, the winners are then determined based on the number of prizes initialized with the sweep. At this point, every drawing is marked closed and it is marked as a winner depending on the points scored.
 
 
-### check prize(GET)
-This endpoint is straightforward and simply queries for the Drawing that the user submitted and determines whether or not they are a winner
-
-###  claim_prize(POST)
-This shares the same url as the check prize endpoint. However, this time data is changed on the server so the request is differentiated by a POST request. At this point, the drawings prize property is marked as claimed and the user simply gets a return saying that the prize was claimed. Aside from that, several edge cases are evaluated in the event the user is ineligible to claim a prize.
-
-
-Deployment
-==========
-Once the application is complete, it will be deployed to my digital ocean VPS and I'll also provide a local docker deployment setup. 
+###  check_or_claim_prize(GET, POST)
+With this view, the user either sends a GET OR POST request. Regardless of the request, if no
+winning drawings are found, the status is reflected in the view. Otherwise, the user can either claim
+or check the status of their prize. 
