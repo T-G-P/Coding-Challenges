@@ -1,7 +1,20 @@
 {% extends "base.html" %}
-{% block title %}Welcome to Django{% endblock %}
-{% block head %}Welcome to Django{% endblock %}
+{% block title %}PayPerks Coding Challenge{% endblock %}
+{% block head %}PayPerks Coding Challenge{% endblock %}
 {% block content %}
     <p>Welcome {{ user.username }} !!!</p>
+
+    <form method="post" action="/users/points/">{% csrf_token %}
+        <input type="submit" value="Enter Drawing for a chance to win" />
+    </form>
+
+    <form method="get" action="/users/prize/">{% csrf_token %}
+        <input type="submit" value="Check Prize Status" />
+    </form>
+
+    <form method="post" action="/users/prize/">{% csrf_token %}
+        <input type="submit" value="Claim Prize" />
+    </form>
+
     <a href="/logout/">Logout</a>
 {% endblock %}
