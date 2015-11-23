@@ -2,18 +2,32 @@
 {% block title %}PayPerks Coding Challenge{% endblock %}
 {% block head %}PayPerks Coding Challenge{% endblock %}
 {% block content %}
+    <style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+        margin-top: 20px;
+    }
+    th, td {
+        padding: 5px;
+        text-align: left;    
+    }
+    </style>
     <p>{{status}}</p>
-    <a href="/home/">Home</a>
 
     {% if winners %}
         <table border="1" style="width:100%">
               <tr>
                 <th>Winners</th>
+                <th>Prize Value</th>
               </tr>
             {% for winner in winners %}
                 <tr>
-                  <td>"{{winner.username}}"</td>
+                    <td>{{winner.username}}</td>
+                  <td>{{winner.prize}}</td>
                 </tr>
             {% endfor %}
     {% endif %}
+    <a href="/home/">Home</a>
 {% endblock %}
