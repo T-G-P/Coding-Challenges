@@ -75,7 +75,6 @@ def earn_points(request):
 @admins_only
 @require_http_methods(["POST"])
 def run_sweeps(request):
-
     try:
         current_sweep = Sweep.objects.\
             filter(completed=False).\
@@ -114,7 +113,8 @@ def run_sweeps(request):
         response = {
             'status': (
                 'Sweep Completed. '
-                '{} prize(s) awarded'.format(len(winning_drawings))
+                '{} prize(s) available, '
+                '{} prize(s) awarded'.format(num_prizes, len(winning_drawings))
             ),
             'winners': winners
         }
