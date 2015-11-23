@@ -26,3 +26,16 @@ def admins_only(function):
             return HttpResponseRedirect('/home')
 
     return wrap
+
+
+def users_only(function):
+    @wraps(function)
+    def wrap(request, *args, **kwargs):
+
+        user = request.user
+        if not user.is_staff:
+            return function(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/home')
+
+    return wrap

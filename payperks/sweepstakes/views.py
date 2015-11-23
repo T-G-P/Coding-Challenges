@@ -4,11 +4,12 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from sweepstakes.models import Sweep, Drawing
-from .utils import admins_only, randint
+from .utils import admins_only, users_only, randint
 
 
 @csrf_exempt
 @login_required
+@users_only
 @require_http_methods(["POST"])
 def earn_points(request):
     user = request.user
@@ -127,6 +128,7 @@ def run_sweeps(request):
 
 @csrf_exempt
 @login_required
+@users_only
 @require_http_methods(["POST", "GET"])
 def check_or_claim_prize(request):
     user = request.user
