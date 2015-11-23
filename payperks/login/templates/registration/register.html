@@ -1,7 +1,15 @@
 {% extends "base.html" %}
-{% block title %}User Registration{% endblock %}
-{% block head %}User Registration{% endblock %}
+{% block title %}Payperks Coding Challenge{% endblock %}
+{% block head %}Payperks Coding Challenge{% endblock %}
 {% block content %}
+    <style>
+    input {
+        clear:left;
+        text-align:;
+        margin: 10px;
+    }
+    </style>
+    <h2> User Registration </h2>
     <form method="post" action=".">{% csrf_token %}
         <table border="0">
             {{ form.as_table }}
