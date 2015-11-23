@@ -16,10 +16,10 @@ def register(request):
                 username=form.cleaned_data['username'],
                 password=form.cleaned_data['password1'],
             )
-            user.userprofile.city = form.cleaned_data['city'],
-            user.userprofile.state = form.cleaned_data['state'],
-            user.userprofile.street = form.cleaned_data['street'],
-            user.userprofile.zip_code = form.cleaned_data['zip_code'],
+            user.userprofile.city = form.cleaned_data['city']
+            user.userprofile.state = form.cleaned_data['state']
+            user.userprofile.street = form.cleaned_data['street']
+            user.userprofile.zip_code = form.cleaned_data['zip_code']
             user.userprofile.save()
             return HttpResponseRedirect('/register/success/')
     else:
