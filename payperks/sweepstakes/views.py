@@ -103,10 +103,17 @@ def run_sweeps(request):
             drawing.is_open = False
             drawing.save()
 
-        winners = [drawing.user.username for drawing in winning_drawings]
+        winners = [
+            {
+                'username': drawing.user.username,
+                'prize': int(drawing_prize)
+            }
+            for drawing in winning_drawings
+        ]
+
         response = {
             'status': (
-                'Sweep Completed.'
+                'Sweep Completed. '
                 '{} prize(s) awarded'.format(len(winning_drawings))
             ),
             'winners': winners
