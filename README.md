@@ -9,6 +9,10 @@ Postgres was chosen as the persistent data store.
 
 Currently live at http://tobias.perelste.in:8005/
 
+Admin Info:
+username: admin
+password: payperks
+
 Modules
 =======
 # payperks.login
