@@ -7,6 +7,8 @@ still a student and everything about it was overwhelming. This time around after
 flask for a while, I really was able to appreciate the features that django has to offer. 
 Postgres was chosen as the persistent data store.
 
+Currently live at http://tobias.perelste.in:8005/
+
 Modules
 =======
 # payperks.login
