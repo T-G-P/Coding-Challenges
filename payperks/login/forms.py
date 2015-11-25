@@ -54,10 +54,42 @@ class RegistrationForm(forms.Form):
         ),
         label=ugettext_lazy("Password (again)")
     )
-    city = forms.CharField(label='City', required=True, max_length=100)
-    street = forms.CharField(label='Street', required=True, max_length=100)
-    state = forms.CharField(label='State', required=True, max_length=100)
-    zip_code = forms.CharField(label='Zip', required=True, max_length=100)
+    street = forms.CharField(
+        widget=forms.TextInput(
+            attrs=dict(
+                required=True,
+                max_length=128,
+                render_value=False)
+        ),
+        label=ugettext_lazy("Street")
+    )
+    city = forms.CharField(
+        widget=forms.TextInput(
+            attrs=dict(
+                required=True,
+                max_length=128,
+                render_value=False)
+        ),
+        label=ugettext_lazy("City")
+    )
+    state = forms.CharField(
+        widget=forms.TextInput(
+            attrs=dict(
+                required=True,
+                max_length=128,
+                render_value=False)
+        ),
+        label=ugettext_lazy("State")
+    )
+    zip_code = forms.CharField(
+        widget=forms.TextInput(
+            attrs=dict(
+                required=True,
+                max_length=128,
+                render_value=False)
+        ),
+        label=ugettext_lazy("Zip")
+    )
 
     def clean_username(self):
         try:
