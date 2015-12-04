@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}PayPerks Coding Challenge{% endblock %}
+{% block head %}PayPerks Coding Challenge{% endblock %}
+{% block content %}
+    <style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+        text-align: left;    
+    }
+    input {
+        clear:left;
+        text-align:;
+        margin-bottom: 20px;
+    }
+    </style>
+    <p>Welcome {{ user.username }} !!!</p>
+
+    <form method="post" action="/users/points/">{% csrf_token %}
+        <input type="submit" value="Enter Drawing for a chance to win" />
+    </form>
+
+    <form method="get" action="/users/prize/">{% csrf_token %}
+        <input type="submit" value="Check Prize Status" />
+    </form>
+
+    <form method="post" action="/users/prize/">{% csrf_token %}
+        <input type="submit" value="Claim Prize" />
+    </form>
+
+    <a href="/logout/">Logout</a>
+{% endblock %}

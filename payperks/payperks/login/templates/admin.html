@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}PayPerks Coding Challenge{% endblock %}
+{% block head %}PayPerks Coding Challenge{% endblock %}
+{% block content %}
+    <style>
+    input {
+        clear:left;
+        text-align:;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+    </style>
+    <h2>Administrator Panel</h2>
+    <p>Welcome {{ user.username }} !!!</p>
+
+    <form method="post" action="/sweeps/">
+        <input type="submit" value="Run Sweep Process" />
+    </form>
+
+
+    <a href="/logout/">Logout</a>
+{% endblock %}
