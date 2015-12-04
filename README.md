@@ -1,3 +1,2 @@
-Some Coding Challenges
-======================
-
+Miscellaneous Excercises and Coding Challenges
+==============================================
