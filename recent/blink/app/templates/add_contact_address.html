@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title>Address Book</title>
+</head>
+<body>
+    <h1>Address Book</h1>
+    <style>
+		label {
+			width:80px;
+			clear:left;
+			text-align:;
+			padding-bottom:10px;
+		}
+        button {
+			clear:left;
+			text-align:;
+            margin-bottom: 20px;
+        }
+		input, label, button {
+			float:left;
+		}
+    </style>
+
+    <form method='POST' action="">
+        <div>
+            <label for='Type'>Type: </label>
+            <input type='text' name='type' id='input' />
+        </div>
+        <div>
+            <label for='Street'>Street: </label>
+            <input type='text' name='street' id='input' />
+        </div>
+        <div>
+            <label for='City'>City: </label>
+            <input type='text' name='city' id='input' />
+        </div>
+        <div>
+            <label for='State'>State: </label>
+            <input type='text' name='state' id='input' />
+        </div>
+        <div>
+            <label for='Zip'>Zip: </label>
+            <input type='text' name='zip' id='input' />
+        </div>
+        <div>
+            <button type='submit'>Create Address</button>
+        </div>
+    </form>
+
+    {% if error %}
+        <p>{{error}}</p>
+    {% endif %}
+
+    <form method='GET' action="/">
+        <div>
+            <button type='submit'>Back to Search</button>
+        </div>
+    </form>
+</body>
+</html>

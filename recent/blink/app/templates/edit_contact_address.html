@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title>Address Book</title>
+</head>
+<body>
+    <h1>Address Book</h1>
+    <style>
+		label {
+			width:80px;
+			clear:left;
+			text-align:;
+			padding-bottom:10px;
+		}
+        button {
+			clear:left;
+			text-align:;
+            margin-bottom: 20px;
+        }
+		input, label, button {
+			float:left;
+		}
+    </style>
+
+    {% if error %}
+        <p>{{error}}</p>
+    {% endif %}
+
+    <form method='POST' action="">
+        <div>
+            <label for='Type'>Type: </label>
+            <input type='text' name='type' id='input', value="{{data['type']}}" />
+        </div>
+        <div>
+            <label for='Street'>Street: </label>
+            <input type='text' name='street' id='input', value="{{data['street']}}" />
+        </div>
+        <div>
+            <label for='City'>City: </label>
+            <input type='text' name='city' id='input', value="{{data['city']}}" />
+        </div>
+        <div>
+            <label for='State'>State: </label>
+            <input type='text' name='state' id='input', value="{{data['state']}}" />
+        </div>
+        <div>
+            <label for='Zip'>Zip: </label>
+            <input type='text' name='zip' id='input', value="{{data['zip']}}" />
+        </div>
+        <div>
+            <button type='submit'>Save Address</button>
+        </div>
+    </form>
+
+    <form method='GET' action="/">
+        <div>
+            <button type='submit'>Back to Search</button>
+        </div>
+    </form>
+</body>
+</html>

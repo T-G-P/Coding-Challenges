@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>Address Book</title>
+</head>
+<body>
+    <h1>Address Book</h1>
+    <style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+        text-align: left;    
+    }
+    button {
+        clear:left;
+        text-align:;
+        margin-bottom: 20px;
+    }
+    </style>
+    {% if error %}
+        <p>{{error}}</p>
+    {% else %}
+        <p>Viewing "{{data['name']}}"</p>
+    
+        {% if not data['addresses'] %}
+            <p>No Addresses (add a new address)</p>
+        {% else %}
+            <table border="1" style="width:100%">
+                  <tr>
+                    <th>Type</th>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th></th>
+                  </tr>
+                {% for address in data['addresses'] %}
+                    <tr>
+                      <td>"{{ address['type'] }}"</td>
+                      <td>"{{ address['street'] }}"</td>
+                      <td>"{{ address['city'] }}"</td>
+                      <td>"{{ address['state'] }}"</td>
+                      <td>"{{ address['zip'] }}"</td>
+                      <td>
+                          <a href="{{ data['id'] }}/addresses/{{ address['id'] }}">edit</a>
+                      </td>
+                    </tr>
+                {% endfor %}
+        {% endif %}
+    {% endif %}
+    <form method='GET' action="{{data['id']}}/address">
+        <div>
+            <button type='submit'>Add address</button>
+        </div>
+    </form>
+    <form method='GET' action="/">
+        <div>
+            <button type='submit'>Back to Search</button>
+        </div>
+    </form>
+<body>
+</html>
