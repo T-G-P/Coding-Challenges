@@ -1,0 +1,57 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
+
+<body>
+<table cellpadding="4" style="">
+    <tr>
+        <td> <div class="grid" id="00"></div> </td>
+        <td> <div class="grid" id="01"></div> </td>
+        <td> <div class="grid" id="02"> <div id="indicator"></div> </div></td>
+    </tr>
+    <tr>
+        <td> <div class="grid" id="03"></div> </td>
+    </tr>
+    <tr>
+        <td> <div class="grid" id="04"></div> </td>
+        <td> <div class="grid" id="05"></div> </td>
+        <td> <div class="grid" id="06"></div> </td>
+    </tr>
+</table>
+
+<script>
+$(document).ready(function(){
+    var total = $("div[id^='0']").length;
+    var count = 0;
+    var click_array = [];
+
+    $('td>div').each(function() {
+        $(this).one( "click", function() {
+            $( this ).css( "background-color", "blue" );
+                click_array.push(this);
+                console.log(click_array);
+                ++count;
+                console.log(count);
+                if (count === total){
+                    $('#indicator').css( "background-color", "red" );
+                    //for (index = 0; index < click_array.length; ++index) {
+                    //    console.log(click_array[index]);
+                    //     $(click_array[index]).animate(
+                    //         {background-color: "white"}, 1000, function() {
+                    //            $('#indicator').css( "background-color", "green" );
+                    //         });
+                    //}
+
+                }
+            }
+        });
+    });
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
+
+<body>
+<table cellpadding="4" style="">
+    <tr>
+        <td> <div class="grid" id="00"></div> </td>
+        <td> <div class="grid" id="01"></div> </td>
+        <td> <div class="grid" id="02"> <div id="indicator"></div> </div></td>
+    </tr>
+    <tr>
+        <td> <div class="grid" id="03"></div> </td>
+    </tr>
+    <tr>
+        <td> <div class="grid" id="04"></div> </td>
+        <td> <div class="grid" id="05"></div> </td>
+        <td> <div class="grid" id="06"></div> </td>
+    </tr>
+</table>
+
+<script>
+$(document).ready(function(){
+    var total = $("div[id^='0']").length;
+    var count = 0;
+    var click_array = [];
+
+    $('td>div').each(function() {
+        $(this).one( "click", function() {
+            $( this ).css( "background-color", "blue" );
+                click_array.push(this);
+                //console.log(click_array);
+                ++count;
+                //console.log(count);
+                //function delayDiv() {
+                //    setTimeout(animateDiv, 1000);
+                //}
+
+                //function animateDiv() {
+                //    $(div).css( "background-color", "white" );
+                //}
+                if (count === total){
+                    $('#indicator').css( "background-color", "red" );
+                    click_array = click_array.reverse();
+
+                    var div;
+
+                  //  function animateDiv() {
+                  //      $(div).css( "background-color", "white" );
+                  //  }
+                  //  for(i in click_array.reverse()){
+
+                  //      div=$(click_array.reverse()[i]);
+                  //      setTimeout(animateDiv,1000);
+                  //      console.log(i);
+
+                  //  }
+
+                    //$click_array.each(function(index) {
+                    //        console.log(index);
+                    //  $(this).css( "background-color", "white" );
+                    //});
+for(var i = 0; i <= click_array.length; i++) {
+    (function(index) {
+        setTimeout(function() {
+
+            var div = click_array[index];
+            $(div).css( "background-color", "white" ); ; }, 1000);
+    })(i);
+}
+                    //$.each(click_array, (function(i) {
+                    //      //$(this).delay(1000).
+                    //            console.log(i);
+                    //    var div = click_array[i];
+                    //    setTimeout(function(){
+                    //        $(div).css( "background-color", "white" );
+                    //            }, 1000);
+                    //    //$(this).delay(1000).css( "background-color", "white" );
+                    //}));
+
+
+
+                }
+
+
+
+    //$.each(click_array.revesre(),function(index,val){
+    //     setTimeout(function(){
+    //         $('div>td').slideUp(function(){
+    //            $(this).text( val ).slideDown();
+    //         });
+    //     },index*2000);
+    //});
+
+        });
+    });
+});
+</script>
+
+</body>
+
+</html>
