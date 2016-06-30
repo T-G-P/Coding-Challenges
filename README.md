@@ -4,6 +4,7 @@
 Currently supporting functionality for uploading images, retrieving images, adding comments, and viewing Users and Images.
 
 TODO
+
 Pagination for comments and images
 
 Queuing all file system IO stuff for saving images
@@ -15,6 +16,8 @@ Rate limiting endpoints
 Caching of requests
 
 Unit tests
+
+Generating thumbnails
 
 
 # API ROUTES
