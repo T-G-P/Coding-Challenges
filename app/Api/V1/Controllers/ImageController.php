@@ -110,6 +110,7 @@ class ImageController extends Controller
         return $this->response->error('Unable to delete file', 500);
     }
 
+    /*Will need to extract file io stuff from here and queue the saving aspects*/
     private function _validateAndSaveFile($currentUser, $image, $request)
     {
         $rules = array();
