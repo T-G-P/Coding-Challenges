@@ -20,11 +20,17 @@ class ImageController extends Controller
 {
     use Helpers;
 
+    public function gallery()
+    {
+		return \App\Image::all();
+    }
+
     public function index()
     {
         $currentUser = JWTAuth::parseToken()->authenticate();
         return $currentUser
             ->images()
+            ->with('comments')
             ->orderBy('created_at', 'DESC')
             ->get()
             ->toArray();
@@ -36,20 +42,16 @@ class ImageController extends Controller
 
         $image = $currentUser
             ->images()
+            ->with('comments')
             ->find($id);
 
-        $path =  storage_path().'/uploads/' . $image->filename;
+        if(!$image) abort(404);
+
+        $path = $image->serverpath;
 
         if(!File::exists($path)) abort(404);
 
-        $file = File::get($path);
-        $type = File::mimeType($path);
-
-        $response = Response::make($file, 200);
-        $response->header("Content-Type", $type);
-
-        return $response;
-
+        return $this->response()->array($image)->statusCode(200);
     }
 
     public function store(Request $request)
@@ -57,7 +59,59 @@ class ImageController extends Controller
         $currentUser = JWTAuth::parseToken()->authenticate();
 
         $image = new image;
-        //$rules = array('image' => 'required');
+
+        $res = $this->_validateAndSaveFile($currentUser, $image, $request);
+
+        if(!empty($res['error'])) {
+            return $this->response->error($res['error'], $res['statuscode']);
+        }
+        return $this->response()->array($res['image'])->statusCode($res['statuscode']);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $currentUser = JWTAuth::parseToken()->authenticate();
+
+        $image = $currentUser
+            ->images()
+            ->with('comments')
+            ->find($id);
+
+        if(!$image) abort(404);
+
+        $res = $this->_validateAndSaveFile($currentUser, $image, $request);
+
+        if(!empty($res['error'])) {
+            return $this->response->error($res['error'], $res['statuscode']);
+        }
+        return $this->response()->array($res['image'])->statusCode($res['statuscode']);
+
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $currentUser = JWTAuth::parseToken()->authenticate();
+
+        $image = $currentUser
+            ->images()
+            ->with('comments')
+            ->find($id);
+
+        if(!$image) abort(404);
+
+        $res = $this->_validateAndSaveFile($currentUser, $image, $request);
+
+        if(!empty($res['error'])) {
+            return $this->response->error($res['error'], $res['statuscode']);
+        }
+        if($image->delete()) {
+            return $this->response()->array($res['image'])->statusCode($res['statuscode']);
+        }
+        return $this->response->error('Unable to delete file', 500);
+    }
+
+    private function _validateAndSaveFile($currentUser, $image, $request)
+    {
         $rules = array();
         $file = array('image' => Input::file('image'));
         $validator = Validator::make($file, $rules);
@@ -66,52 +120,24 @@ class ImageController extends Controller
             $originalFilename = Input::file('image')->getClientOriginalName();
             $extension = Input::file('image')->getClientOriginalExtension();
             $filename = time().'.'.$originalFilename;
+
             $image->metadata = $request->get('metadata');
             $image->user_id = $currentUser->id;
             $image->filename = $filename;
+            $image->serverpath =  storage_path().'/uploads/' . $image->filename;
+
             if($currentUser->images()->save($image)) {
                 $destinationPath = storage_path().'/uploads';
+                $statuscode = 200;
+
+                if ($request->isMethod('post'))
+                    $statuscode = 201;
+
                 Input::file('image')->move($destinationPath, $filename);
-                return $this->response->created();
+
+                return array('image' => $image, 'statuscode' => $statuscode);
             }
         }
-        return $this->response->error('could_not_create_image', 500);
+        return array('error' => "Unable to process file", 'statuscode' => 500);
     }
-
-    //TODO
-
-    // public function update($id)
-    // {
-    //     $currentUser = JWTAuth::parseToken()->authenticate();
-
-    //     $image = $currentUser
-    //         ->images()
-    //         ->find($id);
-
-    //     if(image) {
-    //         $image->name = $request->get('name');
-    //         $image->metadata = $request->get('metadata');
-    //         $image->user_id = $currentUser->id;
-    //         $currentUser->images()->save($image);
-    //         return $this->response->updated();
-    //     }
-    //     else
-    //         return $this->response->error('could_not_update_image', 500);
-    // }
-
-    // public function delete($id)
-    // {
-    //     $currentUser = JWTAuth::parseToken()->authenticate();
-
-    //     $image = $currentUser
-    //         ->images()
-    //         ->find($id);
-
-    //     if(image) {
-    //         $currentUser->images()->delete($image);
-    //         return $this->response->deleted();
-    //     }
-    //     else
-    //         return $this->response->error('could_not_update_image', 500);
-    // }
 }
