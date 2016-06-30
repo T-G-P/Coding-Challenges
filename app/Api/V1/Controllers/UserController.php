@@ -24,6 +24,6 @@ class UserController extends Controller
         //need to paginate data
 		return User::with('comments', 'images')
             ->orderBy('created_at', 'DESC')
-            ->get();
+            ->simplePaginate(15);
     }
 }

@@ -22,7 +22,7 @@ class ImageController extends Controller
 
     public function gallery()
     {
-		return \App\Image::all();
+		return Image::simplePaginate(15);
     }
 
     public function index()
@@ -32,8 +32,7 @@ class ImageController extends Controller
             ->images()
             ->with('comments')
             ->orderBy('created_at', 'DESC')
-            ->get()
-            ->toArray();
+            ->simplePaginate(15);
     }
 
     public function show($id)
