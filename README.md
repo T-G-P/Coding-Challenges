@@ -5,11 +5,8 @@ Currently supporting functionality for uploading images, retrieving images, addi
 
 TODO
 
-Pagination for comments and images
 
 Queuing all file system IO stuff for saving images
-
-Sending email notifications to users when comments are posted
 
 Rate limiting endpoints
 
