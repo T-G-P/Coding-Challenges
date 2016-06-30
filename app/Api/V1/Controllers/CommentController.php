@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Controllers;
 
+use Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -15,6 +16,8 @@ use Dingo\Api\Routing\Helpers;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
 Use Illuminate\Support\Facades\Validator;
+
+use App\Events\CommentWasPosted;
 
 class CommentController extends Controller
 {
@@ -60,8 +63,11 @@ class CommentController extends Controller
         $comment->user_id = $currentUser->id;
         $comment->image_id = $imageId;
 
-        if($currentUser->comments()->save($comment) && $currentUser->images()->save($comment))
+        if($currentUser->comments()->save($comment) && $currentUser->images()->save($comment)) {
+            $image = $comment->image()->first();
+            Event::fire(new CommentWasPosted($image));
             return $this->response()->array($comment)->statusCode(201);
+        }
 
         return $this->response->error('Unable to post comment', 500);
     }
