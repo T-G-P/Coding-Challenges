@@ -11,18 +11,25 @@ $api->version('v1', function ($api) {
 
 
     $api->group(['middleware' => 'api.auth'], function ($api) {
-        $api->get('images', 'App\Api\V1\Controllers\ImageController@index');
-        $api->get('image/{id}', 'App\Api\V1\Controllers\ImageController@show');
-        $api->post('images', 'App\Api\V1\Controllers\ImageController@store');
+        //image related endpoints
+        $api->get('users/images', 'App\Api\V1\Controllers\ImageController@index');
+        $api->post('users/images', 'App\Api\V1\Controllers\ImageController@store');
+        $api->get('users/image/{id}', 'App\Api\V1\Controllers\ImageController@show');
+        $api->put('users/image/{id}', 'App\Api\V1\Controllers\ImageController@update');
+        $api->delete('users/image/{id}', 'App\Api\V1\Controllers\ImageController@delete');
+
+        // comments related endpoints
+        $api->get('users/comments', 'App\Api\V1\Controllers\CommentController@index');
+        $api->get('users/image/{imageId}/comment/{commentId}', 'App\Api\V1\Controllers\CommentController@show');
+        $api->post('users/image/{imageId}/comments', 'App\Api\V1\Controllers\CommentController@store');
+        $api->delete('users/image/{imageId}/comment/{commentId}', 'App\Api\V1\Controllers\CommentController@delete');
     });
 
     // guests can view users and their images
     // gallery endpoint to return all images with pagination
-	$api->get('Users', function() {
-		return \App\User::all();
-	});
-	$api->get('Images', function() {
-		return \App\Image::all();
-	});
+    // need to paginate
+    $api->get('images', 'App\Api\V1\Controllers\ImageController@gallery');
+    $api->get('users', 'App\Api\V1\Controllers\UserController@gallery');
+
 
 });
